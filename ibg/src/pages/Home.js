@@ -91,7 +91,7 @@ export default function Home() {
     BY GOD
   </span>
 </h1>
-</h1>
+</div>
             {/* Subheadline */}
             <p
               className="font-heading text-lg md:text-2xl text-ivory/70 italic mt-6 md:mt-8 max-w-lg"
