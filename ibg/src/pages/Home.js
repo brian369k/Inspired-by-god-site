@@ -82,15 +82,16 @@ export default function Home() {
             </p>
 
             {/* Hero title */}
-            <h1 className="font-display leading-none">
-              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-ivory tracking-wide">
-                INSPIRED
-              </span>
-              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-gradient-gold tracking-wide -mt-2 md:-mt-4">
-                BY GOD
-              </span>
-            </h1>
+           <h1 className="font-display leading-none flex flex-col items-center">
+  <span className="text-[14vw] md:text-[11vw] lg:text-[9vw] text-ivory tracking-wide text-center">
+    INSPIRED
+  </span>
 
+  <span className="text-[14vw] md:text-[11vw] lg:text-[9vw] text-gradient-gold tracking-wide text-center self-center">
+    BY GOD
+  </span>
+</h1>
+</h1>
             {/* Subheadline */}
             <p
               className="font-heading text-lg md:text-2xl text-ivory/70 italic mt-6 md:mt-8 max-w-lg"
