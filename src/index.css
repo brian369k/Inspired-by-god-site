@@ -2,151 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    background: #000;
-    color: #f5f0e8;
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #000;
-    color: #f5f0e8;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  ::selection {
-    background: rgba(201, 168, 76, 0.3);
-    color: #f5f0e8;
-  }
-
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #000;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #c9a84c;
-    border-radius: 2px;
-  }
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  background: black;
+  color: white;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-gradient-gold {
-    background: linear-gradient(135deg, #c9a84c 0%, #e8c97a 50%, #c9a84c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .border-gold-subtle {
-    border-color: rgba(201, 168, 76, 0.3);
-  }
-
-  .bg-grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  }
-
-  .clip-diagonal {
-    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
-  }
-
-  .gold-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
-  }
-
-  .shimmer-text {
-    background: linear-gradient(90deg, #c9a84c 0%, #e8c97a 30%, #f5f0e8 50%, #e8c97a 70%, #c9a84c 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 3s linear infinite;
-  }
-
-  .hover-gold-border {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .hover-gold-border:hover {
-    border-color: rgba(201, 168, 76, 0.8) !important;
-    box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
-  }
-
-  .product-card-hover {
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
-  }
-
-  .product-card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 168, 76, 0.1);
-  }
+* {
+  box-sizing: border-box;
+  cursor: auto !important;
 }
 
-/* Custom cursor */
-@media (pointer: fine) {
-  body {
-    cursor: none;
-  }
-
-  a, button, [role="button"] {
-    cursor: none;
-  }
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Marquee */
-.marquee-container {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.marquee-content {
-  display: inline-block;
-  animation: marquee 25s linear infinite;
-}
-
-/* Page transitions */
-.page-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 500ms ease, transform 500ms ease;
-}
-
-.page-exit {
-  opacity: 1;
-}
-
-.page-exit-active {
-  opacity: 0;
-  transition: opacity 300ms ease;
-}
-
-/* Cart drawer */
-.cart-drawer {
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Input focus */
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: rgba(201, 168, 76, 0.6) !important;
-  box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.2);
+img {
+  display: block;
+  max-width: 100%;
 }
