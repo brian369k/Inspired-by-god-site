@@ -2,7 +2,7 @@
   "name": "my-mockup-app",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+
   "scripts": {
     "start": "node dtx-server.js",
     "dev": "vite",
