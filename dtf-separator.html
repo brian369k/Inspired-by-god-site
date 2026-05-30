@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTX Live — DTF/DTG Separation Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f0ede6;
+    --screen: #e8e4db;
+    --cyan: #00b4c6;
+    --magenta: #e8005a;
+    --yellow: #f5c800;
+    --black-ink: #1a1a1a;
+    --white-ink: #f9f7f2;
+    --accent: #ff3d1f;
+    --groove: #c8c4bb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Halftone background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    position: relative;
+    z-index: 1;
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: 4px;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .logo span {
+    background: none;
+    -webkit-text-fill-color: var(--paper);
+  }
+
+  .tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(240,237,230,0.45);
+    text-transform: uppercase;
+  }
+
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 5px 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Upload Zone */
+  .upload-zone {
+    border: 1.5px dashed rgba(240,237,230,0.2);
+    padding: 60px 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .upload-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,180,198,0.04), rgba(232,0,90,0.04));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--cyan);
+    background: rgba(0,180,198,0.04);
+  }
+
+  .upload-zone:hover::before, .upload-zone.drag-over::before { opacity: 1; }
+
+  .upload-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+    opacity: 0.4;
+  }
+
+  .upload-zone h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .upload-zone p {
+    font-size: 13px;
+    color: rgba(240,237,230,0.45);
+    font-family: 'DM Mono', monospace;
+  }
+
+  #fileInput { display: none; }
+
+  /* Controls */
+  .controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .control-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 16px 20px;
+  }
+
+  .control-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(240,237,230,0.4);
+    margin-bottom: 10px;
+  }
+
+  .control-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  input[type="range"] {
+    flex: 1;
+    appearance: none;
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--cyan);
+    cursor: pointer;
+    border-radius: 0;
+  }
+
+  .range-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--cyan);
+    min-width: 28px;
+    text-align: right;
+  }
+
+  select {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 8px 10px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  select:focus { border-color: var(--cyan); }
+
+  /* Action Buttons */
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.12);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .btn:hover::after { transform: translateX(0); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--paper);
+    border: 1.5px solid rgba(255,255,255,0.2);
+  }
+
+  .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .btn:disabled::after { display: none; }
+
+  /* Progress */
+  .progress-wrap {
+    display: none;
+    margin-bottom: 32px;
+  }
+
+  .progress-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(240,237,230,0.45);
+    margin-bottom: 8px;
+  }
+
+  .progress-bar-bg {
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* Results */
+  .results-section { display: none; }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    color: rgba(240,237,230,0.6);
+    text-transform: uppercase;
+  }
+
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+
+  .channel-card {
+    position: relative;
+    background: #0f0f0f;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .channel-card:hover { transform: scale(1.02); z-index: 2; }
+
+  .channel-card canvas {
+    width: 100%;
+    display: block;
+    image-rendering: pixelated;
+  }
+
+  .channel-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .channel-label.cyan { color: var(--cyan); border-top: 1px solid var(--cyan); }
+  .channel-label.magenta { color: var(--magenta); border-top: 1px solid var(--magenta); }
+  .channel-label.yellow { color: var(--yellow); border-top: 1px solid var(--yellow); }
+  .channel-label.black { color: #aaa; border-top: 1px solid #444; }
+  .channel-label.white { color: #fff; border-top: 1px solid rgba(255,255,255,0.3); }
+  .channel-label.halftone { color: var(--accent); border-top: 1px solid var(--accent); }
+
+  /* Composite preview */
+  .composite-wrap {
+    margin-bottom: 48px;
+  }
+
+  .composite-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .composite-inner { grid-template-columns: 1fr; }
+  }
+
+  .preview-panel {
+    background: #111;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .preview-panel canvas {
+    width: 100%;
+    display: block;
+  }
+
+  .preview-panel .panel-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.7);
+    padding: 4px 10px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* Download buttons */
+  .download-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .dl-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .dl-btn:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.35);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-label {
+    color: rgba(240,237,230,0.35);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 9px;
+  }
+
+  .stat-value {
+    color: var(--cyan);
+    font-size: 14px;
+  }
+
+  /* Garment color selector */
+  .garment-swatches {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .swatch {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.15s;
+    flex-shrink: 0;
+  }
+
+  .swatch.active { border-color: var(--cyan); }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(240,237,230,0.2);
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">DTX<span> Live</span></div>
+    <div class="tagline">DTF · DTG Halftone Separation Studio</div>
+  </div>
+  <div class="badge">Web App</div>
+</header>
+
+<main>
+  <!-- Upload -->
+  <div class="upload-zone" id="uploadZone">
+    <input type="file" id="fileInput" accept="image/*">
+    <span class="upload-icon">⬡</span>
+    <h2>Drop Your Artwork Here</h2>
+    <p>PNG / JPG / WEBP — works best with transparent or solid backgrounds</p>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-grid">
+    <div class="control-block">
+      <div class="control-label">Halftone Frequency</div>
+      <div class="control-row">
+        <input type="range" id="htFreq" min="2" max="20" value="6">
+        <span class="range-val" id="htFreqVal">6</span>
+      </div>
+    </div>
+    <div class="control-block">
+      <div class="control-label">Halftone Angle</div>
+      <div class="control-row">
+        <input type="range" id="htAngle" min="0" max="90" value="45">
+        <span class="range-val" id="htAngleVal">45°</span>
+      </div>
+    </div>
+    <div class="control-block">
+      <div class="control-label">White Threshold</div>
+      <div class="control-row">
+        <input type="range" id="whiteThresh" min="100" max="255" value="220">
+        <span class="range-val" id="whiteThreshVal">220</span>
+      </div>
+    </div>
+    <div class="control-block">
+      <div class="control-label">Sharpening</div>
+      <div class="control-row">
+        <input type="range" id="sharpen" min="0" max="10" value="3">
+        <span class="range-val" id="sharpenVal">3</span>
+      </div>
+    </div>
+    <div class="control-block">
+      <div class="control-label">Garment Color</div>
+      <div class="garment-swatches" id="garmentSwatches">
+        <div class="swatch active" data-color="#000000" style="background:#000000" title="Black"></div>
+        <div class="swatch" data-color="#ffffff" style="background:#ffffff;border:1px solid #333" title="White"></div>
+        <div class="swatch" data-color="#1a3a6b" style="background:#1a3a6b" title="Navy"></div>
+        <div class="swatch" data-color="#8b1a1a" style="background:#8b1a1a" title="Red"></div>
+        <div class="swatch" data-color="#2d5a2d" style="background:#2d5a2d" title="Forest"></div>
+        <div class="swatch" data-color="#4a4a4a" style="background:#4a4a4a" title="Charcoal"></div>
+      </div>
+    </div>
+    <div class="control-block">
+      <div class="control-label">Separation Mode</div>
+      <select id="sepMode">
+        <option value="cmyk">CMYK + White</option>
+        <option value="cmyk_halftone">CMYK Halftone</option>
+        <option value="spot">Spot Color</option>
+        <option value="grayscale">Grayscale Halftone</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn btn-primary" id="processBtn" disabled>▶ Separate Now</button>
+    <button class="btn btn-secondary" id="resetBtn">Reset</button>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label" id="progressLabel">Analyzing image...</div>
+    <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar" id="statsBar" style="display:none">
+    <div class="stat"><span class="stat-label">Image Size</span><span class="stat-value" id="statSize">—</span></div>
+    <div class="stat"><span class="stat-label">Mode</span><span class="stat-value" id="statMode">—</span></div>
+    <div class="stat"><span class="stat-label">Garment</span><span class="stat-value" id="statGarment">—</span></div>
+    <div class="stat"><span class="stat-label">Halftone LPI</span><span class="stat-value" id="statLPI">—</span></div>
+    <div class="stat"><span class="stat-label">Channels</span><span class="stat-value" id="statChannels">—</span></div>
+  </div>
+
+  <!-- Results -->
+  <div class="results-section" id="results">
+
+    <!-- Composite Preview -->
+    <div class="composite-wrap">
+      <div class="section-title">Proof Window</div>
+      <div class="composite-inner">
+        <div class="preview-panel">
+          <canvas id="originalPreview"></canvas>
+          <div class="panel-label">Original</div>
+        </div>
+        <div class="preview-panel">
+          <canvas id="compositePreview"></canvas>
+          <div class="panel-label">Separated Composite</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Channel Separation -->
+    <div class="section-title">Color Channels</div>
+    <div class="channels-grid" id="channelsGrid"></div>
+
+    <!-- Downloads -->
+    <div class="section-title" style="margin-top:40px">Export Channels</div>
+    <div class="download-grid" id="downloadGrid"></div>
+
+  </div>
+</main>
+
+<footer>DTX LIVE WEB SEPARATION STUDIO — IN-BROWSER DTF/DTG PROCESSING — NO DATA UPLOADED</footer>
+
+<script>
+// ====== State ======
+let sourceImage = null;
+let garmentColor = '#000000';
+const garmentNames = {
+  '#000000': 'Black', '#ffffff': 'White', '#1a3a6b': 'Navy',
+  '#8b1a1a': 'Red', '#2d5a2d': 'Forest', '#4a4a4a': 'Charcoal'
+};
+
+// ====== UI Wiring ======
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const processBtn = document.getElementById('processBtn');
+
+uploadZone.addEventListener('click', () => fileInput.click());
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadFile(fileInput.files[0]); });
+
+// Range sliders
+['htFreq','htAngle','whiteThresh','sharpen'].forEach(id => {
+  const el = document.getElementById(id);
+  const val = document.getElementById(id + 'Val');
+  el.addEventListener('input', () => {
+    val.textContent = id === 'htAngle' ? el.value + '°' : el.value;
+  });
+});
+
+// Garment swatches
+document.getElementById('garmentSwatches').addEventListener('click', e => {
+  const sw = e.target.closest('.swatch');
+  if (!sw) return;
+  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+  sw.classList.add('active');
+  garmentColor = sw.dataset.color;
+});
+
+processBtn.addEventListener('click', processImage);
+document.getElementById('resetBtn').addEventListener('click', reset);
+
+// ====== File Loading ======
+function loadFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      sourceImage = img;
+      uploadZone.style.background = `url(${e.target.result}) center/contain no-repeat rgba(255,255,255,0.03)`;
+      uploadZone.querySelector('h2').textContent = file.name;
+      uploadZone.querySelector('p').textContent = `${img.width} × ${img.height}px — Ready to Separate`;
+      processBtn.disabled = false;
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function reset() {
+  sourceImage = null;
+  uploadZone.style.background = '';
+  uploadZone.querySelector('h2').textContent = 'Drop Your Artwork Here';
+  uploadZone.querySelector('p').textContent = 'PNG / JPG / WEBP — works best with transparent or solid backgrounds';
+  processBtn.disabled = true;
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('statsBar').style.display = 'none';
+  document.getElementById('progressWrap').style.display = 'none';
+  fileInput.value = '';
+}
+
+// ====== Image Processing ======
+async function processImage() {
+  if (!sourceImage) return;
+  processBtn.disabled = true;
+
+  const prog = document.getElementById('progressWrap');
+  const bar = document.getElementById('progressBar');
+  const label = document.getElementById('progressLabel');
+  prog.style.display = 'block';
+
+  const setProgress = (pct, msg) => {
+    bar.style.width = pct + '%';
+    label.textContent = msg;
+  };
+
+  setProgress(5, 'Loading source image...');
+  await delay(80);
+
+  // Draw source to working canvas
+  const maxDim = 800;
+  let W = sourceImage.width, H = sourceImage.height;
+  if (W > maxDim || H > maxDim) {
+    const scale = maxDim / Math.max(W, H);
+    W = Math.round(W * scale);
+    H = Math.round(H * scale);
+  }
+
+  const srcCanvas = makeCanvas(W, H);
+  const srcCtx = srcCanvas.getContext('2d');
+  srcCtx.drawImage(sourceImage, 0, 0, W, H);
+  let srcData = srcCtx.getImageData(0, 0, W, H);
+
+  setProgress(15, 'Removing background haze...');
+  await delay(80);
+
+  // Background removal / white haze elimination
+  const whiteThresh = parseInt(document.getElementById('whiteThresh').value);
+  srcData = removeBackgroundHaze(srcData, whiteThresh, hexToRgb(garmentColor));
+
+  setProgress(30, 'Sharpening artwork...');
+  await delay(80);
+
+  const sharpenAmount = parseInt(document.getElementById('sharpen').value);
+  if (sharpenAmount > 0) {
+    srcData = applySharpen(srcData, W, H, sharpenAmount * 0.3);
+  }
+
+  setProgress(45, 'Converting to CMYK...');
+  await delay(80);
+
+  const mode = document.getElementById('sepMode').value;
+  const htFreq = parseInt(document.getElementById('htFreq').value);
+  const htAngle = parseInt(document.getElementById('htAngle').value);
+
+  setProgress(60, 'Generating channel separations...');
+  await delay(100);
+
+  const channels = separateChannels(srcData, W, H, mode);
+
+  setProgress(75, 'Applying halftone screens...');
+  await delay(100);
+
+  const channelCanvases = {};
+  for (const [name, data] of Object.entries(channels)) {
+    const c = makeCanvas(W, H);
+    const ctx = c.getContext('2d');
+    ctx.putImageData(data, 0, 0);
+
+    // Apply halftone
+    const hc = applyHalftone(data, W, H, htFreq, htAngle + channelAngleOffset(name), name, mode);
+    channelCanvases[name] = { raw: c, halftone: hc };
+  }
+
+  setProgress(90, 'Building proof window...');
+  await delay(80);
+
+  renderResults(srcCanvas, channelCanvases, srcData, W, H, mode, htFreq);
+
+  setProgress(100, 'Done!');
+  await delay(300);
+  prog.style.display = 'none';
+
+  // Stats
+  const statsBar = document.getElementById('statsBar');
+  statsBar.style.display = 'flex';
+  document.getElementById('statSize').textContent = `${W}×${H}`;
+  document.getElementById('statMode').textContent = mode.toUpperCase().replace('_', ' ');
+  document.getElementById('statGarment').textContent = garmentNames[garmentColor] || garmentColor;
+  document.getElementById('statLPI').textContent = htFreq + ' LPI';
+  document.getElementById('statChannels').textContent = Object.keys(channels).length;
+
+  processBtn.disabled = false;
+}
+
+function channelAngleOffset(name) {
+  const offsets = { C: 0, M: 15, Y: 30, K: 45, W: 75, R: 0, G: 15, B: 30 };
+  return offsets[name] || 0;
+}
+
+// ====== Background Haze Removal ======
+function removeBackgroundHaze(imgData, threshold, garmentRgb) {
+  const data = new Uint8ClampedArray(imgData.data);
+  const { r: gr, g: gg, b: gb } = garmentRgb;
+
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
+    // Detect near-white pixels (the "haze")
+    if (r > threshold && g > threshold && b > threshold) {
+      // Feather alpha based on brightness
+      const brightness = (r + g + b) / 3;
+      const fade = (brightness - threshold) / (255 - threshold);
+      data[i+3] = Math.round(a * (1 - fade * 0.85));
+    }
+  }
+  return new ImageData(data, imgData.width, imgData.height);
+}
+
+// ====== Sharpen ======
+function applySharpen(imgData, W, H, amount) {
+  const src = imgData.data;
+  const dst = new Uint8ClampedArray(src.length);
+  const kernel = [0, -amount, 0, -amount, 1+4*amount, -amount, 0, -amount, 0];
+
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const idx = (y * W + x) * 4;
+      for (let c = 0; c < 3; c++) {
+        let val = 0;
+        for (let ky = -1; ky <= 1; ky++) {
+          for (let kx = -1; kx <= 1; kx++) {
+            const ny = Math.max(0, Math.min(H-1, y+ky));
+            const nx = Math.max(0, Math.min(W-1, x+kx));
+            val += src[(ny*W+nx)*4+c] * kernel[(ky+1)*3+(kx+1)];
+          }
+        }
+        dst[idx+c] = Math.max(0, Math.min(255, val));
+      }
+      dst[idx+3] = src[idx+3];
+    }
+  }
+  return new ImageData(dst, W, H);
+}
+
+// ====== Channel Separation ======
+function separateChannels(imgData, W, H, mode) {
+  const channels = {};
+  const src = imgData.data;
+
+  if (mode === 'grayscale') {
+    const ch = new Uint8ClampedArray(W * H * 4);
+    for (let i = 0; i < src.length; i += 4) {
+      const gray = 0.299 * src[i] + 0.587 * src[i+1] + 0.114 * src[i+2];
+      const inv = 255 - gray;
+      ch[i] = ch[i+1] = ch[i+2] = inv;
+      ch[i+3] = src[i+3];
+    }
+    channels['K'] = new ImageData(ch, W, H);
+    return channels;
+  }
+
+  if (mode === 'spot') {
+    // Simplified spot: find dominant hues
+    const hues = { R: [255,0,0], G: [0,200,0], B: [0,80,255], Y: [255,220,0], W: [255,255,255] };
+    for (const [name, [tr, tg, tb]] of Object.entries(hues)) {
+      const ch = new Uint8ClampedArray(W * H * 4);
+      for (let i = 0; i < src.length; i += 4) {
+        const r = src[i], g = src[i+1], b = src[i+2], a = src[i+3];
+        const dist = Math.sqrt((r-tr)**2 + (g-tg)**2 + (b-tb)**2);
+        const strength = Math.max(0, 1 - dist/180);
+        ch[i] = tr; ch[i+1] = tg; ch[i+2] = tb;
+        ch[i+3] = Math.round(a * strength);
+      }
+      channels[name] = new ImageData(ch, W, H);
+    }
+    return channels;
+  }
+
+  // CMYK mode (default)
+  const cData = new Uint8ClampedArray(W * H * 4);
+  const mData = new Uint8ClampedArray(W * H * 4);
+  const yData = new Uint8ClampedArray(W * H * 4);
+  const kData = new Uint8ClampedArray(W * H * 4);
+  const wData = new Uint8ClampedArray(W * H * 4);
+
+  for (let i = 0; i < src.length; i += 4) {
+    const r = src[i] / 255, g = src[i+1] / 255, b = src[i+2] / 255, a = src[i+3];
+    const k = 1 - Math.max(r, g, b);
+    const denom = (1 - k) || 0.001;
+    const c = (1 - r - k) / denom;
+    const m = (1 - g - k) / denom;
+    const y = (1 - b - k) / denom;
+
+    const j = i;
+    // Cyan channel — show as cyan on black
+    cData[j] = 0; cData[j+1] = Math.round(c * 200); cData[j+2] = Math.round(c * 210);
+    cData[j+3] = Math.round(a * Math.max(0, c));
+
+    // Magenta
+    mData[j] = Math.round(m * 230); mData[j+1] = 0; mData[j+2] = Math.round(m * 100);
+    mData[j+3] = Math.round(a * Math.max(0, m));
+
+    // Yellow
+    yData[j] = Math.round(y * 245); yData[j+1] = Math.round(y * 200); yData[j+2] = 0;
+    yData[j+3] = Math.round(a * Math.max(0, y));
+
+    // Key/Black
+    kData[j] = Math.round((1-k)*60); kData[j+1] = Math.round((1-k)*60); kData[j+2] = Math.round((1-k)*60);
+    kData[j+3] = Math.round(a * Math.max(0, k));
+
+    // White (for underbase on dark garments)
+    const brightness = (src[i] + src[i+1] + src[i+2]) / 3;
+    const whiteness = brightness / 255 * (a / 255);
+    wData[j] = wData[j+1] = wData[j+2] = 255;
+    wData[j+3] = Math.round(whiteness * 255);
+  }
+
+  channels['C'] = new ImageData(cData, W, H);
+  channels['M'] = new ImageData(mData, W, H);
+  channels['Y'] = new ImageData(yData, W, H);
+  channels['K'] = new ImageData(kData, W, H);
+  channels['W'] = new ImageData(wData, W, H);
+  return channels;
+}
+
+// ====== Halftone Engine ======
+function applyHalftone(imgData, W, H, freq, angleDeg, channelName, mode) {
+  const canvas = makeCanvas(W, H);
+  const ctx = canvas.getContext('2d');
+
+  // Draw channel image
+  ctx.putImageData(imgData, 0, 0);
+  const src = imgData.data;
+
+  // Create halftone overlay
+  const htCanvas = makeCanvas(W, H);
+  const htCtx = htCanvas.getContext('2d');
+
+  // Black background for halftone view
+  htCtx.fillStyle = '#000';
+  htCtx.fillRect(0, 0, W, H);
+
+  const cellSize = Math.max(3, Math.round(W / (freq * 8)));
+  const angleRad = (angleDeg * Math.PI) / 180;
+  const cos = Math.cos(angleRad);
+  const sin = Math.sin(angleRad);
+
+  const channelColors = {
+    C: '#00b4c6', M: '#e8005a', Y: '#f5c800', K: '#cccccc',
+    W: '#ffffff', R: '#ff3d1f', G: '#00c853', B: '#2979ff'
+  };
+  htCtx.fillStyle = channelColors[channelName] || '#ffffff';
+
+  // Sample grid at angle
+  const step = cellSize;
+  for (let gy = -H; gy < H * 2; gy += step) {
+    for (let gx = -W; gx < W * 2; gx += step) {
+      // Rotate grid point
+      const rx = gx * cos - gy * sin;
+      const ry = gx * sin + gy * cos;
+      const sx = Math.round(rx), sy = Math.round(ry);
+
+      if (sx < 0 || sx >= W || sy < 0 || sy >= H) continue;
+
+      // Sample alpha at grid center
+      const pidx = (sy * W + sx) * 4;
+      const alpha = src[pidx + 3] / 255;
+
+      if (alpha < 0.04) continue;
+
+      const dotRadius = (step * 0.5) * Math.sqrt(alpha);
+      if (dotRadius < 0.5) continue;
+
+      htCtx.beginPath();
+      htCtx.arc(rx, ry, dotRadius, 0, Math.PI * 2);
+      htCtx.fill();
+    }
+  }
+
+  return htCanvas;
+}
+
+// ====== Render Results ======
+function renderResults(srcCanvas, channelCanvases, srcData, W, H, mode, htFreq) {
+  const results = document.getElementById('results');
+  results.style.display = 'block';
+
+  // Scroll to results
+  setTimeout(() => results.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+
+  // Original preview
+  const origPrev = document.getElementById('originalPreview');
+  origPrev.width = W; origPrev.height = H;
+  origPrev.getContext('2d').drawImage(srcCanvas, 0, 0);
+
+  // Composite: blend all channels back
+  const compPrev = document.getElementById('compositePreview');
+  compPrev.width = W; compPrev.height = H;
+  const compCtx = compPrev.getContext('2d');
+
+  // Draw garment color
+  compCtx.fillStyle = garmentColor;
+  compCtx.fillRect(0, 0, W, H);
+
+  // Draw white underbase first, then CMYK
+  const drawOrder = mode === 'grayscale' ? ['K'] :
+                    mode === 'spot' ? ['W','Y','R','G','B'] :
+                    ['W','Y','M','C','K'];
+  for (const name of drawOrder) {
+    if (channelCanvases[name]) {
+      compCtx.globalCompositeOperation = name === 'W' ? 'screen' : 'multiply';
+      compCtx.drawImage(channelCanvases[name].raw, 0, 0);
+    }
+  }
+  compCtx.globalCompositeOperation = 'source-over';
+
+  // Channel cards
+  const grid = document.getElementById('channelsGrid');
+  grid.innerHTML = '';
+  const dlGrid = document.getElementById('downloadGrid');
+  dlGrid.innerHTML = '';
+
+  const labelClass = { C:'cyan', M:'magenta', Y:'yellow', K:'black', W:'white', R:'magenta', G:'cyan', B:'cyan' };
+  const channelNames = {
+    C: 'Cyan', M: 'Magenta', Y: 'Yellow', K: 'Black/Key',
+    W: 'White Underbase', R: 'Red', G: 'Green', B: 'Blue'
+  };
+
+  for (const [name, canvases] of Object.entries(channelCanvases)) {
+    // Raw channel card
+    const card = document.createElement('div');
+    card.className = 'channel-card';
+    const c = makeCanvas(canvases.raw.width, canvases.raw.height);
+    c.getContext('2d').fillStyle = '#111';
+    c.getContext('2d').fillRect(0, 0, c.width, c.height);
+    c.getContext('2d').drawImage(canvases.raw, 0, 0);
+    c.style.width = '100%';
+    const lbl = document.createElement('div');
+    lbl.className = `channel-label ${labelClass[name] || 'cyan'}`;
+    lbl.textContent = channelNames[name] || name;
+    card.appendChild(c);
+    card.appendChild(lbl);
+    grid.appendChild(card);
+
+    // Halftone card
+    const htCard = document.createElement('div');
+    htCard.className = 'channel-card';
+    const hc = canvases.halftone;
+    hc.style.width = '100%';
+    const htLbl = document.createElement('div');
+    htLbl.className = 'channel-label halftone';
+    htLbl.textContent = `${channelNames[name] || name} — Halftone`;
+    htCard.appendChild(hc);
+    htCard.appendChild(htLbl);
+    grid.appendChild(htCard);
+
+    // Download button
+    const dl = document.createElement('a');
+    dl.className = 'dl-btn';
+    dl.textContent = `↓ ${channelNames[name] || name}`;
+    dl.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = `dtx-channel-${name.toLowerCase()}.png`;
+      link.href = canvases.raw.toDataURL();
+      link.click();
+    });
+    dlGrid.appendChild(dl);
+
+    // Download halftone
+    const dlHT = document.createElement('a');
+    dlHT.className = 'dl-btn';
+    dlHT.textContent = `↓ ${channelNames[name] || name} HT`;
+    dlHT.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = `dtx-halftone-${name.toLowerCase()}.png`;
+      link.href = canvases.halftone.toDataURL();
+      link.click();
+    });
+    dlGrid.appendChild(dlHT);
+  }
+
+  // Download composite
+  const dlComp = document.createElement('a');
+  dlComp.className = 'dl-btn';
+  dlComp.style.borderColor = 'rgba(255,61,31,0.4)';
+  dlComp.style.color = '#ff3d1f';
+  dlComp.textContent = '↓ Composite Proof';
+  dlComp.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'dtx-composite-proof.png';
+    link.href = compPrev.toDataURL();
+    link.click();
+  });
+  dlGrid.appendChild(dlComp);
+}
+
+// ====== Utilities ======
+function makeCanvas(w, h) {
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  return c;
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return { r, g, b };
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+</script>
+</body>
+</html>
