@@ -228,5 +228,5 @@ async function handleWebhook(req, res) {
   res.json({ received: true });
 }
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`DTX Live server running on port ${PORT}`));
