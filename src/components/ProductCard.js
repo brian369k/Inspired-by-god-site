@@ -1,6 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+const getColorHex = (color) => {
+  const c = color.toLowerCase();
+  if (c.includes('black')) return '#1a1a1a';
+  if (c.includes('white')) return '#f5f0e8';
+  if (c.includes('sand')) return '#c2b280';
+  if (c.includes('azalea')) return '#f4a7b9';
+  if (c.includes('cardinal blue')) return '#1a3a6b';
+  if (c.includes('grey') || c.includes('gray') || c.includes('stone') || c.includes('heather')) return '#888';
+  if (c.includes('olive') || c.includes('military')) return '#556b2f';
+  if (c.includes('navy')) return '#1a2744';
+  if (c.includes('red')) return '#c0392b';
+  if (c.includes('green')) return '#2ecc71';
+  if (c.includes('blue')) return '#2980b9';
+  if (c.includes('purple')) return '#8e44ad';
+  if (c.includes('orange')) return '#e67e22';
+  if (c.includes('yellow')) return '#f1c40f';
+  if (c.includes('pink')) return '#ff69b4';
+  if (c.includes('brown')) return '#795548';
+  if (c.includes('cream') || c.includes('bone') || c.includes('ivory')) return '#f5f0e8';
+  return '#888888';
+};
+
 export default function ProductCard({ product, index = 0 }) {
   const [hovered, setHovered] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
@@ -83,25 +105,13 @@ export default function ProductCard({ product, index = 0 }) {
             <span className="font-mono text-sm text-gold flex-shrink-0">${product.price}</span>
           </div>
 
-          {/* Color dots */}
-          <div className="flex gap-1.5 mt-3">
+          {/* Color dots — correctly mapped */}
+          <div className="flex gap-1.5 mt-3 flex-wrap">
             {product.colors.map((color) => (
               <div
                 key={color}
-                className="w-3 h-3 rounded-full border border-grey-mid"
-                style={{
-                  background: color.toLowerCase().includes('black') || color.toLowerCase().includes('onyx') || color.toLowerCase().includes('jet')
-                    ? '#1a1a1a'
-                    : color.toLowerCase().includes('white') || color.toLowerCase().includes('ivory') || color.toLowerCase().includes('bone')
-                    ? '#f5f0e8'
-                    : color.toLowerCase().includes('grey') || color.toLowerCase().includes('stone') || color.toLowerCase().includes('heather')
-                    ? '#888'
-                    : color.toLowerCase().includes('olive') || color.toLowerCase().includes('military')
-                    ? '#556b2f'
-                    : color.toLowerCase().includes('navy')
-                    ? '#1a2744'
-                    : '#c9a84c',
-                }}
+                className="w-3.5 h-3.5 rounded-full border border-grey-mid flex-shrink-0"
+                style={{ background: getColorHex(color) }}
                 title={color}
               />
             ))}
