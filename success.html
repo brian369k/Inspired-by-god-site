@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to DTX Live!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #12151f;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(62,207,239,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+  }
+
+  .card {
+    background: #1e2535;
+    border-radius: 24px;
+    padding: 52px 40px;
+    max-width: 480px;
+    width: 100%;
+    border: 1px solid rgba(62,207,239,0.15);
+    position: relative;
+    z-index: 1;
+  }
+
+  .check-circle {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, #3ecfef, #4ade80);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 36px;
+    box-shadow: 0 0 40px rgba(62,207,239,0.3);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 4px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 32px; font-weight: 800;
+    margin-bottom: 12px; line-height: 1.1;
+  }
+
+  h1 span { color: #3ecfef; }
+
+  .subtitle {
+    font-size: 15px; color: rgba(255,255,255,0.5);
+    line-height: 1.6; margin-bottom: 36px;
+  }
+
+  .steps {
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+
+  .steps-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+
+  .step {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 16px;
+  }
+  .step:last-child { margin-bottom: 0; }
+
+  .step-num {
+    width: 26px; height: 26px;
+    background: #3ecfef;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #0d1018;
+    flex-shrink: 0;
+  }
+
+  .step-text { font-size: 14px; line-height: 1.5; padding-top: 3px; }
+  .step-text strong { color: #fff; }
+  .step-text span { color: rgba(255,255,255,0.5); }
+
+  .cta-btn {
+    display: block; width: 100%;
+    padding: 17px;
+    background: linear-gradient(135deg, #3ecfef, #5b8df5);
+    color: #fff; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(62,207,239,0.3);
+  }
+
+  .cta-btn:hover {
+    box-shadow: 0 6px 28px rgba(62,207,239,0.45);
+    transform: translateY(-1px);
+  }
+
+  .support-link {
+    font-size: 13px; color: rgba(255,255,255,0.3);
+  }
+
+  .support-link a { color: #3ecfef; text-decoration: none; }
+
+  /* Confetti dots */
+  .confetti {
+    position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+  }
+  .dot {
+    position: absolute;
+    width: 8px; height: 8px; border-radius: 50%;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="confetti" id="confetti"></div>
+
+<div class="card">
+  <div class="logo">DTX LIVE</div>
+  <div class="check-circle">✓</div>
+  <h1>You're <span>In!</span></h1>
+  <p class="subtitle">Your subscription is active. Welcome to the DTX Live separation studio — you're ready to print!</p>
+
+  <div class="steps">
+    <div class="steps-title">What happens next</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Check your email</strong><br><span>Your access link is on its way to your inbox right now.</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Click your access link</strong><br><span>It takes you straight into the separation studio.</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Upload your first design</strong><br><span>Separate, halftone, and export in under a minute.</span></div>
+    </div>
+  </div>
+
+  <a href="dtf-separator.html" class="cta-btn">Open DTX Live Studio →</a>
+  <div class="support-link">Questions? <a href="mailto:support@inspiredbygod.us">support@inspiredbygod.us</a></div>
+</div>
+
+<script>
+  // Confetti
+  const colors = ['#3ecfef','#4ade80','#f5c800','#ff6b6b','#5b8df5'];
+  const container = document.getElementById('confetti');
+  for (let i = 0; i < 60; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.style.left = Math.random() * 100 + 'vw';
+    dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    dot.style.animationDelay = (Math.random() * 2) + 's';
+    dot.style.width = dot.style.height = (Math.random() * 8 + 4) + 'px';
+    container.appendChild(dot);
+  }
+
+  // Check Stripe session if came from checkout
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+  if (sessionId) {
+    fetch(`https://inspired-by-god-site-production.up.railway.app/api/verify-session?session_id=${sessionId}`)
+      .then(r => r.json())
+      .then(data => {
+        console.log('Session verified:', data);
+      })
+      .catch(err => console.log('Could not verify session'));
+  }
+</script>
+</body>
+</html>

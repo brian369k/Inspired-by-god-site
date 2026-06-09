@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTX Live — My Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #12151f;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(62,207,239,0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+  }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px; height: 52px;
+    background: #0d1018;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 4px; color: #fff; text-decoration: none;
+  }
+  .nav-logo em { font-style: normal; color: #3ecfef; }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-link {
+    padding: 7px 14px;
+    font-size: 13px; color: rgba(255,255,255,0.45);
+    text-decoration: none; border-radius: 5px;
+    transition: all 0.15s;
+  }
+  .nav-link:hover { color: #fff; background: rgba(255,255,255,0.06); }
+  .nav-link.active { color: #3ecfef; }
+
+  .page {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 32px 16px 80px;
+    position: relative; z-index: 1;
+  }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .page-subtitle {
+    font-size: 14px; color: rgba(255,255,255,0.35);
+    margin-bottom: 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 1px;
+  }
+
+  /* Loading */
+  #loadingState {
+    text-align: center; padding: 60px 0;
+  }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid rgba(62,207,239,0.15);
+    border-top-color: #3ecfef;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Login prompt */
+  #loginPrompt {
+    display: none; text-align: center; padding: 60px 0;
+  }
+  #loginPrompt h3 { font-size: 20px; margin-bottom: 8px; }
+  #loginPrompt p { color: rgba(255,255,255,0.4); font-size: 14px; margin-bottom: 24px; }
+
+  /* Account content */
+  #accountContent { display: none; }
+
+  /* Card */
+  .card {
+    background: #1e2535;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .icon { font-size: 16px; }
+
+  /* Status badge */
+  .status-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .status-active { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
+  .status-trial { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+  .status-cancelled { background: rgba(255,100,100,0.15); color: #ff6464; border: 1px solid rgba(255,100,100,0.25); }
+
+  /* Info rows */
+  .info-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-label { font-size: 13px; color: rgba(255,255,255,0.4); }
+  .info-value { font-size: 13px; font-weight: 500; font-family: 'DM Mono', monospace; }
+  .info-value.highlight { color: #3ecfef; }
+  .info-value.warn { color: #f59e0b; }
+
+  /* Buttons */
+  .btn {
+    width: 100%;
+    padding: 14px;
+    border: none; border-radius: 8px;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer; transition: all 0.2s;
+    margin-top: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #3ecfef, #5b8df5);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(62,207,239,0.25);
+  }
+  .btn-primary:hover { box-shadow: 0 6px 24px rgba(62,207,239,0.4); transform: translateY(-1px); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .btn-danger {
+    background: rgba(255,100,100,0.08);
+    color: rgba(255,100,100,0.8);
+    border: 1px solid rgba(255,100,100,0.2);
+  }
+  .btn-danger:hover { background: rgba(255,100,100,0.15); color: #ff6464; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+  /* Login form */
+  .login-input {
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: #fff; font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 12px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .login-input:focus { border-color: #3ecfef; }
+  .login-input::placeholder { color: rgba(255,255,255,0.2); }
+
+  .msg {
+    padding: 12px 16px; border-radius: 8px;
+    font-size: 13px; margin-bottom: 12px; display: none;
+  }
+  .msg.success { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: #4ade80; }
+  .msg.error { background: rgba(255,100,100,0.1); border: 1px solid rgba(255,100,100,0.25); color: #ff8080; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">DTX<em> Live</em></a>
+  <div class="nav-links">
+    <a href="app.html" class="nav-link">Studio</a>
+    <a href="account.html" class="nav-link active">Account</a>
+    <a href="index.html" class="nav-link">Plans</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-title">My Account</div>
+  <div class="page-subtitle">Manage your subscription and billing</div>
+
+  <!-- Loading -->
+  <div id="loadingState">
+    <div class="spinner"></div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.3)">Loading...</div>
+  </div>
+
+  <!-- Login prompt -->
+  <div id="loginPrompt">
+    <h3>Sign In to Your Account</h3>
+    <p>Enter your email to receive a magic login link</p>
+    <div id="loginMsg" class="msg"></div>
+    <input type="email" class="login-input" id="loginEmail" placeholder="your@email.com">
+    <button class="btn btn-primary" onclick="sendLoginLink()">Send Magic Link</button>
+  </div>
+
+  <!-- Account content -->
+  <div id="accountContent">
+
+    <!-- Subscription card -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="icon">⭐</span> Subscription</div>
+        <span class="status-badge status-trial" id="subStatus">Trial</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Plan</span>
+        <span class="info-value highlight" id="subPlan">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Status</span>
+        <span class="info-value" id="subStatusText">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Email</span>
+        <span class="info-value" id="subEmail">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Member Since</span>
+        <span class="info-value" id="subSince">—</span>
+      </div>
+
+      <button class="btn btn-primary" id="manageBtn" onclick="openPortal()">
+        ⚙️ Manage Billing & Cancel
+      </button>
+      <button class="btn btn-secondary" onclick="window.location.href='app.html'">
+        🎨 Open Studio
+      </button>
+    </div>
+
+    <!-- Access card -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="icon">🔑</span> Access</div>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Login Method</span>
+        <span class="info-value">Magic Link (no password)</span>
+      </div>
+      <button class="btn btn-secondary" onclick="requestNewLink()">
+        ✉️ Send New Login Link
+      </button>
+      <button class="btn btn-danger" onclick="logout()">
+        🚪 Log Out
+      </button>
+    </div>
+
+    <div id="acctMsg" class="msg" style="margin-top:8px"></div>
+
+  </div>
+</div>
+
+<script>
+const RAILWAY = 'https://inspired-by-god-site-production.up.railway.app';
+
+let userEmail = null;
+
+async function init() {
+  const token = new URLSearchParams(window.location.search).get('token') || localStorage.getItem('dtx_token');
+
+  if (!token) {
+    showLoginPrompt();
+    return;
+  }
+
+  try {
+    const res = await fetch(`${RAILWAY}/api/verify-token?token=${token}`);
+    const data = await res.json();
+    if (res.ok && data.valid) {
+      localStorage.setItem('dtx_token', token);
+      userEmail = data.email;
+      showAccount(data);
+    } else {
+      localStorage.removeItem('dtx_token');
+      showLoginPrompt();
+    }
+  } catch (err) {
+    showLoginPrompt();
+  }
+}
+
+function showLoginPrompt() {
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('loginPrompt').style.display = 'block';
+}
+
+function showAccount(data) {
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('accountContent').style.display = 'block';
+
+  document.getElementById('subPlan').textContent = (data.plan || 'Starter') + ' Plan';
+  document.getElementById('subEmail').textContent = data.email || '—';
+  document.getElementById('subStatusText').textContent = data.status || 'Active';
+  document.getElementById('subSince').textContent = data.created_at ? new Date(data.created_at).toLocaleDateString() : '—';
+
+  const badge = document.getElementById('subStatus');
+  if (data.status === 'active') {
+    badge.textContent = 'Active';
+    badge.className = 'status-badge status-active';
+  } else if (data.status === 'past_due') {
+    badge.textContent = 'Past Due';
+    badge.className = 'status-badge status-cancelled';
+  } else {
+    badge.textContent = 'Trial';
+    badge.className = 'status-badge status-trial';
+  }
+}
+
+async function openPortal() {
+  const btn = document.getElementById('manageBtn');
+  btn.disabled = true;
+  btn.textContent = 'Opening...';
+
+  try {
+    const res = await fetch(`${RAILWAY}/api/create-portal-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userEmail })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      showAcctMsg('Could not open billing portal. Please contact support.', 'error');
+    }
+  } catch (err) {
+    showAcctMsg('Something went wrong. Please try again.', 'error');
+  }
+  btn.disabled = false;
+  btn.innerHTML = '⚙️ Manage Billing & Cancel';
+}
+
+async function sendLoginLink() {
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!email) return;
+
+  const btn = event.currentTarget;
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const res = await fetch(`${RAILWAY}/api/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showLoginMsg('✓ Magic link sent! Check your email.', 'success');
+    } else {
+      showLoginMsg(data.error || 'No active subscription found.', 'error');
+    }
+  } catch (err) {
+    showLoginMsg('Something went wrong. Try again.', 'error');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Send Magic Link';
+}
+
+async function requestNewLink() {
+  if (!userEmail) return;
+  try {
+    const res = await fetch(`${RAILWAY}/api/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userEmail })
+    });
+    if (res.ok) showAcctMsg('✓ New login link sent to ' + userEmail, 'success');
+    else showAcctMsg('Could not send link. Try again.', 'error');
+  } catch { showAcctMsg('Something went wrong.', 'error'); }
+}
+
+function logout() {
+  localStorage.removeItem('dtx_token');
+  window.location.href = 'login.html';
+}
+
+function showLoginMsg(text, type) {
+  const el = document.getElementById('loginMsg');
+  el.textContent = text; el.className = 'msg ' + type; el.style.display = 'block';
+}
+function showAcctMsg(text, type) {
+  const el = document.getElementById('acctMsg');
+  el.textContent = text; el.className = 'msg ' + type; el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 4000);
+}
+
+init();
+</script>
+</body>
+</html>
