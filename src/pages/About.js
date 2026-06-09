@@ -34,17 +34,12 @@ const values = [
 export default function About() {
   return (
     <div className="bg-black pt-16 md:pt-20">
-      {/* Hero */}
-      <div className="relative min-h-[70vh] flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=80"
-            alt="About"
-            className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.25)' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-        </div>
+      {/* Hero — clean dark, no image */}
+      <div className="relative min-h-[50vh] flex items-end overflow-hidden bg-black border-b border-gold/10">
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.07) 0%, transparent 70%)' }}
+        />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pb-16 md:pb-24 w-full">
           <FadeUp>
             <p className="font-mono text-xs tracking-ultra-wide text-gold mb-4">— OUR STORY</p>
@@ -81,17 +76,15 @@ export default function About() {
         </div>
       </section>
 
-      {/* Full-width image */}
-      <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80"
-          alt="Brand lifestyle"
-          className="w-full h-full object-cover"
-          style={{ filter: 'brightness(0.4)' }}
+      {/* Brand statement — dark bg, no image */}
+      <div className="relative py-24 bg-off-black border-t border-b border-gold/10">
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)' }}
         />
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative flex items-center justify-center">
           <FadeUp>
-            <p className="font-display text-[8vw] text-ivory tracking-widest text-center opacity-80">
+            <p className="font-display text-[8vw] text-ivory/10 tracking-widest text-center select-none">
               CHOSEN ONES
             </p>
           </FadeUp>

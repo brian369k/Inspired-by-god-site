@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
 
-// Intersection observer hook
 function useInView(options = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -48,27 +47,29 @@ export default function Home() {
 
   return (
     <div className="bg-black">
-      {/* HERO */}
-      <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&q=85"
-            alt="Hero"
-            className="w-full h-full object-cover object-top"
-            style={{ filter: 'brightness(0.35)' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
-        </div>
+      {/* HERO — clean dark, no image */}
+      <section className="relative min-h-[70vh] flex flex-col justify-center overflow-hidden bg-black">
+        {/* Subtle gold gradient at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
-        {/* Grain overlay */}
-        <div className="absolute inset-0 opacity-40 mix-blend-overlay"
-          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 512 512\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")' }}
+        {/* Grain texture overlay */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 512 512\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
+          }}
+        />
+
+        {/* Radial gold glow */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%)',
+          }}
         />
 
         {/* Hero content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pb-16 md:pb-24 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-32 w-full">
           <div
             style={{
               opacity: heroLoaded ? 1 : 0,
@@ -171,17 +172,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BRAND STATEMENT — FULL WIDTH */}
-      <section className="relative py-28 md:py-40 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1600&q=80"
-            alt="Brand"
-            className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.2)' }}
-          />
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
+      {/* BRAND STATEMENT */}
+      <section className="relative py-28 md:py-40 overflow-hidden bg-off-black">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%)',
+          }}
+        />
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-10 text-center">
           <FadeUp>
             <p className="font-mono text-xs tracking-ultra-wide text-gold mb-8">— THE ETHOS</p>
@@ -201,25 +199,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FULL CATALOG TEASER */}
+      {/* CATALOG TEASER */}
       <section className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* New Arrivals */}
           <FadeUp>
-            <div className="relative overflow-hidden group aspect-[4/5]">
-              <img
-                src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=80"
-                alt="New Arrivals"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                style={{ filter: 'brightness(0.5)' }}
+            <div className="relative overflow-hidden group aspect-[4/5] bg-grey-dark">
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)',
+                }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
+              <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <p className="font-mono text-xs tracking-widest text-gold mb-2">NEW IN</p>
                 <h3 className="font-display text-4xl md:text-5xl text-ivory tracking-wide mb-4">ARRIVALS</h3>
                 <Link
                   to="/shop"
-                  className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all"
+                  className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all w-fit"
                 >
                   SHOP NOW
                 </Link>
@@ -227,22 +223,20 @@ export default function Home() {
             </div>
           </FadeUp>
 
-          {/* Bestsellers */}
           <FadeUp delay={0.15}>
-            <div className="relative overflow-hidden group aspect-[4/5]">
-              <img
-                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"
-                alt="Bestsellers"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                style={{ filter: 'brightness(0.5)' }}
+            <div className="relative overflow-hidden group aspect-[4/5] bg-grey-dark">
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'linear-gradient(135deg, #111 0%, #1a1a0a 100%)',
+                }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
+              <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <p className="font-mono text-xs tracking-widest text-gold mb-2">FAN FAVOURITES</p>
                 <h3 className="font-display text-4xl md:text-5xl text-ivory tracking-wide mb-4">BESTSELLERS</h3>
                 <Link
                   to="/shop"
-                  className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all"
+                  className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all w-fit"
                 >
                   EXPLORE
                 </Link>
