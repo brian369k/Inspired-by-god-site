@@ -47,12 +47,12 @@ export default function Home() {
 
   return (
     <div className="bg-black">
-      {/* HERO — clean dark, no image */}
-      <section className="relative min-h-[70vh] flex flex-col justify-center overflow-hidden bg-black">
-        {/* Subtle gold gradient at bottom */}
+      {/* HERO — centered, clean dark */}
+      <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden bg-black">
+        {/* Subtle gold gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
-        {/* Grain texture overlay */}
+        {/* Grain texture */}
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -68,8 +68,8 @@ export default function Home() {
           }}
         />
 
-        {/* Hero content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-32 w-full">
+        {/* Hero content — fully centered */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-32 text-center">
           <div
             style={{
               opacity: heroLoaded ? 1 : 0,
@@ -82,7 +82,7 @@ export default function Home() {
               SS 2024 — DROP 01
             </p>
 
-            {/* Hero title */}
+            {/* Hero title — centered */}
             <h1 className="font-display leading-none">
               <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-ivory tracking-wide">
                 INSPIRED
@@ -94,7 +94,7 @@ export default function Home() {
 
             {/* Subheadline */}
             <p
-              className="font-heading text-lg md:text-2xl text-ivory/70 italic mt-6 md:mt-8 max-w-lg"
+              className="font-heading text-lg md:text-2xl text-ivory/70 italic mt-6 md:mt-8 max-w-lg mx-auto"
               style={{
                 opacity: heroLoaded ? 1 : 0,
                 transition: 'opacity 1s ease 0.8s',
@@ -103,9 +103,9 @@ export default function Home() {
               "Elevated essentials for those who move with divine purpose."
             </p>
 
-            {/* CTAs */}
+            {/* CTAs — centered */}
             <div
-              className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-12"
+              className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-12 justify-center"
               style={{
                 opacity: heroLoaded ? 1 : 0,
                 transform: heroLoaded ? 'none' : 'translateY(20px)',
@@ -127,15 +127,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-8 right-10 hidden md:flex flex-col items-center gap-3"
-          style={{ opacity: heroLoaded ? 1 : 0, transition: 'opacity 1s ease 1.5s' }}
-        >
-          <span className="font-mono text-[10px] tracking-widest text-grey-light rotate-90 mb-2">SCROLL</span>
-          <div className="w-px h-16 bg-gradient-to-b from-gold/50 to-transparent" />
         </div>
       </section>
 
@@ -206,9 +197,7 @@ export default function Home() {
             <div className="relative overflow-hidden group aspect-[4/5] bg-grey-dark">
               <div
                 className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)',
-                }}
+                style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)' }}
               />
               <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <p className="font-mono text-xs tracking-widest text-gold mb-2">NEW IN</p>
@@ -227,9 +216,7 @@ export default function Home() {
             <div className="relative overflow-hidden group aspect-[4/5] bg-grey-dark">
               <div
                 className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(135deg, #111 0%, #1a1a0a 100%)',
-                }}
+                style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a0a 100%)' }}
               />
               <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <p className="font-mono text-xs tracking-widest text-gold mb-2">FAN FAVOURITES</p>
