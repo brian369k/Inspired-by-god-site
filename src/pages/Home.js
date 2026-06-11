@@ -84,7 +84,7 @@ export default function Home() {
 
             {/* Hero title — centered */}
             <h1 className="font-display leading-none">
-              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-ivory tracking-wide">
+              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-white tracking-wide">
                 INSPIRED
               </span>
               <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-gradient-gold tracking-wide -mt-2 md:-mt-4">
@@ -142,7 +142,7 @@ export default function Home() {
         <FadeUp className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 md:mb-16 gap-4">
           <div>
             <p className="font-mono text-xs tracking-widest text-gold mb-3">— FEATURED PIECES</p>
-            <h2 className="font-display text-5xl md:text-7xl text-ivory tracking-wide leading-none">
+            <h2 className="font-display text-5xl md:text-7xl text-white tracking-wide leading-none">
               THE<br />COLLECTION
             </h2>
           </div>
@@ -201,7 +201,7 @@ export default function Home() {
               />
               <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <p className="font-mono text-xs tracking-widest text-gold mb-2">NEW IN</p>
-                <h3 className="font-display text-4xl md:text-5xl text-ivory tracking-wide mb-4">ARRIVALS</h3>
+                <h3 className="font-display text-4xl md:text-5xl text-white tracking-wide mb-4">ARRIVALS</h3>
                 <Link
                   to="/shop"
                   className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all w-fit"
@@ -220,7 +220,7 @@ export default function Home() {
               />
               <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <p className="font-mono text-xs tracking-widest text-gold mb-2">FAN FAVOURITES</p>
-                <h3 className="font-display text-4xl md:text-5xl text-ivory tracking-wide mb-4">BESTSELLERS</h3>
+                <h3 className="font-display text-4xl md:text-5xl text-white tracking-wide mb-4">BESTSELLERS</h3>
                 <Link
                   to="/shop"
                   className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all w-fit"
@@ -238,7 +238,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto px-6 text-center">
           <FadeUp>
             <p className="font-mono text-xs tracking-widest text-gold mb-4">— INNER CIRCLE</p>
-            <h2 className="font-display text-4xl md:text-6xl text-ivory tracking-wide mb-4">JOIN THE CHOSEN</h2>
+            <h2 className="font-display text-4xl md:text-6xl text-white tracking-wide mb-4">JOIN THE CHOSEN</h2>
             <p className="font-body text-sm text-grey-light mb-10">
               First access to limited drops, sacred announcements, and exclusive offers.
             </p>
