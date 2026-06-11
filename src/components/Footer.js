@@ -54,7 +54,7 @@ export default function Footer() {
                 { label: 'FAQ', to: '/faq' },
                 { label: 'Contact', to: '/contact' },
                 { label: 'Shipping', to: '/faq' },
-                { label: 'Returns', to: '/faq' },
+                { label: 'Returns', to: '/return-policy' },
                 { label: 'Size Guide', to: '/faq' },
               ].map((item) => (
                 <li key={item.label}>
@@ -110,11 +110,19 @@ export default function Footer() {
           <p className="font-mono text-xs text-grey-mid tracking-widest">
             © 2024 INSPIRED BY GOD. ALL RIGHTS RESERVED.
           </p>
-          <div className="flex gap-6">
-            {['Privacy Policy', 'Terms', 'Cookie Policy'].map((item) => (
-              <a key={item} href="/" className="font-mono text-xs text-grey-mid hover:text-grey-light transition-colors">
-                {item}
-              </a>
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              { label: 'Privacy Policy', to: '/privacy-policy' },
+              { label: 'Return Policy', to: '/return-policy' },
+              { label: 'Terms & Conditions', to: '/terms' },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                className="font-mono text-xs text-grey-mid hover:text-grey-light transition-colors"
+              >
+                {item.label}
+              </Link>
             ))}
           </div>
         </div>
