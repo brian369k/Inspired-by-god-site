@@ -12,13 +12,13 @@
   html {
     scroll-behavior: smooth;
     background: #000;
-    color: #f5f0e8;
+    color: #ffffff;
   }
 
   body {
     font-family: 'DM Sans', sans-serif;
     background: #000;
-    color: #f5f0e8;
+    color: #ffffff;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -26,7 +26,7 @@
 
   ::selection {
     background: rgba(201, 168, 76, 0.3);
-    color: #f5f0e8;
+    color: #ffffff;
   }
 
   ::-webkit-scrollbar {
