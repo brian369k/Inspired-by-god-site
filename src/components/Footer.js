@@ -19,7 +19,7 @@ export default function Footer() {
       </div>
 
       {/* Main footer */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2.5rem 3rem' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2.5rem 2rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
 
           {/* Brand */}
@@ -38,10 +38,19 @@ export default function Footer() {
             </Link>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: '13px', color: '#888',
+              fontSize: '13px', color: '#ffffff',
               lineHeight: 1.7, maxWidth: '260px',
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
+            </p>
+
+            {/* Copyright — moved up under tagline */}
+            <p style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '10px', letterSpacing: '0.15em',
+              color: '#ffffff', marginTop: '1.5rem',
+            }}>
+              © {year} INSPIRED BY GOD.<br />ALL RIGHTS RESERVED.
             </p>
 
             {/* Socials */}
@@ -59,15 +68,15 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   style={{
                     width: '36px', height: '36px',
-                    border: '1px solid rgba(201,168,76,0.2)',
+                    border: '1px solid rgba(201,168,76,0.3)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontFamily: "'Space Mono', monospace",
-                    fontSize: '9px', color: '#888',
+                    fontSize: '9px', color: '#ffffff',
                     textDecoration: 'none',
                     transition: 'border-color 0.2s, color 0.2s',
                   }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = '#c9a84c'; e.currentTarget.style.color = '#c9a84c'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.2)'; e.currentTarget.style.color = '#888'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)'; e.currentTarget.style.color = '#ffffff'; }}
                 >
                   {s.name}
                 </a>
@@ -92,12 +101,12 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link to={item.to} style={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '13px', color: '#888',
+                    fontSize: '14px', color: '#ffffff',
                     textDecoration: 'none',
                     transition: 'color 0.2s',
                   }}
-                    onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
-                    onMouseLeave={e => e.currentTarget.style.color = '#888'}
+                    onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#ffffff'}
                   >
                     {item.label}
                   </Link>
@@ -122,12 +131,12 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link to={item.to} style={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '13px', color: '#888',
+                    fontSize: '14px', color: '#ffffff',
                     textDecoration: 'none',
                     transition: 'color 0.2s',
                   }}
-                    onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
-                    onMouseLeave={e => e.currentTarget.style.color = '#888'}
+                    onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#ffffff'}
                   >
                     {item.label}
                   </Link>
@@ -136,23 +145,6 @@ export default function Footer() {
             </ul>
           </div>
 
-        </div>
-
-        {/* Bottom bar */}
-        <div style={{
-          marginTop: '3rem',
-          paddingTop: '1.5rem',
-          borderTop: '1px solid rgba(201,168,76,0.1)',
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
-          <p style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: '10px', letterSpacing: '0.2em',
-            color: '#444',
-          }}>
-            © {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.
-          </p>
         </div>
       </div>
     </footer>
