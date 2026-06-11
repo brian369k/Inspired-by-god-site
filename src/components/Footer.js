@@ -1,64 +1,104 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const socials = [
-  { name: 'INSTAGRAM', href: 'https://instagram.com', icon: 'IG' },
-  { name: 'TIKTOK', href: 'https://tiktok.com', icon: 'TK' },
-  { name: 'TWITTER', href: 'https://twitter.com', icon: 'TW' },
-  { name: 'PINTEREST', href: 'https://pinterest.com', icon: 'PT' },
-];
-
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-off-black border-t border-gold/10">
+    <footer style={{ background: '#0a0a0a', borderTop: '1px solid rgba(201,168,76,0.1)', overflow: 'hidden' }}>
+
       {/* Marquee */}
-      <div className="border-b border-gold/10 py-4 overflow-hidden">
-        <div className="marquee-content font-display text-5xl md:text-7xl text-gold/10 tracking-widest whitespace-nowrap">
-          {Array(6).fill('INSPIRED BY GOD · ELEVATED ESSENTIALS · CHOSEN · ').join('')}
+      <div style={{ background: '#c9a84c', padding: '0.6rem 0', overflow: 'hidden' }}>
+        <div className="marquee-content" style={{
+          fontFamily: "'Space Mono', monospace",
+          fontSize: '11px', letterSpacing: '0.25em',
+          color: '#000000', whiteSpace: 'nowrap',
+        }}>
+          {Array(10).fill('INSPIRED BY GOD · LUXURY STREETWEAR · ELEVATED ESSENTIALS · CHOSEN · ').join('')}
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+      {/* Main footer */}
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2.5rem 3rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
+
           {/* Brand */}
-          <div className="md:col-span-1">
-            <Link to="/" className="block mb-4">
-              <span className="font-display text-3xl text-ivory block tracking-widest">INSPIRED</span>
-              <span className="font-mono text-xs text-gold tracking-ultra-wide">BY GOD</span>
+          <div style={{ gridColumn: 'span 2' }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'block', marginBottom: '1rem' }}>
+              <span style={{
+                fontFamily: "'Bebas Neue', cursive",
+                fontSize: '2rem', color: '#ffffff',
+                letterSpacing: '0.2em', display: 'block',
+              }}>INSPIRED</span>
+              <span style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '10px', color: '#c9a84c',
+                letterSpacing: '0.4em',
+              }}>BY GOD</span>
             </Link>
-            <p className="font-body text-sm text-grey-light leading-relaxed max-w-xs">
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: '13px', color: '#888',
+              lineHeight: 1.7, maxWidth: '260px',
+            }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
+
+            {/* Socials */}
+            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
+              {[
+                { name: 'IG', href: 'https://instagram.com' },
+                { name: 'TK', href: 'https://tiktok.com' },
+                { name: 'TW', href: 'https://twitter.com' },
+                { name: 'PT', href: 'https://pinterest.com' },
+              ].map((s) => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    width: '36px', height: '36px',
+                    border: '1px solid rgba(201,168,76,0.2)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontFamily: "'Space Mono', monospace",
+                    fontSize: '9px', color: '#888',
+                    textDecoration: 'none',
+                    transition: 'border-color 0.2s, color 0.2s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = '#c9a84c'; e.currentTarget.style.color = '#c9a84c'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.2)'; e.currentTarget.style.color = '#888'; }}
+                >
+                  {s.name}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Shop */}
           <div>
-            <h4 className="font-mono text-xs tracking-widest text-gold mb-6">SHOP</h4>
-            <ul className="space-y-3">
-              {['New Arrivals', 'Hoodies', 'Tops', 'Bottoms', 'Outerwear', 'Accessories'].map((item) => (
-                <li key={item}>
-                  <Link to="/shop" className="font-body text-sm text-grey-light hover:text-ivory transition-colors">
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Info */}
-          <div>
-            <h4 className="font-mono text-xs tracking-widest text-gold mb-6">INFO</h4>
-            <ul className="space-y-3">
+            <p style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '10px', letterSpacing: '0.25em',
+              color: '#c9a84c', marginBottom: '1.25rem',
+            }}>SHOP</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {[
+                { label: 'Shop All', to: '/shop' },
                 { label: 'About', to: '/about' },
                 { label: 'FAQ', to: '/faq' },
                 { label: 'Contact', to: '/contact' },
-                { label: 'Shipping', to: '/faq' },
-                { label: 'Returns', to: '/return-policy' },
-                { label: 'Size Guide', to: '/faq' },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link to={item.to} className="font-body text-sm text-grey-light hover:text-ivory transition-colors">
+                  <Link to={item.to} style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '13px', color: '#888',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s',
+                  }}
+                    onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#888'}
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -66,65 +106,53 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter + Social */}
+          {/* Legal */}
           <div>
-            <h4 className="font-mono text-xs tracking-widest text-gold mb-6">THE INNER CIRCLE</h4>
-            <p className="font-body text-sm text-grey-light mb-4">
-              First access to drops. Sacred announcements only.
-            </p>
-            <div className="flex gap-0">
-              <input
-                type="email"
-                placeholder="YOUR EMAIL"
-                className="flex-1 bg-black border border-gold/20 px-4 py-3 font-mono text-xs text-ivory placeholder-grey-mid focus:outline-none focus:border-gold/50 transition-colors"
-              />
-              <button className="bg-gold text-black font-mono text-xs px-4 py-3 hover:bg-gold-light transition-colors flex-shrink-0">
-                →
-              </button>
-            </div>
-
-            {/* Socials */}
-            <div className="mt-8">
-              <h4 className="font-mono text-xs tracking-widest text-gold mb-4">FOLLOW</h4>
-              <div className="flex gap-4">
-                {socials.map((s) => (
-                  <a
-                    key={s.name}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 border border-gold/20 flex items-center justify-center font-mono text-[9px] text-grey-light hover:border-gold hover:text-gold transition-all"
-                    aria-label={s.name}
+            <p style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '10px', letterSpacing: '0.25em',
+              color: '#c9a84c', marginBottom: '1.25rem',
+            }}>LEGAL</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {[
+                { label: 'Privacy Policy', to: '/privacy-policy' },
+                { label: 'Return Policy', to: '/return-policy' },
+                { label: 'Terms & Conditions', to: '/terms' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link to={item.to} style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '13px', color: '#888',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s',
+                  }}
+                    onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
+                    onMouseLeave={e => e.currentTarget.style.color = '#888'}
                   >
-                    {s.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+
         </div>
 
         {/* Bottom bar */}
-        <div className="gold-line my-10" />
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-mono text-xs text-grey-mid tracking-widest">
-            © 2024 INSPIRED BY GOD. ALL RIGHTS RESERVED.
+        <div style={{
+          marginTop: '3rem',
+          paddingTop: '1.5rem',
+          borderTop: '1px solid rgba(201,168,76,0.1)',
+          display: 'flex',
+          justifyContent: 'center',
+        }}>
+          <p style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: '10px', letterSpacing: '0.2em',
+            color: '#444',
+          }}>
+            © {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              { label: 'Privacy Policy', to: '/privacy-policy' },
-              { label: 'Return Policy', to: '/return-policy' },
-              { label: 'Terms & Conditions', to: '/terms' },
-            ].map((item) => (
-              <Link
-                key={item.label}
-                to={item.to}
-                className="font-mono text-xs text-grey-mid hover:text-grey-light transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
