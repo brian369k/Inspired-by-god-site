@@ -84,7 +84,7 @@ export default function Home() {
 
             {/* Hero title — centered */}
             <h1 className="font-display leading-none">
-              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-white tracking-wide">
+              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] tracking-wide" style={{color: "#ffffff"}}>
                 INSPIRED
               </span>
               <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-gradient-gold tracking-wide -mt-2 md:-mt-4">
