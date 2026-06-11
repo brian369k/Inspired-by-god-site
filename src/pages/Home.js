@@ -94,7 +94,7 @@ export default function Home() {
 
             {/* Subheadline */}
             <p
-              className="font-heading text-lg md:text-2xl text-ivory/70 italic mt-6 md:mt-8 max-w-lg mx-auto"
+              className="font-heading text-lg md:text-2xl text-white/80 italic mt-6 md:mt-8 max-w-lg mx-auto"
               style={{
                 opacity: heroLoaded ? 1 : 0,
                 transition: 'opacity 1s ease 0.8s',
