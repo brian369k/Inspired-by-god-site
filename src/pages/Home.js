@@ -46,115 +46,163 @@ export default function Home() {
   const featured = products.slice(0, 4);
 
   return (
-    <div className="bg-black">
-      {/* HERO — centered, clean dark */}
-      <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden bg-black">
-        {/* Subtle gold gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+    <div style={{ background: '#000000' }}>
 
-        {/* Grain texture */}
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 512 512\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
-          }}
-        />
+      {/* ============ HERO ============ */}
+      <section style={{
+        minHeight: '70vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        background: '#000000',
+        position: 'relative',
+        overflow: 'hidden',
+        borderBottom: '1px solid rgba(201,168,76,0.15)',
+      }}>
+        {/* Grain */}
+        <div style={{
+          position: 'absolute', inset: 0, opacity: 0.15,
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 512 512\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
+        }} />
 
-        {/* Radial gold glow */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%)',
-          }}
-        />
+        {/* Gold glow */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%)',
+        }} />
 
-        {/* Hero content — fully centered */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-32 text-center">
-          <div
-            style={{
-              opacity: heroLoaded ? 1 : 0,
-              transform: heroLoaded ? 'none' : 'translateY(30px)',
-              transition: 'opacity 1.2s ease 0.2s, transform 1.2s ease 0.2s',
-            }}
-          >
-            {/* Eyebrow */}
-            <p className="font-mono text-xs tracking-ultra-wide text-gold mb-6 md:mb-8">
-              SS 2024 — DROP 01
-            </p>
+        {/* Content */}
+        <div style={{
+          position: 'relative', zIndex: 10,
+          width: '100%', maxWidth: '1280px',
+          margin: '0 auto', padding: '6rem 2.5rem',
+          textAlign: 'center',
+          opacity: heroLoaded ? 1 : 0,
+          transform: heroLoaded ? 'none' : 'translateY(30px)',
+          transition: 'opacity 1.2s ease 0.2s, transform 1.2s ease 0.2s',
+        }}>
+          {/* Eyebrow */}
+          <p style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: '11px',
+            letterSpacing: '0.4em',
+            color: '#c9a84c',
+            marginBottom: '2rem',
+          }}>
+            SS 2024 — DROP 01
+          </p>
 
-            {/* Hero title — centered */}
-            <h1 className="font-display leading-none">
-              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] tracking-wide" style={{color: "#ffffff"}}>
-                INSPIRED
-              </span>
-              <span className="block text-[14vw] md:text-[11vw] lg:text-[9vw] text-gradient-gold tracking-wide -mt-2 md:-mt-4">
-                BY GOD
-              </span>
-            </h1>
+          {/* INSPIRED */}
+          <h1 style={{ margin: 0, padding: 0, lineHeight: 1 }}>
+            <span style={{
+              display: 'block',
+              fontFamily: "'Bebas Neue', cursive",
+              fontSize: 'clamp(80px, 14vw, 160px)',
+              color: '#ffffff',
+              letterSpacing: '0.05em',
+              lineHeight: 1,
+              WebkitTextFillColor: '#ffffff',
+            }}>
+              INSPIRED
+            </span>
+            <span style={{
+              display: 'block',
+              fontFamily: "'Bebas Neue', cursive",
+              fontSize: 'clamp(80px, 14vw, 160px)',
+              background: 'linear-gradient(135deg, #c9a84c 0%, #e8c97a 50%, #c9a84c 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              letterSpacing: '0.05em',
+              lineHeight: 1,
+              marginTop: '-0.1em',
+            }}>
+              BY GOD
+            </span>
+          </h1>
 
-            {/* Subheadline */}
-            <p
-              className="font-heading text-lg md:text-2xl text-white/80 italic mt-6 md:mt-8 max-w-lg mx-auto"
-              style={{
-                opacity: heroLoaded ? 1 : 0,
-                transition: 'opacity 1s ease 0.8s',
-              }}
-            >
-              "Elevated essentials for those who move with divine purpose."
-            </p>
+          {/* Subheadline */}
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: 'clamp(16px, 2vw, 22px)',
+            color: 'rgba(255,255,255,0.7)',
+            fontStyle: 'italic',
+            marginTop: '1.5rem',
+            maxWidth: '500px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            opacity: heroLoaded ? 1 : 0,
+            transition: 'opacity 1s ease 0.8s',
+          }}>
+            "Elevated essentials for those who move with divine purpose."
+          </p>
 
-            {/* CTAs — centered */}
-            <div
-              className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-12 justify-center"
-              style={{
-                opacity: heroLoaded ? 1 : 0,
-                transform: heroLoaded ? 'none' : 'translateY(20px)',
-                transition: 'opacity 0.8s ease 1s, transform 0.8s ease 1s',
-              }}
-            >
-              <Link
-                to="/shop"
-                className="inline-flex items-center justify-center gap-3 bg-gold text-black font-mono text-xs tracking-widest px-10 py-4 hover:bg-gold-light transition-colors duration-200 animate-pulse-gold"
-              >
-                SHOP THE DROP
-                <span className="text-base">→</span>
-              </Link>
-              <Link
-                to="/about"
-                className="inline-flex items-center justify-center gap-3 border border-ivory/30 text-ivory font-mono text-xs tracking-widest px-10 py-4 hover:border-gold hover:text-gold transition-colors duration-200"
-              >
-                OUR STORY
-              </Link>
-            </div>
+          {/* Buttons */}
+          <div style={{
+            display: 'flex',
+            gap: '1rem',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            marginTop: '2.5rem',
+            opacity: heroLoaded ? 1 : 0,
+            transform: heroLoaded ? 'none' : 'translateY(20px)',
+            transition: 'opacity 0.8s ease 1s, transform 0.8s ease 1s',
+          }}>
+            <Link to="/shop" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.75rem',
+              background: '#c9a84c', color: '#000000',
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '11px', letterSpacing: '0.25em',
+              padding: '1rem 2.5rem',
+              textDecoration: 'none',
+              transition: 'background 0.2s ease',
+            }}>
+              SHOP THE DROP →
+            </Link>
+            <Link to="/about" style={{
+              display: 'inline-flex', alignItems: 'center',
+              border: '1px solid rgba(255,255,255,0.3)', color: '#ffffff',
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '11px', letterSpacing: '0.25em',
+              padding: '1rem 2.5rem',
+              textDecoration: 'none',
+              transition: 'border-color 0.2s ease',
+            }}>
+              OUR STORY
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* MARQUEE BAND */}
-      <div className="bg-gold py-3 overflow-hidden">
-        <div className="marquee-content font-mono text-[11px] tracking-widest text-black whitespace-nowrap">
+      {/* ============ MARQUEE ============ */}
+      <div style={{ background: '#c9a84c', padding: '0.75rem 0', overflow: 'hidden' }}>
+        <div className="marquee-content" style={{
+          fontFamily: "'Space Mono', monospace",
+          fontSize: '11px', letterSpacing: '0.25em',
+          color: '#000000', whiteSpace: 'nowrap',
+        }}>
           {Array(8).fill('INSPIRED BY GOD · LUXURY STREETWEAR · FREE SHIPPING OVER $150 · NEW ARRIVALS NOW LIVE · CHOSEN ONES ONLY · ').join('')}
         </div>
       </div>
 
-      {/* FEATURED PRODUCTS */}
-      <section className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
-        <FadeUp className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 md:mb-16 gap-4">
-          <div>
-            <p className="font-mono text-xs tracking-widest text-gold mb-3">— FEATURED PIECES</p>
-            <h2 className="font-display text-5xl md:text-7xl text-white tracking-wide leading-none">
-              THE<br />COLLECTION
-            </h2>
+      {/* ============ FEATURED PRODUCTS ============ */}
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 2.5rem' }}>
+        <FadeUp>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: '10px', letterSpacing: '0.25em', color: '#c9a84c', marginBottom: '0.75rem' }}>— FEATURED PIECES</p>
+              <h2 style={{ fontFamily: "'Bebas Neue', cursive", fontSize: 'clamp(48px, 7vw, 80px)', color: '#ffffff', letterSpacing: '0.05em', lineHeight: 1 }}>
+                THE<br />COLLECTION
+              </h2>
+            </div>
+            <Link to="/shop" style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', letterSpacing: '0.25em', color: '#888', textDecoration: 'none', borderBottom: '1px solid #333', paddingBottom: '2px' }}>
+              VIEW ALL →
+            </Link>
           </div>
-          <Link
-            to="/shop"
-            className="font-mono text-xs tracking-widest text-grey-light hover:text-gold transition-colors border-b border-grey-mid hover:border-gold pb-1"
-          >
-            VIEW ALL →
-          </Link>
         </FadeUp>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.5rem' }}>
           {featured.map((product, i) => (
             <FadeUp key={product.id} delay={i * 0.1}>
               <ProductCard product={product} index={i} />
@@ -163,97 +211,86 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BRAND STATEMENT */}
-      <section className="relative py-28 md:py-40 overflow-hidden bg-off-black">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%)',
-          }}
-        />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-10 text-center">
+      {/* ============ BRAND STATEMENT ============ */}
+      <section style={{
+        background: '#0a0a0a',
+        padding: '6rem 2.5rem',
+        textAlign: 'center',
+        position: 'relative',
+      }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%)',
+        }} />
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
           <FadeUp>
-            <p className="font-mono text-xs tracking-ultra-wide text-gold mb-8">— THE ETHOS</p>
-            <blockquote className="font-heading text-3xl md:text-5xl lg:text-6xl text-ivory leading-tight italic">
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: '10px', letterSpacing: '0.4em', color: '#c9a84c', marginBottom: '2rem' }}>— THE ETHOS</p>
+            <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(24px, 4vw, 48px)', color: '#ffffff', fontStyle: 'italic', lineHeight: 1.3, margin: 0 }}>
               "We don't make clothes.<br />We make armor for the anointed."
             </blockquote>
-            <p className="font-body text-sm text-grey-light mt-8 max-w-lg mx-auto leading-relaxed">
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#888', marginTop: '2rem', lineHeight: 1.7, maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>
               Every piece is crafted with intention. Sacred materials. Deliberate silhouettes. For those who know their purpose and dress accordingly.
             </p>
-            <Link
-              to="/about"
-              className="inline-block mt-10 font-mono text-xs tracking-widest text-gold border border-gold/30 px-8 py-3 hover:border-gold hover:bg-gold/5 transition-all"
-            >
+            <Link to="/about" style={{
+              display: 'inline-block', marginTop: '2.5rem',
+              fontFamily: "'Space Mono', monospace", fontSize: '11px', letterSpacing: '0.25em',
+              color: '#c9a84c', border: '1px solid rgba(201,168,76,0.3)',
+              padding: '0.75rem 2rem', textDecoration: 'none',
+            }}>
               LEARN MORE
             </Link>
           </FadeUp>
         </div>
       </section>
 
-      {/* CATALOG TEASER */}
-      <section className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* ============ CATALOG PANELS ============ */}
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 2.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
           <FadeUp>
-            <div className="relative overflow-hidden group aspect-[4/5] bg-grey-dark">
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)' }}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <p className="font-mono text-xs tracking-widest text-gold mb-2">NEW IN</p>
-                <h3 className="font-display text-4xl md:text-5xl text-white tracking-wide mb-4">ARRIVALS</h3>
-                <Link
-                  to="/shop"
-                  className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all w-fit"
-                >
-                  SHOP NOW
-                </Link>
-              </div>
+            <div style={{ background: 'linear-gradient(135deg, #1a1a1a, #0a0a0a)', aspectRatio: '4/5', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2rem' }}>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: '10px', letterSpacing: '0.25em', color: '#c9a84c', marginBottom: '0.5rem' }}>NEW IN</p>
+              <h3 style={{ fontFamily: "'Bebas Neue', cursive", fontSize: '48px', color: '#ffffff', letterSpacing: '0.05em', marginBottom: '1rem' }}>ARRIVALS</h3>
+              <Link to="/shop" style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', letterSpacing: '0.25em', color: '#ffffff', border: '1px solid rgba(255,255,255,0.3)', padding: '0.625rem 1.5rem', textDecoration: 'none', display: 'inline-block' }}>
+                SHOP NOW
+              </Link>
             </div>
           </FadeUp>
-
           <FadeUp delay={0.15}>
-            <div className="relative overflow-hidden group aspect-[4/5] bg-grey-dark">
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a0a 100%)' }}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <p className="font-mono text-xs tracking-widest text-gold mb-2">FAN FAVOURITES</p>
-                <h3 className="font-display text-4xl md:text-5xl text-white tracking-wide mb-4">BESTSELLERS</h3>
-                <Link
-                  to="/shop"
-                  className="font-mono text-xs tracking-widest text-ivory border border-ivory/30 px-6 py-2.5 inline-block hover:border-gold hover:text-gold transition-all w-fit"
-                >
-                  EXPLORE
-                </Link>
-              </div>
+            <div style={{ background: 'linear-gradient(135deg, #111, #1a1a0a)', aspectRatio: '4/5', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2rem' }}>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: '10px', letterSpacing: '0.25em', color: '#c9a84c', marginBottom: '0.5rem' }}>FAN FAVOURITES</p>
+              <h3 style={{ fontFamily: "'Bebas Neue', cursive", fontSize: '48px', color: '#ffffff', letterSpacing: '0.05em', marginBottom: '1rem' }}>BESTSELLERS</h3>
+              <Link to="/shop" style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', letterSpacing: '0.25em', color: '#ffffff', border: '1px solid rgba(255,255,255,0.3)', padding: '0.625rem 1.5rem', textDecoration: 'none', display: 'inline-block' }}>
+                EXPLORE
+              </Link>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <section className="border-t border-gold/10 py-20 md:py-24">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <FadeUp>
-            <p className="font-mono text-xs tracking-widest text-gold mb-4">— INNER CIRCLE</p>
-            <h2 className="font-display text-4xl md:text-6xl text-white tracking-wide mb-4">JOIN THE CHOSEN</h2>
-            <p className="font-body text-sm text-grey-light mb-10">
-              First access to limited drops, sacred announcements, and exclusive offers.
-            </p>
-            <div className="flex gap-0 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="YOUR EMAIL ADDRESS"
-                className="flex-1 bg-grey-dark border border-gold/20 px-5 py-4 font-mono text-xs text-ivory placeholder-grey-mid focus:outline-none focus:border-gold/50"
-              />
-              <button className="bg-gold text-black font-mono text-xs tracking-widest px-6 py-4 hover:bg-gold-light transition-colors whitespace-nowrap">
-                JOIN
-              </button>
-            </div>
-          </FadeUp>
-        </div>
+      {/* ============ NEWSLETTER ============ */}
+      <section style={{ borderTop: '1px solid rgba(201,168,76,0.1)', padding: '5rem 2.5rem', textAlign: 'center' }}>
+        <FadeUp>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: '10px', letterSpacing: '0.25em', color: '#c9a84c', marginBottom: '1rem' }}>— INNER CIRCLE</p>
+          <h2 style={{ fontFamily: "'Bebas Neue', cursive", fontSize: 'clamp(40px, 6vw, 72px)', color: '#ffffff', letterSpacing: '0.05em', marginBottom: '1rem' }}>JOIN THE CHOSEN</h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#888', marginBottom: '2.5rem' }}>
+            First access to limited drops, sacred announcements, and exclusive offers.
+          </p>
+          <div style={{ display: 'flex', maxWidth: '420px', margin: '0 auto' }}>
+            <input type="email" placeholder="YOUR EMAIL ADDRESS" style={{
+              flex: 1, background: '#1a1a1a', border: '1px solid rgba(201,168,76,0.2)',
+              borderRight: 'none', padding: '1rem 1.25rem',
+              fontFamily: "'Space Mono', monospace", fontSize: '11px',
+              color: '#ffffff', outline: 'none',
+            }} />
+            <button style={{
+              background: '#c9a84c', color: '#000000', border: 'none',
+              fontFamily: "'Space Mono', monospace", fontSize: '11px',
+              letterSpacing: '0.25em', padding: '1rem 1.5rem', cursor: 'pointer',
+            }}>
+              JOIN
+            </button>
+          </div>
+        </FadeUp>
       </section>
     </div>
   );
