@@ -41,20 +41,17 @@ export default function ProductCard({ product, index = 0 }) {
               transition: 'transform 0.6s ease',
             }}
           />
-
-          {/* Tag */}
           {product.tag && (
             <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
               <span style={{
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Montserrat', sans-serif",
                 fontSize: '9px', letterSpacing: '0.15em',
+                fontWeight: 700,
                 background: '#c9a84c', color: '#000000',
                 padding: '4px 10px',
               }}>{product.tag}</span>
             </div>
           )}
-
-          {/* Quick view */}
           <div style={{
             position: 'absolute', bottom: '12px', left: '12px', right: '12px',
             opacity: hovered ? 1 : 0,
@@ -63,10 +60,11 @@ export default function ProductCard({ product, index = 0 }) {
           }}>
             <span style={{
               display: 'block', textAlign: 'center',
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Montserrat', sans-serif",
               fontSize: '10px', letterSpacing: '0.15em',
-              color: '#ffffff', background: 'rgba(0,0,0,0.7)',
-              padding: '8px',
+              fontWeight: 700,
+              color: '#ffffff', background: 'rgba(0,0,0,0.75)',
+              padding: '10px',
             }}>VIEW PRODUCT</span>
           </div>
         </div>
@@ -76,19 +74,22 @@ export default function ProductCard({ product, index = 0 }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
             <div>
               <h3 style={{
-                fontFamily: "'Bebas Neue', cursive",
-                fontSize: '1.1rem', letterSpacing: '0.1em',
-                color: '#000000',
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: '13px', fontWeight: 700,
+                letterSpacing: '0.05em', color: '#000000',
+                textTransform: 'uppercase',
               }}>{product.name}</h3>
               <p style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '12px', color: '#888888',
-                textTransform: 'capitalize', marginTop: '2px',
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: '12px', fontWeight: 400,
+                color: '#888888', textTransform: 'capitalize',
+                marginTop: '2px',
               }}>{product.category}</p>
             </div>
             <span style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: '13px', color: '#c9a84c', flexShrink: 0,
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: '13px', fontWeight: 700,
+              color: '#c9a84c', flexShrink: 0,
             }}>${product.price}</span>
           </div>
 

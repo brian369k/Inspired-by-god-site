@@ -17,13 +17,10 @@ export default function Navbar() {
 
   useEffect(() => { setMenuOpen(false); }, [location]);
 
-  // On homepage: transparent over black hero, then white after scroll
-  // On other pages: always white
   const isTransparent = isHome && !scrolled;
   const bgColor = isTransparent ? 'transparent' : '#ffffff';
   const borderColor = isTransparent ? 'transparent' : '#e0e0e0';
   const textColor = isTransparent ? '#ffffff' : '#000000';
-  const logoSubColor = '#c9a84c';
 
   const navLinks = [
     { to: '/shop', label: 'SHOP' },
@@ -56,8 +53,9 @@ export default function Navbar() {
               transition: 'color 0.3s',
             }}>INSPIRED</span>
             <span style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: '8px', color: logoSubColor,
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              fontSize: '8px', color: '#c9a84c',
               letterSpacing: '0.4em', display: 'block',
               marginTop: '-2px',
             }}>BY GOD</span>
@@ -67,12 +65,13 @@ export default function Navbar() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }} className="hidden-mobile">
             {navLinks.map((link) => (
               <Link key={link.to} to={link.to} style={{
-                fontFamily: "'Space Mono', monospace",
-                fontSize: '11px', letterSpacing: '0.2em',
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 700,
+                fontSize: '11px', letterSpacing: '0.15em',
                 color: location.pathname === link.to ? '#c9a84c' : textColor,
                 textDecoration: 'none',
                 transition: 'color 0.2s',
-                borderBottom: location.pathname === link.to ? '1px solid #c9a84c' : 'none',
+                borderBottom: location.pathname === link.to ? '2px solid #c9a84c' : 'none',
                 paddingBottom: '2px',
               }}>
                 {link.label}
@@ -85,8 +84,9 @@ export default function Navbar() {
             <button onClick={toggleCart} style={{
               background: 'none', border: 'none', cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: '0.5rem',
-              fontFamily: "'Space Mono', monospace",
-              fontSize: '11px', letterSpacing: '0.2em',
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              fontSize: '11px', letterSpacing: '0.15em',
               color: textColor, transition: 'color 0.3s',
             }}>
               CART
@@ -94,22 +94,21 @@ export default function Navbar() {
                 <span style={{
                   width: '20px', height: '20px',
                   background: '#c9a84c', color: '#000000',
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: '10px', fontWeight: 'bold',
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '10px', fontWeight: 700,
                   borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>{totalItems}</span>
               )}
             </button>
 
-            {/* Hamburger */}
             <button onClick={() => setMenuOpen(!menuOpen)}
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex', flexDirection: 'column', gap: '5px' }}
               className="show-mobile"
             >
-              <span style={{ display: 'block', width: '24px', height: '1px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(6px)' : 'none' }} />
-              <span style={{ display: 'block', width: '24px', height: '1px', background: textColor, transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-              <span style={{ display: 'block', width: '24px', height: '1px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none' }} />
+              <span style={{ display: 'block', width: '24px', height: '2px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(7px)' : 'none' }} />
+              <span style={{ display: 'block', width: '24px', height: '2px', background: textColor, transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: '24px', height: '2px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none' }} />
             </button>
           </div>
         </div>
@@ -128,27 +127,25 @@ export default function Navbar() {
       }}>
         {navLinks.map((link) => (
           <Link key={link.to} to={link.to} style={{
-            fontFamily: "'Bebas Neue', cursive",
-            fontSize: '3rem', color: '#000000',
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 800,
+            fontSize: '2rem', color: '#000000',
             textDecoration: 'none', letterSpacing: '0.1em',
           }}>{link.label}</Link>
         ))}
         <button onClick={() => { toggleCart(); setMenuOpen(false); }} style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          fontFamily: "'Bebas Neue', cursive",
-          fontSize: '3rem', color: '#000000', letterSpacing: '0.1em',
+          fontFamily: "'Montserrat', sans-serif",
+          fontWeight: 800,
+          fontSize: '2rem', color: '#000000', letterSpacing: '0.1em',
         }}>
           CART {totalItems > 0 && `(${totalItems})`}
         </button>
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          .hidden-mobile { display: none !important; }
-        }
-        @media (min-width: 769px) {
-          .show-mobile { display: none !important; }
-        }
+        @media (max-width: 768px) { .hidden-mobile { display: none !important; } }
+        @media (min-width: 769px) { .show-mobile { display: none !important; } }
       `}</style>
     </>
   );
