@@ -8,18 +8,9 @@ const getColorHex = (color) => {
   if (c.includes('sand')) return '#c2b280';
   if (c.includes('azalea')) return '#f4a7b9';
   if (c.includes('cardinal blue')) return '#1a3a6b';
-  if (c.includes('grey') || c.includes('gray') || c.includes('stone') || c.includes('heather')) return '#888';
+  if (c.includes('grey') || c.includes('gray') || c.includes('stone')) return '#888';
   if (c.includes('olive') || c.includes('military')) return '#556b2f';
   if (c.includes('navy')) return '#1a2744';
-  if (c.includes('red')) return '#c0392b';
-  if (c.includes('green')) return '#2ecc71';
-  if (c.includes('blue')) return '#2980b9';
-  if (c.includes('purple')) return '#8e44ad';
-  if (c.includes('orange')) return '#e67e22';
-  if (c.includes('yellow')) return '#f1c40f';
-  if (c.includes('pink')) return '#ff69b4';
-  if (c.includes('brown')) return '#795548';
-  if (c.includes('cream') || c.includes('bone') || c.includes('ivory')) return '#f5f0e8';
   return '#888888';
 };
 
@@ -27,91 +18,89 @@ export default function ProductCard({ product, index = 0 }) {
   const [hovered, setHovered] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
 
-  const handleMouseEnter = () => {
-    setHovered(true);
-    if (product.images.length > 1) setImgIdx(1);
-  };
-  const handleMouseLeave = () => {
-    setHovered(false);
-    setImgIdx(0);
-  };
-
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group block"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{ animationDelay: `${index * 0.1}s` }}
+      style={{ display: 'block', textDecoration: 'none' }}
+      onMouseEnter={() => { setHovered(true); if (product.images.length > 1) setImgIdx(1); }}
+      onMouseLeave={() => { setHovered(false); setImgIdx(0); }}
     >
-      <div className="product-card-hover">
-        {/* Image Container */}
-        <div className="relative overflow-hidden bg-grey-dark aspect-[3/4]">
+      <div style={{
+        transform: hovered ? 'translateY(-6px)' : 'none',
+        boxShadow: hovered ? '0 20px 40px rgba(0,0,0,0.12)' : 'none',
+        transition: 'transform 0.4s ease, box-shadow 0.4s ease',
+      }}>
+        {/* Image */}
+        <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '3/4', background: '#f5f5f5' }}>
           <img
             src={product.images[imgIdx]}
             alt={product.name}
-            className="w-full h-full object-cover transition-all duration-700"
-            style={{ transform: hovered ? 'scale(1.06)' : 'scale(1)' }}
-          />
-
-          {/* Overlay */}
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent transition-opacity duration-300"
-            style={{ opacity: hovered ? 1 : 0.4 }}
+            style={{
+              width: '100%', height: '100%', objectFit: 'cover',
+              transform: hovered ? 'scale(1.05)' : 'scale(1)',
+              transition: 'transform 0.6s ease',
+            }}
           />
 
           {/* Tag */}
           {product.tag && (
-            <div className="absolute top-4 left-4">
-              <span className="font-mono text-[10px] tracking-widest px-3 py-1 bg-gold text-black">
-                {product.tag}
-              </span>
+            <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
+              <span style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '9px', letterSpacing: '0.15em',
+                background: '#c9a84c', color: '#000000',
+                padding: '4px 10px',
+              }}>{product.tag}</span>
             </div>
           )}
 
-          {/* Quick View */}
-          <div
-            className="absolute bottom-4 left-4 right-4 transition-all duration-300"
-            style={{ transform: hovered ? 'translateY(0)' : 'translateY(10px)', opacity: hovered ? 1 : 0 }}
-          >
-            <span className="font-mono text-xs tracking-widest text-ivory border border-ivory/40 px-4 py-2 block text-center hover:border-gold hover:text-gold transition-colors">
-              VIEW PRODUCT
-            </span>
+          {/* Quick view */}
+          <div style={{
+            position: 'absolute', bottom: '12px', left: '12px', right: '12px',
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? 'translateY(0)' : 'translateY(8px)',
+            transition: 'all 0.3s ease',
+          }}>
+            <span style={{
+              display: 'block', textAlign: 'center',
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '10px', letterSpacing: '0.15em',
+              color: '#ffffff', background: 'rgba(0,0,0,0.7)',
+              padding: '8px',
+            }}>VIEW PRODUCT</span>
           </div>
-
-          {/* Image dots */}
-          {product.images.length > 1 && (
-            <div className="absolute bottom-14 left-1/2 -translate-x-1/2 flex gap-1.5">
-              {product.images.map((_, i) => (
-                <span
-                  key={i}
-                  className="w-1 h-1 rounded-full transition-colors duration-200"
-                  style={{ background: i === imgIdx ? '#c9a84c' : 'rgba(245,240,232,0.4)' }}
-                />
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Info */}
-        <div className="pt-4 pb-2">
-          <div className="flex items-start justify-between gap-2">
+        <div style={{ paddingTop: '12px', paddingBottom: '8px', background: '#ffffff' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
             <div>
-              <h3 className="font-display text-lg tracking-widest text-ivory group-hover:text-gold transition-colors duration-200">
-                {product.name}
-              </h3>
-              <p className="font-body text-xs text-grey-light mt-0.5 capitalize">{product.category}</p>
+              <h3 style={{
+                fontFamily: "'Bebas Neue', cursive",
+                fontSize: '1.1rem', letterSpacing: '0.1em',
+                color: '#000000',
+              }}>{product.name}</h3>
+              <p style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: '12px', color: '#888888',
+                textTransform: 'capitalize', marginTop: '2px',
+              }}>{product.category}</p>
             </div>
-            <span className="font-mono text-sm text-gold flex-shrink-0">${product.price}</span>
+            <span style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '13px', color: '#c9a84c', flexShrink: 0,
+            }}>${product.price}</span>
           </div>
 
-          {/* Color dots — correctly mapped */}
-          <div className="flex gap-1.5 mt-3 flex-wrap">
+          {/* Color dots */}
+          <div style={{ display: 'flex', gap: '6px', marginTop: '10px', flexWrap: 'wrap' }}>
             {product.colors.map((color) => (
-              <div
-                key={color}
-                className="w-3.5 h-3.5 rounded-full border border-grey-mid flex-shrink-0"
-                style={{ background: getColorHex(color) }}
+              <div key={color}
+                style={{
+                  width: '14px', height: '14px', borderRadius: '50%',
+                  background: getColorHex(color),
+                  border: '1px solid #dddddd',
+                }}
                 title={color}
               />
             ))}

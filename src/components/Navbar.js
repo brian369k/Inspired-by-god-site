@@ -7,6 +7,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { totalItems, toggleCart } = useCart();
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -15,6 +16,14 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => { setMenuOpen(false); }, [location]);
+
+  // On homepage: transparent over black hero, then white after scroll
+  // On other pages: always white
+  const isTransparent = isHome && !scrolled;
+  const bgColor = isTransparent ? 'transparent' : '#ffffff';
+  const borderColor = isTransparent ? 'transparent' : '#e0e0e0';
+  const textColor = isTransparent ? '#ffffff' : '#000000';
+  const logoSubColor = '#c9a84c';
 
   const navLinks = [
     { to: '/shop', label: 'SHOP' },
@@ -25,100 +34,122 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-black/95 backdrop-blur-md border-b border-gold/10' : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        background: bgColor,
+        borderBottom: `1px solid ${borderColor}`,
+        backdropFilter: scrolled ? 'blur(10px)' : 'none',
+        transition: 'all 0.4s ease',
+      }}>
+        <div style={{
+          maxWidth: '1280px', margin: '0 auto',
+          padding: '0 2.5rem',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: '72px',
+        }}>
           {/* Logo */}
-          <Link to="/" className="flex flex-col leading-none group">
-            <span className="font-display text-xl md:text-2xl text-ivory tracking-widest group-hover:text-gold transition-colors duration-300">
-              INSPIRED
-            </span>
-            <span className="font-mono text-[9px] md:text-[10px] text-gold tracking-ultra-wide -mt-0.5">
-              BY GOD
-            </span>
+          <Link to="/" style={{ textDecoration: 'none', lineHeight: 1 }}>
+            <span style={{
+              fontFamily: "'Bebas Neue', cursive",
+              fontSize: '1.4rem', color: textColor,
+              letterSpacing: '0.2em', display: 'block',
+              transition: 'color 0.3s',
+            }}>INSPIRED</span>
+            <span style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '8px', color: logoSubColor,
+              letterSpacing: '0.4em', display: 'block',
+              marginTop: '-2px',
+            }}>BY GOD</span>
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-10">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }} className="hidden-mobile">
             {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`font-mono text-xs tracking-widest transition-colors duration-200 relative group ${
-                  location.pathname === link.to ? 'text-gold' : 'text-grey-light hover:text-ivory'
-                }`}
-              >
+              <Link key={link.to} to={link.to} style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '11px', letterSpacing: '0.2em',
+                color: location.pathname === link.to ? '#c9a84c' : textColor,
+                textDecoration: 'none',
+                transition: 'color 0.2s',
+                borderBottom: location.pathname === link.to ? '1px solid #c9a84c' : 'none',
+                paddingBottom: '2px',
+              }}>
                 {link.label}
-                <span className={`absolute -bottom-1 left-0 h-px bg-gold transition-all duration-300 ${
-                  location.pathname === link.to ? 'w-full' : 'w-0 group-hover:w-full'
-                }`} />
               </Link>
             ))}
           </div>
 
-          {/* Right: Cart + Hamburger */}
-          <div className="flex items-center gap-5">
-            {/* Cart */}
-            <button
-              onClick={toggleCart}
-              className="relative group flex items-center gap-2"
-              aria-label="Open cart"
-            >
-              <span className="font-mono text-xs tracking-widest text-grey-light group-hover:text-ivory transition-colors">
-                CART
-              </span>
+          {/* Right */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <button onClick={toggleCart} style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '11px', letterSpacing: '0.2em',
+              color: textColor, transition: 'color 0.3s',
+            }}>
+              CART
               {totalItems > 0 && (
-                <span className="w-5 h-5 bg-gold text-black font-mono text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {totalItems}
-                </span>
+                <span style={{
+                  width: '20px', height: '20px',
+                  background: '#c9a84c', color: '#000000',
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: '10px', fontWeight: 'bold',
+                  borderRadius: '50%',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>{totalItems}</span>
               )}
             </button>
 
             {/* Hamburger */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden flex flex-col gap-1.5 p-1"
-              aria-label="Toggle menu"
+            <button onClick={() => setMenuOpen(!menuOpen)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex', flexDirection: 'column', gap: '5px' }}
+              className="show-mobile"
             >
-              <span className={`block h-px w-6 bg-ivory transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-              <span className={`block h-px w-6 bg-ivory transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-              <span className={`block h-px w-6 bg-ivory transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+              <span style={{ display: 'block', width: '24px', height: '1px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(6px)' : 'none' }} />
+              <span style={{ display: 'block', width: '24px', height: '1px', background: textColor, transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: '24px', height: '1px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none' }} />
             </button>
           </div>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed inset-0 z-40 bg-black flex flex-col transition-all duration-500 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="flex-1 flex flex-col items-center justify-center gap-10 pt-16">
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="font-display text-5xl text-ivory hover:text-gold transition-colors duration-200"
-              style={{ animationDelay: `${i * 0.08}s` }}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <button
-            onClick={() => { toggleCart(); setMenuOpen(false); }}
-            className="font-display text-5xl text-ivory hover:text-gold transition-colors duration-200"
-          >
-            CART {totalItems > 0 && `(${totalItems})`}
-          </button>
-        </div>
-        <div className="p-8 text-center">
-          <p className="font-mono text-xs text-grey-light tracking-widest">© 2024 INSPIRED BY GOD</p>
-        </div>
+      <div style={{
+        position: 'fixed', inset: 0, zIndex: 40,
+        background: '#ffffff',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        gap: '2rem', paddingTop: '72px',
+        opacity: menuOpen ? 1 : 0,
+        pointerEvents: menuOpen ? 'auto' : 'none',
+        transition: 'opacity 0.4s ease',
+      }}>
+        {navLinks.map((link) => (
+          <Link key={link.to} to={link.to} style={{
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: '3rem', color: '#000000',
+            textDecoration: 'none', letterSpacing: '0.1em',
+          }}>{link.label}</Link>
+        ))}
+        <button onClick={() => { toggleCart(); setMenuOpen(false); }} style={{
+          background: 'none', border: 'none', cursor: 'pointer',
+          fontFamily: "'Bebas Neue', cursive",
+          fontSize: '3rem', color: '#000000', letterSpacing: '0.1em',
+        }}>
+          CART {totalItems > 0 && `(${totalItems})`}
+        </button>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hidden-mobile { display: none !important; }
+        }
+        @media (min-width: 769px) {
+          .show-mobile { display: none !important; }
+        }
+      `}</style>
     </>
   );
 }
