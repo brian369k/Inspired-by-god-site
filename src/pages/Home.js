@@ -167,7 +167,7 @@ export default function Home() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(100%, 1fr))',
           gap: '1.5rem',
         }}>
           {products.map((product, i) => (
@@ -209,7 +209,7 @@ export default function Home() {
 
       {/* PANELS — No NEW IN or FAN FAVORITES labels */}
       <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))', gap: '1.5rem' }}>
           {[
             { title: 'ARRIVALS', btn: 'SHOP NOW', img: products[0].images[0] },
             { title: 'BESTSELLERS', btn: 'EXPLORE', img: products[1].images[0] },
