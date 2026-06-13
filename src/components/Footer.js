@@ -22,7 +22,7 @@ export default function Footer() {
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
+          gridTemplateColumns: '1.2fr 0.8fr 0.8fr',
           gap: '2rem',
           alignItems: 'start',
         }}>
