@@ -18,22 +18,23 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main footer — equal 3 columns */}
+      {/* Main footer */}
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1.2fr 0.8fr 0.8fr',
-          gap: '2rem',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gap: '1.5rem',
           alignItems: 'start',
         }}>
 
           {/* Column 1 — Brand */}
-          <div>
+          <div style={{ paddingTop: '0' }}>
             <Link to="/" style={{ textDecoration: 'none', display: 'block', marginBottom: '1rem' }}>
               <span style={{
                 fontFamily: "'Bebas Neue', cursive",
                 fontSize: '1.8rem', color: '#000000',
                 letterSpacing: '0.2em', display: 'block',
+                lineHeight: 1,
               }}>INSPIRED</span>
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",
@@ -88,8 +89,6 @@ export default function Footer() {
               fontWeight: 800, fontSize: '12px',
               letterSpacing: '0.2em', color: '#000000',
               marginBottom: '1.25rem',
-              paddingBottom: '0.75rem',
-              borderBottom: '2px solid #000000',
             }}>SHOP</p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {[
@@ -103,7 +102,6 @@ export default function Footer() {
                     fontFamily: "'Montserrat', sans-serif",
                     fontWeight: 500, fontSize: '14px',
                     color: '#333333', textDecoration: 'none',
-                    transition: 'color 0.2s',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
                     onMouseLeave={e => e.currentTarget.style.color = '#333333'}
@@ -120,8 +118,6 @@ export default function Footer() {
               fontWeight: 800, fontSize: '12px',
               letterSpacing: '0.2em', color: '#000000',
               marginBottom: '1.25rem',
-              paddingBottom: '0.75rem',
-              borderBottom: '2px solid #000000',
             }}>LEGAL</p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {[
@@ -134,7 +130,6 @@ export default function Footer() {
                     fontFamily: "'Montserrat', sans-serif",
                     fontWeight: 500, fontSize: '14px',
                     color: '#333333', textDecoration: 'none',
-                    transition: 'color 0.2s',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
                     onMouseLeave={e => e.currentTarget.style.color = '#333333'}
