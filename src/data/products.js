@@ -55,7 +55,7 @@ export const products = [
     price3x: 20.49,
     category: "tshirts",
     tag: null,
-    stripeLink: "https://buy.stripe.com/5kQaEXeX90EG5z977F6Ri02",
+    stripeLink: "https://buy.stripe.com/3cI3cv02fcnoaTteA76Ri05",
     description: "Clean and minimal IBG Divine tee. Let your presence speak. Premium cotton, elevated basics.",
     details: [
       "100% heavyweight ring-spun cotton",
