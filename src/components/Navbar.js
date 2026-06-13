@@ -192,7 +192,7 @@ export default function Navbar() {
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 900,
-                fontSize: 'clamp(2.5rem, 10vw, 5rem)',
+                fontSize: 'clamp(1.8rem, 4vw, 3rem)',
                 color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
                 textDecoration: 'none',
                 letterSpacing: '-0.01em',
@@ -215,7 +215,7 @@ export default function Navbar() {
               background: 'none', border: 'none', cursor: 'pointer',
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(2.5rem, 10vw, 5rem)',
+              fontSize: 'clamp(1.8rem, 4vw, 3rem)',
               color: '#ffffff',
               letterSpacing: '-0.01em',
               lineHeight: 1.1,
