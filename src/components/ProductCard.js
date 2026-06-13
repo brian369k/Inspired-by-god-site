@@ -26,81 +26,81 @@ export default function ProductCard({ product, index = 0 }) {
       onMouseLeave={() => { setHovered(false); setImgIdx(0); }}
     >
       <div style={{
-        transform: hovered ? 'translateY(-6px)' : 'none',
-        boxShadow: hovered ? '0 20px 40px rgba(0,0,0,0.12)' : 'none',
-        transition: 'transform 0.4s ease, box-shadow 0.4s ease',
+        transform: hovered ? 'translateY(-4px)' : 'none',
+        boxShadow: hovered ? '0 12px 30px rgba(0,0,0,0.1)' : 'none',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
       }}>
-        {/* Image */}
-        <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '3/4', background: '#f5f5f5' }}>
+        {/* Image - square like God Is Dope */}
+        <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '1/1', background: '#f0f0f0' }}>
           <img
             src={product.images[imgIdx]}
             alt={product.name}
             style={{
               width: '100%', height: '100%', objectFit: 'cover',
-              transform: hovered ? 'scale(1.05)' : 'scale(1)',
-              transition: 'transform 0.6s ease',
+              transform: hovered ? 'scale(1.04)' : 'scale(1)',
+              transition: 'transform 0.5s ease',
             }}
           />
           {product.tag && (
-            <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
+            <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontSize: '9px', letterSpacing: '0.15em',
-                fontWeight: 700,
+                fontWeight: 800, fontSize: '9px',
+                letterSpacing: '0.1em',
                 background: '#c9a84c', color: '#000000',
-                padding: '4px 10px',
+                padding: '3px 8px',
               }}>{product.tag}</span>
             </div>
           )}
           <div style={{
-            position: 'absolute', bottom: '12px', left: '12px', right: '12px',
+            position: 'absolute', bottom: '10px', left: '10px', right: '10px',
             opacity: hovered ? 1 : 0,
-            transform: hovered ? 'translateY(0)' : 'translateY(8px)',
+            transform: hovered ? 'translateY(0)' : 'translateY(6px)',
             transition: 'all 0.3s ease',
           }}>
             <span style={{
               display: 'block', textAlign: 'center',
               fontFamily: "'Montserrat', sans-serif",
-              fontSize: '10px', letterSpacing: '0.15em',
-              fontWeight: 700,
-              color: '#ffffff', background: 'rgba(0,0,0,0.75)',
+              fontWeight: 700, fontSize: '10px',
+              letterSpacing: '0.1em', color: '#ffffff',
+              background: 'rgba(0,0,0,0.8)',
               padding: '10px',
-            }}>VIEW PRODUCT</span>
+            }}>QUICK VIEW</span>
           </div>
         </div>
 
         {/* Info */}
-        <div style={{ paddingTop: '12px', paddingBottom: '8px', background: '#ffffff' }}>
+        <div style={{ padding: '12px 4px 8px', background: '#ffffff' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
-            <div>
+            <div style={{ flex: 1 }}>
               <h3 style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontSize: '13px', fontWeight: 700,
-                letterSpacing: '0.05em', color: '#000000',
-                textTransform: 'uppercase',
+                fontWeight: 700, fontSize: '13px',
+                color: '#000000', margin: 0,
+                textTransform: 'uppercase', letterSpacing: '0.03em',
               }}>{product.name}</h3>
               <p style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontSize: '12px', fontWeight: 400,
-                color: '#888888', textTransform: 'capitalize',
-                marginTop: '2px',
+                fontWeight: 500, fontSize: '12px',
+                color: '#888888', margin: '2px 0 0',
+                textTransform: 'capitalize',
               }}>{product.category}</p>
             </div>
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontSize: '13px', fontWeight: 700,
-              color: '#c9a84c', flexShrink: 0,
+              fontWeight: 800, fontSize: '14px',
+              color: '#000000', flexShrink: 0,
             }}>${product.price}</span>
           </div>
 
           {/* Color dots */}
-          <div style={{ display: 'flex', gap: '6px', marginTop: '10px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '5px', marginTop: '8px', flexWrap: 'wrap' }}>
             {product.colors.map((color) => (
               <div key={color}
                 style={{
-                  width: '14px', height: '14px', borderRadius: '50%',
+                  width: '12px', height: '12px', borderRadius: '50%',
                   background: getColorHex(color),
-                  border: '1px solid #dddddd',
+                  border: '1.5px solid #dddddd',
                 }}
                 title={color}
               />
