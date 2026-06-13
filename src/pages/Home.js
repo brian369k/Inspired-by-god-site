@@ -67,12 +67,8 @@ export default function Home() {
           transform: heroLoaded ? 'none' : 'translateY(30px)',
           transition: 'opacity 1.2s ease 0.2s, transform 1.2s ease 0.2s',
         }}>
-          <p style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 600, fontSize: '11px',
-            letterSpacing: '0.4em', color: '#c9a84c',
-            marginBottom: '1.5rem',
-          }}>SS 2024 — DROP 01</p>
+
+          {/* No SS 2024 text - removed */}
 
           <h1 style={{ margin: 0, padding: 0, lineHeight: 0.95 }}>
             <span style={{
@@ -148,20 +144,27 @@ export default function Home() {
       {/* PRODUCTS */}
       <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
         <FadeUp>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <div>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.2em', color: '#c9a84c', marginBottom: '0.5rem' }}>— FEATURED PIECES</p>
-              <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 'clamp(32px, 6vw, 56px)', color: '#000000', letterSpacing: '-0.01em', lineHeight: 1 }}>
-                THE COLLECTION
-              </h2>
-            </div>
-            <Link to="/shop" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '12px', letterSpacing: '0.15em', color: '#000000', textDecoration: 'none', borderBottom: '2px solid #000', paddingBottom: '2px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+            {/* No "— FEATURED PIECES" label */}
+            <h2 style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 800, fontSize: 'clamp(28px, 5vw, 48px)',
+              color: '#000000', letterSpacing: '-0.01em', lineHeight: 1,
+            }}>
+              THE COLLECTION
+            </h2>
+            <Link to="/shop" style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700, fontSize: '12px',
+              letterSpacing: '0.15em', color: '#000000',
+              textDecoration: 'none', borderBottom: '2px solid #000',
+              paddingBottom: '2px',
+            }}>
               VIEW ALL →
             </Link>
           </div>
         </FadeUp>
 
-        {/* Responsive grid: 1 col mobile, 2 col tablet, 3 col desktop */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -179,11 +182,18 @@ export default function Home() {
       <section style={{ background: '#f5f5f5', padding: '5rem 1.5rem', textAlign: 'center' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto' }}>
           <FadeUp>
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.3em', color: '#c9a84c', marginBottom: '1.5rem' }}>— THE ETHOS</p>
-            <blockquote style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 'clamp(22px, 4vw, 36px)', color: '#000000', lineHeight: 1.3, margin: 0 }}>
+            <blockquote style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 800, fontSize: 'clamp(22px, 4vw, 36px)',
+              color: '#000000', lineHeight: 1.3, margin: 0,
+            }}>
               "We don't make clothes. We make armor for the anointed."
             </blockquote>
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '15px', color: '#444444', marginTop: '1.5rem', lineHeight: 1.8 }}>
+            <p style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 500, fontSize: '15px',
+              color: '#444444', marginTop: '1.5rem', lineHeight: 1.8,
+            }}>
               Every piece is crafted with intention. Sacred materials. Deliberate silhouettes. For those who know their purpose and dress accordingly.
             </p>
             <Link to="/about" style={{
@@ -197,21 +207,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PANELS */}
+      {/* PANELS — No NEW IN or FAN FAVORITES labels */}
       <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {[
-            { label: 'NEW IN', title: 'ARRIVALS', btn: 'SHOP NOW', img: products[0].images[0] },
-            { label: 'FAN FAVOURITES', title: 'BESTSELLERS', btn: 'EXPLORE', img: products[1].images[0] },
+            { title: 'ARRIVALS', btn: 'SHOP NOW', img: products[0].images[0] },
+            { title: 'BESTSELLERS', btn: 'EXPLORE', img: products[1].images[0] },
           ].map((panel, i) => (
             <FadeUp key={panel.title} delay={i * 0.1}>
               <div style={{ position: 'relative', aspectRatio: '4/5', overflow: 'hidden' }}>
                 <img src={panel.img} alt={panel.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55)' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)' }} />
                 <div style={{ position: 'absolute', bottom: '2rem', left: '1.5rem', right: '1.5rem' }}>
-                  <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '10px', letterSpacing: '0.2em', color: '#c9a84c', marginBottom: '0.5rem' }}>{panel.label}</p>
-                  <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '2.5rem', color: '#ffffff', marginBottom: '1rem', lineHeight: 1 }}>{panel.title}</h3>
-                  <Link to="/shop" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.2em', color: '#ffffff', border: '2px solid rgba(255,255,255,0.7)', padding: '0.6rem 1.5rem', textDecoration: 'none', display: 'inline-block' }}>{panel.btn}</Link>
+                  <h3 style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 800, fontSize: '2.2rem',
+                    color: '#ffffff', marginBottom: '1rem', lineHeight: 1,
+                  }}>{panel.title}</h3>
+                  <Link to="/shop" style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 700, fontSize: '11px',
+                    letterSpacing: '0.2em', color: '#ffffff',
+                    border: '2px solid rgba(255,255,255,0.7)',
+                    padding: '0.6rem 1.5rem', textDecoration: 'none',
+                    display: 'inline-block',
+                  }}>{panel.btn}</Link>
                 </div>
               </div>
             </FadeUp>
@@ -219,23 +239,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
+      {/* NEWSLETTER — renamed from INNER CIRCLE */}
       <section style={{ background: '#f5f5f5', padding: '4rem 1.5rem', textAlign: 'center' }}>
         <FadeUp>
-          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '11px', letterSpacing: '0.3em', color: '#c9a84c', marginBottom: '0.75rem' }}>— INNER CIRCLE</p>
-          <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 6vw, 52px)', color: '#000000', marginBottom: '0.75rem' }}>JOIN THE CHOSEN</h2>
-          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '15px', color: '#444444', marginBottom: '2rem' }}>
-            First access to limited drops, sacred announcements, and exclusive offers.
+          <h2 style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 800, fontSize: 'clamp(28px, 6vw, 52px)',
+            color: '#000000', marginBottom: '0.75rem',
+          }}>JOIN THE CHOSEN</h2>
+          <p style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 500, fontSize: '15px',
+            color: '#444444', marginBottom: '2rem',
+          }}>
+            Sign up to get the latest on drops, sales, new releases and more.
           </p>
           <div style={{ display: 'flex', maxWidth: '440px', margin: '0 auto' }}>
-            <input type="email" placeholder="Enter your email address" style={{
-              flex: 1, background: '#ffffff',
-              border: '2px solid #000000', borderRight: 'none',
-              padding: '1rem 1.25rem',
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 500, fontSize: '13px',
-              color: '#000000', outline: 'none',
-            }} />
+            <input
+              type="email"
+              placeholder="Enter your email address..."
+              style={{
+                flex: 1, background: '#ffffff',
+                border: '2px solid #000000', borderRight: 'none',
+                padding: '1rem 1.25rem',
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 500, fontSize: '13px',
+                color: '#000000', outline: 'none',
+              }}
+            />
             <button style={{
               background: '#000000', color: '#ffffff', border: 'none',
               fontFamily: "'Montserrat', sans-serif",
