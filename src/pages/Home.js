@@ -184,14 +184,14 @@ export default function Home() {
           <FadeUp>
             <blockquote style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: 'clamp(22px, 4vw, 36px)',
+              fontWeight: 800, fontSize: 'clamp(20px, 3vw, 28px)',
               color: '#000000', lineHeight: 1.3, margin: 0,
             }}>
               "We don't make clothes. We make armor for the anointed."
             </blockquote>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 500, fontSize: '15px',
+              fontWeight: 500, fontSize: '17px',
               color: '#444444', marginTop: '1.5rem', lineHeight: 1.8,
             }}>
               Every piece is crafted with intention. Sacred materials. Deliberate silhouettes. For those who know their purpose and dress accordingly.
@@ -244,12 +244,12 @@ export default function Home() {
         <FadeUp>
           <h2 style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 800, fontSize: 'clamp(28px, 6vw, 52px)',
+            fontWeight: 800, fontSize: 'clamp(24px, 5vw, 36px)',
             color: '#000000', marginBottom: '0.75rem',
           }}>JOIN THE CHOSEN</h2>
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500, fontSize: '15px',
+            fontWeight: 500, fontSize: '17px',
             color: '#444444', marginBottom: '2rem',
           }}>
             Sign up to get the latest on drops, sales, new releases and more.
