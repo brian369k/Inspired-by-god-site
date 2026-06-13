@@ -18,10 +18,15 @@ export default function Navbar() {
 
   useEffect(() => { setMenuOpen(false); }, [location]);
 
-  const isTransparent = isHome && !scrolled;
-  const bgColor = isTransparent ? 'transparent' : '#ffffff';
-  const borderColor = isTransparent ? 'transparent' : '#e0e0e0';
-  const textColor = isTransparent ? '#ffffff' : '#000000';
+  // Lock body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const isTransparent = isHome && !scrolled && !menuOpen;
+  const bgColor = menuOpen ? '#000000' : isTransparent ? 'transparent' : '#ffffff';
+  const textColor = menuOpen ? '#ffffff' : isTransparent ? '#ffffff' : '#000000';
 
   const navLinks = [
     { to: '/shop', label: 'SHOP' },
@@ -33,36 +38,31 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement Bar */}
-      {announcementVisible && (
+      {announcementVisible && !menuOpen && (
         <div style={{
           background: '#000000', color: '#ffffff',
-          textAlign: 'center', padding: '0.6rem 2rem',
+          textAlign: 'center', padding: '0.6rem 2.5rem',
           fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 600, fontSize: '12px',
-          letterSpacing: '0.1em',
-          position: 'relative', zIndex: 60,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontWeight: 700, fontSize: '12px',
+          letterSpacing: '0.12em', position: 'relative',
+          zIndex: 60,
         }}>
-          <span>FREE SHIPPING ON ORDERS OVER $150 · USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF</span>
-          <button
-            onClick={() => setAnnouncementVisible(false)}
-            style={{
-              position: 'absolute', right: '1rem',
-              background: 'none', border: 'none',
-              color: '#ffffff', cursor: 'pointer',
-              fontSize: '16px', lineHeight: 1,
-            }}
-          >×</button>
+          FREE SHIPPING ON ORDERS OVER $150 · USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
+          <button onClick={() => setAnnouncementVisible(false)} style={{
+            position: 'absolute', right: '1rem', top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'none', border: 'none',
+            color: '#ffffff', cursor: 'pointer', fontSize: '16px',
+          }}>×</button>
         </div>
       )}
 
-      {/* Main Navbar */}
+      {/* Navbar */}
       <nav style={{
-        position: 'sticky', top: 0, left: 0, right: 0, zIndex: 50,
+        position: 'sticky', top: 0, zIndex: 50,
         background: bgColor,
-        borderBottom: `1px solid ${borderColor}`,
-        backdropFilter: scrolled ? 'blur(10px)' : 'none',
-        transition: 'all 0.4s ease',
+        borderBottom: menuOpen ? 'none' : scrolled ? '1px solid #e0e0e0' : 'none',
+        transition: 'background 0.3s ease',
       }}>
         <div style={{
           maxWidth: '1280px', margin: '0 auto',
@@ -73,35 +73,54 @@ export default function Navbar() {
           height: '64px',
         }}>
 
-          {/* Left — Desktop nav links */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden-mobile">
-            {navLinks.slice(0, 2).map((link) => (
-              <Link key={link.to} to={link.to} style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 700, fontSize: '11px',
-                letterSpacing: '0.15em',
-                color: location.pathname === link.to ? '#c9a84c' : textColor,
-                textDecoration: 'none', transition: 'color 0.2s',
-              }}>{link.label}</Link>
-            ))}
-          </div>
-
-          {/* Mobile left — hamburger */}
-          <div className="show-mobile" style={{ display: 'flex', alignItems: 'center' }}>
-            <button onClick={() => setMenuOpen(!menuOpen)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex', flexDirection: 'column', gap: '5px' }}
+          {/* Left — Hamburger always visible */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menu"
+              style={{
+                background: 'none', border: 'none',
+                cursor: 'pointer', padding: '6px',
+                display: 'flex', flexDirection: 'column',
+                gap: '5px',
+              }}
             >
-              <span style={{ display: 'block', width: '22px', height: '2px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(7px)' : 'none' }} />
-              <span style={{ display: 'block', width: '22px', height: '2px', background: textColor, transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-              <span style={{ display: 'block', width: '22px', height: '2px', background: textColor, transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none' }} />
+              <span style={{
+                display: 'block', width: '26px', height: '2.5px',
+                background: textColor,
+                transition: 'all 0.3s ease',
+                transform: menuOpen ? 'rotate(45deg) translateY(7.5px)' : 'none',
+              }} />
+              <span style={{
+                display: 'block', width: '26px', height: '2.5px',
+                background: textColor,
+                transition: 'all 0.3s ease',
+                opacity: menuOpen ? 0 : 1,
+              }} />
+              <span style={{
+                display: 'block', width: '26px', height: '2.5px',
+                background: textColor,
+                transition: 'all 0.3s ease',
+                transform: menuOpen ? 'rotate(-45deg) translateY(-7.5px)' : 'none',
+              }} />
             </button>
+
+            {/* MENU text next to hamburger like God Is Dope */}
+            <span style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 800, fontSize: '13px',
+              letterSpacing: '0.15em', color: textColor,
+              transition: 'color 0.3s',
+            }}>
+              {menuOpen ? 'CLOSE' : 'MENU'}
+            </span>
           </div>
 
           {/* Center — Logo */}
           <Link to="/" style={{ textDecoration: 'none', textAlign: 'center', lineHeight: 1 }}>
             <span style={{
               fontFamily: "'Bebas Neue', cursive",
-              fontSize: '1.5rem', color: textColor,
+              fontSize: '1.6rem', color: textColor,
               letterSpacing: '0.2em', display: 'block',
               transition: 'color 0.3s',
             }}>INSPIRED</span>
@@ -113,36 +132,28 @@ export default function Navbar() {
             }}>BY GOD</span>
           </Link>
 
-          {/* Right */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '2rem' }}>
-            {/* Desktop right links */}
-            <div style={{ display: 'flex', gap: '2rem' }} className="hidden-mobile">
-              {navLinks.slice(2).map((link) => (
-                <Link key={link.to} to={link.to} style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 700, fontSize: '11px',
-                  letterSpacing: '0.15em',
-                  color: location.pathname === link.to ? '#c9a84c' : textColor,
-                  textDecoration: 'none', transition: 'color 0.2s',
-                }}>{link.label}</Link>
-              ))}
-            </div>
-
-            {/* Cart */}
+          {/* Right — Cart */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button onClick={toggleCart} style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              display: 'flex', alignItems: 'center', gap: '0.4rem',
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '11px',
+              fontWeight: 800, fontSize: '13px',
               letterSpacing: '0.15em', color: textColor,
+              transition: 'color 0.3s',
             }}>
-              CART
+              {/* Cart bag icon */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5" style={{ transition: 'stroke 0.3s' }}>
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
               {totalItems > 0 && (
                 <span style={{
-                  width: '20px', height: '20px',
+                  width: '22px', height: '22px',
                   background: '#c9a84c', color: '#000000',
                   fontFamily: "'Montserrat', sans-serif",
-                  fontSize: '10px', fontWeight: 700,
+                  fontSize: '11px', fontWeight: 800,
                   borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>{totalItems}</span>
@@ -152,39 +163,93 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* FULLSCREEN MENU — Big bold like God Is Dope */}
       <div style={{
         position: 'fixed', inset: 0, zIndex: 40,
-        background: '#ffffff',
+        background: '#000000',
         display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        gap: '2rem',
+        padding: '6rem 2rem 3rem',
         opacity: menuOpen ? 1 : 0,
         pointerEvents: menuOpen ? 'auto' : 'none',
-        transition: 'opacity 0.4s ease',
+        transition: 'opacity 0.35s ease',
+        overflowY: 'auto',
       }}>
-        {navLinks.map((link) => (
-          <Link key={link.to} to={link.to} style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 800, fontSize: '2rem',
-            color: '#000000', textDecoration: 'none',
-            letterSpacing: '0.1em',
-          }}>{link.label}</Link>
-        ))}
-        <button onClick={() => { toggleCart(); setMenuOpen(false); }} style={{
-          background: 'none', border: 'none', cursor: 'pointer',
-          fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 800, fontSize: '2rem',
-          color: '#000000', letterSpacing: '0.1em',
-        }}>
-          CART {totalItems > 0 && `(${totalItems})`}
-        </button>
-      </div>
+        {/* Main nav links — very large */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0.5rem' }}>
+          {navLinks.map((link, i) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 800,
+                fontSize: 'clamp(3rem, 10vw, 6rem)',
+                color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
+                textDecoration: 'none',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.1,
+                display: 'block',
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
+                transition: `opacity 0.4s ease ${i * 0.06}s, transform 0.4s ease ${i * 0.06}s, color 0.2s`,
+              }}
+              onMouseEnter={e => { if (location.pathname !== link.to) e.currentTarget.style.color = '#c9a84c'; }}
+              onMouseLeave={e => { if (location.pathname !== link.to) e.currentTarget.style.color = '#ffffff'; }}
+            >
+              {link.label}
+            </Link>
+          ))}
 
-      <style>{`
-        @media (max-width: 768px) { .hidden-mobile { display: none !important; } }
-        @media (min-width: 769px) { .show-mobile { display: none !important; } }
-      `}</style>
+          {/* Cart in menu */}
+          <button
+            onClick={() => { toggleCart(); setMenuOpen(false); }}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 800,
+              fontSize: 'clamp(3rem, 10vw, 6rem)',
+              color: '#ffffff',
+              letterSpacing: '-0.01em',
+              lineHeight: 1.1,
+              textAlign: 'left', padding: 0,
+              opacity: menuOpen ? 1 : 0,
+              transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
+              transition: `opacity 0.4s ease ${navLinks.length * 0.06}s, transform 0.4s ease ${navLinks.length * 0.06}s`,
+            }}
+          >
+            CART {totalItems > 0 && <span style={{ color: '#c9a84c' }}>({totalItems})</span>}
+          </button>
+        </div>
+
+        {/* Bottom of menu — social + copyright */}
+        <div style={{
+          borderTop: '1px solid rgba(255,255,255,0.15)',
+          paddingTop: '1.5rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem',
+        }}>
+          <div style={{ display: 'flex', gap: '1.5rem' }}>
+            {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
+              <a key={s} href={`https://${s.toLowerCase()}.com`} target="_blank" rel="noopener noreferrer"
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontWeight: 700, fontSize: '11px',
+                  letterSpacing: '0.15em', color: '#888888',
+                  textDecoration: 'none',
+                }}
+              >{s}</a>
+            ))}
+          </div>
+          <p style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 500, fontSize: '11px',
+            color: '#555555', letterSpacing: '0.1em',
+          }}>© 2024 INSPIRED BY GOD</p>
+        </div>
+      </div>
     </>
   );
 }
