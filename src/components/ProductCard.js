@@ -77,7 +77,7 @@ export default function ProductCard({ product, index = 0 }) {
               <h3 style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 800,
-                fontSize: 'clamp(15px, 3.5vw, 17px)',
+                fontSize: 'clamp(18px, 4vw, 17px)',
                 color: '#000000', margin: 0,
                 textTransform: 'uppercase',
                 letterSpacing: '0.03em',
@@ -87,7 +87,7 @@ export default function ProductCard({ product, index = 0 }) {
               <p style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 500,
-                fontSize: 'clamp(13px, 3vw, 14px)',
+                fontSize: 'clamp(16px, 3.5vw, 14px)',
                 color: '#888888', margin: '4px 0 0',
                 textTransform: 'capitalize',
               }}>{product.category}</p>
@@ -96,7 +96,7 @@ export default function ProductCard({ product, index = 0 }) {
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800,
-              fontSize: 'clamp(15px, 3.5vw, 17px)',
+              fontSize: 'clamp(18px, 4vw, 17px)',
               color: '#000000', flexShrink: 0,
             }}>${product.price}</span>
           </div>
