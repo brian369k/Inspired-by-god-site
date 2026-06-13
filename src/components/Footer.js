@@ -18,17 +18,19 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main footer */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
+      {/* Main footer — centered with max width */}
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '3rem',
           alignItems: 'start',
+          justifyItems: 'center',
+          textAlign: 'center',
         }}>
 
           {/* Column 1 — Brand */}
-          <div style={{ paddingTop: '0' }}>
+          <div style={{ width: '100%' }}>
             <Link to="/" style={{ textDecoration: 'none', display: 'block', marginBottom: '1rem' }}>
               <span style={{
                 fontFamily: "'Bebas Neue', cursive",
@@ -52,13 +54,13 @@ export default function Footer() {
             </p>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '11px',
-              letterSpacing: '0.1em', color: '#000000',
+              fontWeight: 700, fontSize: '10px',
+              letterSpacing: '0.08em', color: '#000000',
               marginBottom: '1rem',
             }}>
-              © {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.
+              © {year} INSPIRED BY GOD.<br />ALL RIGHTS RESERVED.
             </p>
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
               {[
                 { name: 'IG', href: 'https://instagram.com' },
                 { name: 'TK', href: 'https://tiktok.com' },
@@ -83,7 +85,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2 — Shop */}
-          <div>
+          <div style={{ width: '100%' }}>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '12px',
@@ -112,7 +114,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3 — Legal */}
-          <div>
+          <div style={{ width: '100%' }}>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '12px',
