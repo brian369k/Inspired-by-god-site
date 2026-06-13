@@ -67,4 +67,7 @@ module.exports = {
     },
   },
   plugins: [],
+  corePlugins: {
+    fontSize: false,
+  },
 };
