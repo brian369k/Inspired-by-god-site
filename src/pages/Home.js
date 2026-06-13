@@ -114,7 +114,7 @@ export default function Home() {
             <Link to="/shop" style={{
               background: '#c9a84c', color: '#000000',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '12px',
+              fontWeight: 800, fontSize: '18px',
               letterSpacing: '0.2em',
               padding: '1rem 2.5rem', textDecoration: 'none',
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -122,7 +122,7 @@ export default function Home() {
             <Link to="/about" style={{
               border: '2px solid rgba(255,255,255,0.5)', color: '#ffffff',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '12px',
+              fontWeight: 700, fontSize: '18px',
               letterSpacing: '0.2em',
               padding: '1rem 2.5rem', textDecoration: 'none',
             }}>OUR STORY</Link>
@@ -155,7 +155,7 @@ export default function Home() {
             </h2>
             <Link to="/shop" style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '12px',
+              fontWeight: 700, fontSize: '18px',
               letterSpacing: '0.15em', color: '#000000',
               textDecoration: 'none', borderBottom: '2px solid #000',
               paddingBottom: '2px',
@@ -199,7 +199,7 @@ export default function Home() {
             <Link to="/about" style={{
               display: 'inline-block', marginTop: '2rem',
               fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
-              fontSize: '12px', letterSpacing: '0.2em',
+              fontSize: '18px', letterSpacing: '0.2em',
               color: '#000000', border: '2px solid #000000',
               padding: '0.75rem 2rem', textDecoration: 'none',
             }}>LEARN MORE</Link>
@@ -263,14 +263,14 @@ export default function Home() {
                 border: '2px solid #000000', borderRight: 'none',
                 padding: '1rem 1.25rem',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 500, fontSize: '13px',
+                fontWeight: 500, fontSize: '16px',
                 color: '#000000', outline: 'none',
               }}
             />
             <button style={{
               background: '#000000', color: '#ffffff', border: 'none',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '12px',
+              fontWeight: 800, fontSize: '18px',
               letterSpacing: '0.15em', padding: '1rem 1.5rem', cursor: 'pointer',
             }}>SIGN UP</button>
           </div>

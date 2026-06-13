@@ -61,7 +61,7 @@ export default function ProductCard({ product, index = 0 }) {
             <span style={{
               display: 'block', textAlign: 'center',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '10px',
+              fontWeight: 700, fontSize: '13px',
               letterSpacing: '0.1em', color: '#ffffff',
               background: 'rgba(0,0,0,0.8)',
               padding: '10px',
@@ -75,20 +75,20 @@ export default function ProductCard({ product, index = 0 }) {
             <div style={{ flex: 1 }}>
               <h3 style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 700, fontSize: '13px',
+                fontWeight: 700, fontSize: '16px',
                 color: '#000000', margin: 0,
                 textTransform: 'uppercase', letterSpacing: '0.03em',
               }}>{product.name}</h3>
               <p style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 500, fontSize: '12px',
+                fontWeight: 500, fontSize: '15px',
                 color: '#888888', margin: '2px 0 0',
                 textTransform: 'capitalize',
               }}>{product.category}</p>
             </div>
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '14px',
+              fontWeight: 800, fontSize: '17px',
               color: '#000000', flexShrink: 0,
             }}>${product.price}</span>
           </div>
