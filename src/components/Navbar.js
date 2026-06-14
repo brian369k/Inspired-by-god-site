@@ -37,22 +37,27 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Announcement Bar */}
+      {/* Announcement Bar — 28px */}
       {announcementVisible && !menuOpen && (
         <div style={{
           background: '#000000', color: '#ffffff',
-          textAlign: 'center', padding: '0.7rem 3rem',
+          textAlign: 'center',
+          padding: '0.9rem 3rem',
           fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 700, fontSize: '12px',
-          letterSpacing: '0.12em', position: 'relative',
+          fontWeight: 700,
+          fontSize: '28px',
+          letterSpacing: '0.08em',
+          position: 'relative',
           zIndex: 60,
+          lineHeight: 1.4,
         }}>
           FREE SHIPPING ON ORDERS OVER $150 · USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
           <button onClick={() => setAnnouncementVisible(false)} style={{
             position: 'absolute', right: '1rem', top: '50%',
             transform: 'translateY(-50%)',
             background: 'none', border: 'none',
-            color: '#ffffff', cursor: 'pointer', fontSize: '20px', lineHeight: 1,
+            color: '#ffffff', cursor: 'pointer',
+            fontSize: '28px', lineHeight: 1,
           }}>×</button>
         </div>
       )}
@@ -93,8 +98,7 @@ export default function Navbar() {
               <span style={{
                 display: 'block', width: '32px', height: '3px',
                 background: textColor, transition: 'all 0.3s ease',
-                opacity: menuOpen ? 0 : 1,
-                borderRadius: '2px',
+                opacity: menuOpen ? 0 : 1, borderRadius: '2px',
               }} />
               <span style={{
                 display: 'block', width: '32px', height: '3px',
@@ -105,7 +109,7 @@ export default function Navbar() {
             </button>
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900, fontSize: '20px',
+              fontWeight: 900, fontSize: '16px',
               letterSpacing: '0.2em', color: textColor,
               transition: 'color 0.3s', userSelect: 'none',
             }}>
@@ -129,7 +133,7 @@ export default function Navbar() {
             }}>BY GOD</span>
           </Link>
 
-          {/* Right — Cart with CART text */}
+          {/* Right — Cart */}
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
             <button onClick={toggleCart} style={{
               background: 'none', border: 'none', cursor: 'pointer',
@@ -139,14 +143,12 @@ export default function Navbar() {
               letterSpacing: '0.15em', color: textColor,
               transition: 'color 0.3s',
             }}>
-              {/* CART text */}
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 800, fontSize: '13px',
                 letterSpacing: '0.2em', color: textColor,
                 transition: 'color 0.3s',
               }}>CART</span>
-              {/* Cart bag icon */}
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" style={{ transition: 'stroke 0.3s' }}>
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
@@ -180,58 +182,43 @@ export default function Navbar() {
       }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0.25rem' }}>
           {navLinks.map((link, i) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 900,
-                fontSize: 'clamp(2.5rem, 10vw, 5rem)',
-                color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
-                textDecoration: 'none',
-                letterSpacing: '-0.01em',
-                lineHeight: 1.1,
-                display: 'block',
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
-                padding: '0.4rem 0',
-                opacity: menuOpen ? 1 : 0,
-                transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
-                transition: `opacity 0.35s ease ${i * 0.06}s, transform 0.35s ease ${i * 0.06}s, color 0.2s`,
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-
-          <button
-            onClick={() => { toggleCart(); setMenuOpen(false); }}
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer',
+            <Link key={link.to} to={link.to} style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 900,
               fontSize: 'clamp(2.5rem, 10vw, 5rem)',
-              color: '#ffffff',
-              letterSpacing: '-0.01em',
-              lineHeight: 1.1,
-              textAlign: 'left',
+              color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
+              textDecoration: 'none',
+              letterSpacing: '-0.01em', lineHeight: 1.1,
+              display: 'block',
+              borderBottom: '1px solid rgba(255,255,255,0.08)',
               padding: '0.4rem 0',
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
-              transition: `opacity 0.35s ease ${navLinks.length * 0.06}s, transform 0.35s ease ${navLinks.length * 0.06}s`,
-            }}
-          >
+              transition: `opacity 0.35s ease ${i * 0.06}s, transform 0.35s ease ${i * 0.06}s, color 0.2s`,
+            }}>
+              {link.label}
+            </Link>
+          ))}
+          <button onClick={() => { toggleCart(); setMenuOpen(false); }} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(2.5rem, 10vw, 5rem)',
+            color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.1,
+            textAlign: 'left', padding: '0.4rem 0',
+            opacity: menuOpen ? 1 : 0,
+            transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
+            transition: `opacity 0.35s ease ${navLinks.length * 0.06}s, transform 0.35s ease ${navLinks.length * 0.06}s`,
+          }}>
             CART {totalItems > 0 && <span style={{ color: '#c9a84c' }}>({totalItems})</span>}
           </button>
         </div>
 
-        {/* Bottom */}
         <div style={{
           borderTop: '1px solid rgba(255,255,255,0.1)',
           paddingTop: '1.5rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap', gap: '1rem',
+          display: 'flex', justifyContent: 'space-between',
+          alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
         }}>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
             {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
@@ -242,14 +229,12 @@ export default function Navbar() {
                   fontWeight: 700, fontSize: '12px',
                   letterSpacing: '0.15em', color: '#888888',
                   textDecoration: 'none',
-                }}
-              >{s}</a>
+                }}>{s}</a>
             ))}
           </div>
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500, fontSize: '11px',
-            color: '#555555',
+            fontWeight: 500, fontSize: '11px', color: '#555555',
           }}>© 2024 INSPIRED BY GOD</p>
         </div>
       </div>
