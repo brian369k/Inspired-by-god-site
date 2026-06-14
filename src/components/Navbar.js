@@ -37,27 +37,40 @@ export default function Navbar() {
 
   return (
     <>
+      <style>{`
+        /* Mobile specific navbar sizes */
+        @media (max-width: 768px) {
+          .ann-bar { font-size: 28px !important; padding: 1rem 3rem !important; }
+          .menu-text { font-size: 25px !important; }
+          .cart-text { font-size: 25px !important; }
+          .hamburger-line { width: 35px !important; height: 4px !important; }
+          .cart-icon { width: 28px !important; height: 28px !important; }
+          .navbar-height { height: 80px !important; }
+          .close-btn { font-size: 28px !important; }
+        }
+      `}</style>
+
       {/* Announcement Bar */}
       {announcementVisible && !menuOpen && (
-        <div style={{
+        <div className="ann-bar" style={{
           background: '#000000', color: '#ffffff',
           textAlign: 'center',
-          padding: '0.9rem 3rem',
+          padding: '0.7rem 3rem',
           fontFamily: "'Montserrat', sans-serif",
           fontWeight: 700,
-          fontSize: 'clamp(13px, 2.5vw, 14px)',
+          fontSize: '13px',
           letterSpacing: '0.06em',
           position: 'relative',
           zIndex: 60,
-          lineHeight: 1.4,
+          lineHeight: 1.5,
         }}>
           FREE SHIPPING ON ORDERS OVER $150 · USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
-          <button onClick={() => setAnnouncementVisible(false)} style={{
+          <button className="close-btn" onClick={() => setAnnouncementVisible(false)} style={{
             position: 'absolute', right: '1rem', top: '50%',
             transform: 'translateY(-50%)',
             background: 'none', border: 'none',
             color: '#ffffff', cursor: 'pointer',
-            fontSize: 'clamp(18px, 3vw, 20px)', lineHeight: 1,
+            fontSize: '18px', lineHeight: 1,
           }}>×</button>
         </div>
       )}
@@ -69,13 +82,13 @@ export default function Navbar() {
         borderBottom: borderColor,
         transition: 'background 0.3s ease',
       }}>
-        <div style={{
+        <div className="navbar-height" style={{
           maxWidth: '1280px', margin: '0 auto',
           padding: '0 1.5rem',
           display: 'grid',
           gridTemplateColumns: '1fr auto 1fr',
           alignItems: 'center',
-          height: 'clamp(64px, 8vw, 80px)',
+          height: '72px',
         }}>
 
           {/* Left — Hamburger + MENU/CLOSE */}
@@ -86,41 +99,33 @@ export default function Navbar() {
               style={{
                 background: 'none', border: 'none',
                 cursor: 'pointer', padding: '4px',
-                display: 'flex', flexDirection: 'column',
-                gap: 'clamp(5px, 1.2vw, 7px)',
+                display: 'flex', flexDirection: 'column', gap: '7px',
               }}
             >
-              {/* Hamburger — bigger on mobile, normal on desktop */}
-              <span style={{
-                display: 'block',
-                width: 'clamp(28px, 5vw, 32px)',
-                height: 'clamp(3px, 0.5vw, 3px)',
+              <span className="hamburger-line" style={{
+                display: 'block', width: '28px', height: '3px',
                 background: textColor, transition: 'all 0.3s ease',
-                transform: menuOpen ? 'rotate(45deg) translateY(10px)' : 'none',
+                transform: menuOpen ? 'rotate(45deg) translateY(11px)' : 'none',
                 borderRadius: '2px',
               }} />
-              <span style={{
-                display: 'block',
-                width: 'clamp(28px, 5vw, 32px)',
-                height: 'clamp(3px, 0.5vw, 3px)',
+              <span className="hamburger-line" style={{
+                display: 'block', width: '28px', height: '3px',
                 background: textColor, transition: 'all 0.3s ease',
                 opacity: menuOpen ? 0 : 1, borderRadius: '2px',
               }} />
-              <span style={{
-                display: 'block',
-                width: 'clamp(28px, 5vw, 32px)',
-                height: 'clamp(3px, 0.5vw, 3px)',
+              <span className="hamburger-line" style={{
+                display: 'block', width: '28px', height: '3px',
                 background: textColor, transition: 'all 0.3s ease',
-                transform: menuOpen ? 'rotate(-45deg) translateY(-10px)' : 'none',
+                transform: menuOpen ? 'rotate(-45deg) translateY(-11px)' : 'none',
                 borderRadius: '2px',
               }} />
             </button>
 
-            {/* MENU text — bigger on mobile */}
-            <span style={{
+            {/* MENU text */}
+            <span className="menu-text" style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(18px, 3vw, 16px)',
+              fontSize: '16px',
               letterSpacing: '0.2em',
               color: textColor,
               transition: 'color 0.3s',
@@ -134,15 +139,13 @@ export default function Navbar() {
           <Link to="/" style={{ textDecoration: 'none', textAlign: 'center', lineHeight: 1 }}>
             <span style={{
               fontFamily: "'Bebas Neue', cursive",
-              fontSize: 'clamp(1.5rem, 3vw, 1.75rem)',
-              color: textColor,
+              fontSize: '1.75rem', color: textColor,
               letterSpacing: '0.2em', display: 'block',
               transition: 'color 0.3s',
             }}>INSPIRED</span>
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700,
-              fontSize: 'clamp(8px, 1.5vw, 9px)',
+              fontWeight: 700, fontSize: '9px',
               color: '#c9a84c', letterSpacing: '0.4em',
               display: 'block', marginTop: '-2px',
             }}>BY GOD</span>
@@ -153,26 +156,17 @@ export default function Navbar() {
             <button onClick={toggleCart} style={{
               background: 'none', border: 'none', cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: '8px',
-              transition: 'color 0.3s',
             }}>
-              {/* CART text — bigger on mobile */}
-              <span style={{
+              <span className="cart-text" style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 800,
-                fontSize: 'clamp(18px, 3vw, 13px)',
+                fontSize: '13px',
                 letterSpacing: '0.2em',
                 color: textColor,
                 transition: 'color 0.3s',
               }}>CART</span>
 
-              {/* Cart icon — bigger on mobile */}
-              <svg
-                width="clamp(24px, 4vw, 22px)"
-                height="clamp(24px, 4vw, 22px)"
-                viewBox="0 0 24 24" fill="none"
-                stroke={textColor} strokeWidth="2"
-                style={{ transition: 'stroke 0.3s', minWidth: '24px' }}
-              >
+              <svg className="cart-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" style={{ transition: 'stroke 0.3s', minWidth: '22px' }}>
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 01-8 0"/>
@@ -262,14 +256,6 @@ export default function Navbar() {
           }}>© 2024 INSPIRED BY GOD</p>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .announcement-bar { font-size: 16px !important; }
-          .menu-text { font-size: 22px !important; }
-          .cart-text { font-size: 20px !important; }
-        }
-      `}</style>
     </>
   );
 }
