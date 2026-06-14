@@ -42,13 +42,13 @@ export default function ProductCard({ product, index = 0 }) {
             }}
           />
           {product.tag && (
-            <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
+            <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '11px',
+                fontWeight: 800, fontSize: '13px',
                 letterSpacing: '0.1em',
                 background: '#c9a84c', color: '#000000',
-                padding: '4px 10px',
+                padding: '5px 12px',
               }}>{product.tag}</span>
             </div>
           )}
@@ -61,54 +61,54 @@ export default function ProductCard({ product, index = 0 }) {
             <span style={{
               display: 'block', textAlign: 'center',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '12px',
+              fontWeight: 700, fontSize: '15px',
               letterSpacing: '0.1em', color: '#ffffff',
               background: 'rgba(0,0,0,0.8)',
-              padding: '10px',
+              padding: '12px',
             }}>QUICK VIEW</span>
           </div>
         </div>
 
         {/* Info */}
-        <div style={{ padding: '14px 4px 10px', background: '#ffffff' }}>
+        <div style={{ padding: '16px 4px 12px', background: '#ffffff' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
             <div style={{ flex: 1 }}>
-              {/* Product name — much bigger */}
+              {/* Product name — 28px */}
               <h3 style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 800,
-                fontSize: 'clamp(18px, 4vw, 17px)',
+                fontSize: '28px',
                 color: '#000000', margin: 0,
                 textTransform: 'uppercase',
-                letterSpacing: '0.03em',
+                letterSpacing: '0.02em',
                 lineHeight: 1.2,
               }}>{product.name}</h3>
-              {/* Category */}
+              {/* Category — 22px */}
               <p style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 500,
-                fontSize: 'clamp(16px, 3.5vw, 14px)',
-                color: '#888888', margin: '4px 0 0',
+                fontSize: '22px',
+                color: '#888888', margin: '6px 0 0',
                 textTransform: 'capitalize',
               }}>{product.category}</p>
             </div>
-            {/* Price — bigger */}
+            {/* Price — 28px */}
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800,
-              fontSize: 'clamp(18px, 4vw, 17px)',
+              fontSize: '28px',
               color: '#000000', flexShrink: 0,
             }}>${product.price}</span>
           </div>
 
-          {/* Color dots */}
-          <div style={{ display: 'flex', gap: '6px', marginTop: '10px', flexWrap: 'wrap' }}>
+          {/* Color dots — bigger */}
+          <div style={{ display: 'flex', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
             {product.colors.map((color) => (
               <div key={color}
                 style={{
-                  width: '16px', height: '16px', borderRadius: '50%',
+                  width: '22px', height: '22px', borderRadius: '50%',
                   background: getColorHex(color),
-                  border: '1.5px solid #dddddd',
+                  border: '2px solid #dddddd',
                 }}
                 title={color}
               />

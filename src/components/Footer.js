@@ -8,17 +8,17 @@ export default function Footer() {
     <footer style={{ background: '#f5f5f5', borderTop: '1px solid #e0e0e0', overflow: 'hidden' }}>
 
       {/* Marquee */}
-      <div style={{ background: '#c9a84c', padding: '0.6rem 0', overflow: 'hidden' }}>
+      <div style={{ background: '#c9a84c', padding: '0.8rem 0', overflow: 'hidden' }}>
         <div className="marquee-content" style={{
           fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 700, fontSize: '11px',
-          letterSpacing: '0.25em', color: '#000000', whiteSpace: 'nowrap',
+          fontWeight: 700, fontSize: '15px',
+          letterSpacing: '0.2em', color: '#000000', whiteSpace: 'nowrap',
         }}>
           {Array(10).fill('INSPIRED BY GOD · LUXURY STREETWEAR · ELEVATED ESSENTIALS · CHOSEN · ').join('')}
         </div>
       </div>
 
-      {/* Main footer — centered with max width */}
+      {/* Main footer */}
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
         <div style={{
           display: 'grid',
@@ -34,29 +34,26 @@ export default function Footer() {
             <Link to="/" style={{ textDecoration: 'none', display: 'block', marginBottom: '1rem' }}>
               <span style={{
                 fontFamily: "'Bebas Neue', cursive",
-                fontSize: '1.8rem', color: '#000000',
-                letterSpacing: '0.2em', display: 'block',
-                lineHeight: 1,
+                fontSize: '2.2rem', color: '#000000',
+                letterSpacing: '0.2em', display: 'block', lineHeight: 1,
               }}>INSPIRED</span>
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 700, fontSize: '9px',
+                fontWeight: 700, fontSize: '13px',
                 color: '#c9a84c', letterSpacing: '0.4em',
               }}>BY GOD</span>
             </Link>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 500, fontSize: '13px',
-              color: '#444444', lineHeight: 1.7,
-              marginBottom: '1rem',
+              fontWeight: 500, fontSize: '20px',
+              color: '#444444', lineHeight: 1.7, marginBottom: '1rem',
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '10px',
-              letterSpacing: '0.08em', color: '#000000',
-              marginBottom: '1rem',
+              fontWeight: 700, fontSize: '16px',
+              letterSpacing: '0.08em', color: '#000000', marginBottom: '1rem',
             }}>
               © {year} INSPIRED BY GOD.<br />ALL RIGHTS RESERVED.
             </p>
@@ -69,11 +66,11 @@ export default function Footer() {
               ].map((s) => (
                 <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer"
                   style={{
-                    width: '36px', height: '36px',
+                    width: '44px', height: '44px',
                     border: '1px solid #cccccc',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 700, fontSize: '9px',
+                    fontWeight: 700, fontSize: '13px',
                     color: '#333333', textDecoration: 'none',
                     background: '#ffffff',
                   }}
@@ -88,11 +85,10 @@ export default function Footer() {
           <div style={{ width: '100%' }}>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '12px',
-              letterSpacing: '0.2em', color: '#000000',
-              marginBottom: '1.25rem',
+              fontWeight: 800, fontSize: '18px',
+              letterSpacing: '0.2em', color: '#000000', marginBottom: '1.25rem',
             }}>SHOP</p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
                 { label: 'Shop All', to: '/shop' },
                 { label: 'About', to: '/about' },
@@ -102,7 +98,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link to={item.to} style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 500, fontSize: '14px',
+                    fontWeight: 500, fontSize: '20px',
                     color: '#333333', textDecoration: 'none',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
@@ -117,11 +113,10 @@ export default function Footer() {
           <div style={{ width: '100%' }}>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '12px',
-              letterSpacing: '0.2em', color: '#000000',
-              marginBottom: '1.25rem',
+              fontWeight: 800, fontSize: '18px',
+              letterSpacing: '0.2em', color: '#000000', marginBottom: '1.25rem',
             }}>LEGAL</p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
                 { label: 'Privacy Policy', to: '/privacy-policy' },
                 { label: 'Return Policy', to: '/return-policy' },
@@ -130,7 +125,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link to={item.to} style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 500, fontSize: '14px',
+                    fontWeight: 500, fontSize: '20px',
                     color: '#333333', textDecoration: 'none',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
