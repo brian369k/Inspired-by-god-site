@@ -105,7 +105,7 @@ export default function Navbar() {
             </button>
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900, fontSize: '16px',
+              fontWeight: 900, fontSize: '20px',
               letterSpacing: '0.2em', color: textColor,
               transition: 'color 0.3s', userSelect: 'none',
             }}>
