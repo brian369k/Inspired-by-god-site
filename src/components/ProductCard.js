@@ -3,15 +3,11 @@ import { Link } from 'react-router-dom';
 
 const getColorHex = (color) => {
   const c = color.toLowerCase();
-  if (c.includes('black')) return '#1a1a1a';
-  if (c.includes('white')) return '#f5f0e8';
-  if (c.includes('sand')) return '#c2b280';
-  if (c.includes('azalea')) return '#f4a7b9';
-  if (c.includes('cardinal blue')) return '#1a3a6b';
-  if (c.includes('grey') || c.includes('gray') || c.includes('stone')) return '#888';
-  if (c.includes('olive') || c.includes('military')) return '#556b2f';
-  if (c.includes('navy')) return '#1a2744';
-  return '#888888';
+  if (c.includes('black')) return '#252525';
+  if (c.includes('white')) return 'EFEEF4';
+  if (c.includes('sand')) return '#B6A384';
+  if (c.includes('azalea')) return '#F284A5';
+  if (c.includes('cardinal blue')) return '#779BD5';
 };
 
 export default function ProductCard({ product, index = 0 }) {

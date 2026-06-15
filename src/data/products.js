@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 1,
-    name: "IBG SIGNATURE TEE",
+    name: "IBG OVERLAPPED",
     price: 17.99,
     price2x: 19.49,
     price3x: 20.49,
@@ -19,7 +19,7 @@ export const products = [
     sizes: ["S", "M", "L", "XL", "2X", "3X"],
     colors: ["Black", "White", "Sand", "Azalea", "Cardinal Blue"],
     images: [
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=90",
+      "https://github.com/brian369k/Inspired-by-god-site/blob/main/IBG%20OVERLAPPED-BLACK.png",
       "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=800&q=90",
     ],
   },
