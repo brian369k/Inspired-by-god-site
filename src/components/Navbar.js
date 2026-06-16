@@ -19,8 +19,17 @@ export default function Navbar() {
   useEffect(() => { setMenuOpen(false); }, [location]);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+    };
   }, [menuOpen]);
 
   const isTransparent = isHome && !scrolled && !menuOpen;
@@ -38,15 +47,12 @@ export default function Navbar() {
   return (
     <>
       <style>{`
-        /* Mobile specific navbar sizes */
         @media (max-width: 768px) {
-          .ann-bar { font-size: 28px !important; padding: 1rem 3rem !important; }
-          .menu-text { font-size: 25px !important; }
-          .cart-text { font-size: 25px !important; }
+          .ann-bar { font-size: 13px !important; padding: 0.6rem 3rem !important; }
+          .menu-text { font-size: 22px !important; }
+          .cart-text { font-size: 22px !important; }
           .hamburger-line { width: 35px !important; height: 4px !important; }
-          .cart-icon { width: 28px !important; height: 28px !important; }
-          .navbar-height { height: 80px !important; }
-          .close-btn { font-size: 28px !important; }
+          .cart-icon { width: 26px !important; height: 26px !important; }
         }
       `}</style>
 
@@ -65,12 +71,12 @@ export default function Navbar() {
           lineHeight: 1.5,
         }}>
           FREE SHIPPING ON ORDERS OVER $150 · USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
-          <button className="close-btn" onClick={() => setAnnouncementVisible(false)} style={{
+          <button onClick={() => setAnnouncementVisible(false)} style={{
             position: 'absolute', right: '1rem', top: '50%',
             transform: 'translateY(-50%)',
             background: 'none', border: 'none',
             color: '#ffffff', cursor: 'pointer',
-            fontSize: '18px', lineHeight: 1,
+            fontSize: '20px', lineHeight: 1,
           }}>×</button>
         </div>
       )}
@@ -82,7 +88,7 @@ export default function Navbar() {
         borderBottom: borderColor,
         transition: 'background 0.3s ease',
       }}>
-        <div className="navbar-height" style={{
+        <div style={{
           maxWidth: '1280px', margin: '0 auto',
           padding: '0 1.5rem',
           display: 'grid',
@@ -100,28 +106,26 @@ export default function Navbar() {
                 background: 'none', border: 'none',
                 cursor: 'pointer', padding: '4px',
                 display: 'flex', flexDirection: 'column', gap: '7px',
+                color: textColor,
               }}
             >
-              <span className="hamburger-line" style={{
-                display: 'block', width: '28px', height: '3px',
-                background: textColor, transition: 'all 0.3s ease',
-                transform: menuOpen ? 'rotate(45deg) translateY(11px)' : 'none',
-                borderRadius: '2px',
-              }} />
-              <span className="hamburger-line" style={{
-                display: 'block', width: '28px', height: '3px',
-                background: textColor, transition: 'all 0.3s ease',
-                opacity: menuOpen ? 0 : 1, borderRadius: '2px',
-              }} />
-              <span className="hamburger-line" style={{
-                display: 'block', width: '28px', height: '3px',
-                background: textColor, transition: 'all 0.3s ease',
-                transform: menuOpen ? 'rotate(-45deg) translateY(-11px)' : 'none',
-                borderRadius: '2px',
-              }} />
+              {menuOpen ? (
+                /* X icon like caricature site — size 55 on mobile */
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5" className="hamburger-icon">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              ) : (
+                /* Hamburger — size 55 on mobile */
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5" className="hamburger-icon">
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                  <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+              )}
             </button>
 
-            {/* MENU text */}
+            {/* MENU text — 22px mobile */}
             <span className="menu-text" style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 900,
@@ -187,75 +191,82 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* FULLSCREEN MENU */}
-      <div style={{
-        position: 'fixed', inset: 0, zIndex: 40,
-        background: '#000000',
-        display: 'flex', flexDirection: 'column',
-        padding: '100px 2.5rem 2.5rem',
-        opacity: menuOpen ? 1 : 0,
-        pointerEvents: menuOpen ? 'auto' : 'none',
-        transition: 'opacity 0.3s ease',
-        overflowY: 'auto',
-      }}>
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0.25rem' }}>
-          {navLinks.map((link, i) => (
-            <Link key={link.to} to={link.to} style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(2.4rem, 10vw, 5rem)',
-              color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
-              textDecoration: 'none',
-              letterSpacing: '-0.01em', lineHeight: 1.1,
-              display: 'block',
-              borderBottom: '1px solid rgba(255,255,255,0.08)',
-              padding: '0.4rem 0',
-              opacity: menuOpen ? 1 : 0,
-              transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
-              transition: `opacity 0.35s ease ${i * 0.06}s, transform 0.35s ease ${i * 0.06}s, color 0.2s`,
-            }}>
-              {link.label}
-            </Link>
-          ))}
-          <button onClick={() => { toggleCart(); setMenuOpen(false); }} style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 900,
-            fontSize: 'clamp(2.4rem, 10vw, 5rem)',
-            color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.1,
-            textAlign: 'left', padding: '0.4rem 0',
-            opacity: menuOpen ? 1 : 0,
-            transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
-            transition: `opacity 0.35s ease ${navLinks.length * 0.06}s, transform 0.35s ease ${navLinks.length * 0.06}s`,
-          }}>
-            CART {totalItems > 0 && <span style={{ color: '#c9a84c' }}>({totalItems})</span>}
-          </button>
-        </div>
-
+      {/* FULLSCREEN MENU — matching caricature site style */}
+      {menuOpen && (
         <div style={{
-          borderTop: '1px solid rgba(255,255,255,0.1)',
-          paddingTop: '1.5rem',
-          display: 'flex', justifyContent: 'space-between',
-          alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
+          position: 'fixed', inset: 0, zIndex: 40,
+          backgroundColor: '#000000',
+          display: 'flex', flexDirection: 'column',
+          padding: '100px 1.5rem 2.5rem',
+          overflowY: 'auto',
         }}>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
-              <a key={s} href={`https://${s.toLowerCase()}.com`}
-                target="_blank" rel="noopener noreferrer"
+          <nav style={{ display: 'flex', flexDirection: 'column' }}>
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
                 style={{
                   fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 700, fontSize: '14px',
-                  letterSpacing: '0.15em', color: '#888888',
+                  fontWeight: 900,
+                  fontSize: '55px',
+                  color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
                   textDecoration: 'none',
-                }}>{s}</a>
+                  letterSpacing: '0.02em',
+                  lineHeight: 1.1,
+                  display: 'block',
+                  padding: '0.4rem 0',
+                  borderBottom: '1px solid rgba(255,255,255,0.1)',
+                }}
+              >
+                {link.label}
+              </Link>
             ))}
+            <button
+              onClick={() => { toggleCart(); setMenuOpen(false); }}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 900,
+                fontSize: '55px',
+                color: '#ffffff',
+                letterSpacing: '0.02em',
+                lineHeight: 1.1,
+                textAlign: 'left',
+                padding: '0.4rem 0',
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
+              }}
+            >
+              CART {totalItems > 0 && <span style={{ color: '#c9a84c' }}>({totalItems})</span>}
+            </button>
+          </nav>
+
+          {/* Bottom social links */}
+          <div style={{
+            marginTop: 'auto',
+            paddingTop: '2rem',
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            display: 'flex', justifyContent: 'space-between',
+            alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
+          }}>
+            <div style={{ display: 'flex', gap: '1.5rem' }}>
+              {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
+                <a key={s} href={`https://${s.toLowerCase()}.com`}
+                  target="_blank" rel="noopener noreferrer"
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 700, fontSize: '14px',
+                    letterSpacing: '0.15em', color: '#888888',
+                    textDecoration: 'none',
+                  }}>{s}</a>
+              ))}
+            </div>
+            <p style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 500, fontSize: '13px', color: '#555555',
+            }}>© 2026 INSPIRED BY GOD</p>
           </div>
-          <p style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500, fontSize: '13px', color: '#555555',
-          }}>© 2024 INSPIRED BY GOD</p>
         </div>
-      </div>
+      )}
     </>
   );
 }

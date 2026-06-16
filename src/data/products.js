@@ -1,8 +1,8 @@
 const IBG_ALL_BLOCKED_UP = 'https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/IBG%20ALL%20BLOCKED%20UP.png';
-const IBG_THE_KINGS_HOUSE = 'https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/IBG%20THE%20KINGS%20HOUSE.png';
+const IBG_THE_KINGS_HOUSE = 'https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/kings-house.png';
 const IBG_OVERLAPPED = 'https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/IBG%20OVERLAPPED-BLACK.png';
-const IBG_IM_SOO_RAZZ = "https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/IBG%20I'M%20SOO%20RAZZ.png";
-const IBG_MAKE_A_WORD = 'https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/IBG%20MAKE%20A%20WORD.png';
+const IBG_IM_SOO_RAZZ = 'https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/soo-razz.png';
+const IBG_MAKE_A_WORD = 'https://raw.githubusercontent.com/brian369k/Inspired-by-god-site/main/make-a-word.png';
 
 export const products = [
   {

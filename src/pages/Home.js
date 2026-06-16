@@ -44,7 +44,7 @@ export default function Home() {
 
       {/* HERO */}
       <section style={{
-        minHeight: '100svh',
+        minHeight: 'auto',
         display: 'flex', flexDirection: 'column',
         justifyContent: 'center', alignItems: 'center',
         background: '#000000', position: 'relative', overflow: 'hidden',
@@ -61,7 +61,7 @@ export default function Home() {
         <div style={{
           position: 'relative', zIndex: 10,
           width: '100%', maxWidth: '1280px',
-          margin: '0 auto', padding: '4rem 1.5rem',
+          margin: '0 auto', padding: '2rem 1.5rem',
           textAlign: 'center',
           opacity: heroLoaded ? 1 : 0,
           transform: heroLoaded ? 'none' : 'translateY(30px)',
@@ -140,7 +140,7 @@ export default function Home() {
       </div>
 
       {/* PRODUCTS */}
-      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
+      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '2rem 1.5rem' }}>
         <FadeUp>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
             <h2 style={{
@@ -160,7 +160,7 @@ export default function Home() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(100%, 1fr))',
           gap: '2rem',
         }}>
           {products.map((product, i) => (
@@ -202,7 +202,7 @@ export default function Home() {
       </section>
 
       {/* PANELS */}
-      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
+      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '2rem 1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
           {[
             { title: 'ARRIVALS', btn: 'SHOP NOW', img: products[0].images[0] },
@@ -234,7 +234,7 @@ export default function Home() {
       </section>
 
       {/* NEWSLETTER */}
-      <section style={{ background: '#f5f5f5', padding: '4rem 1.5rem', textAlign: 'center' }}>
+      <section style={{ background: '#f5f5f5', padding: '2rem 1.5rem', textAlign: 'center' }}>
         <FadeUp>
           <h2 style={{
             fontFamily: "'Montserrat', sans-serif",
