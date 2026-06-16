@@ -1,8 +1,8 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Force font sizes — overrides Tailwind */
+/* Force font sizes â€” overrides Tailwind */
 html, body {
   font-family: 'Montserrat', sans-serif !important;
   font-size: 18px !important;
@@ -120,3 +120,5 @@ input:focus, textarea:focus, select:focus {
   border-color: rgba(201, 168, 76, 0.6) !important;
   box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.2);
 }
+
+
