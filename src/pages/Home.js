@@ -44,7 +44,7 @@ export default function Home() {
 
       {/* HERO */}
       <section style={{
-        minHeight: 'auto',
+        minHeight: '100svh',
         display: 'flex', flexDirection: 'column',
         justifyContent: 'center', alignItems: 'center',
         background: '#000000', position: 'relative', overflow: 'hidden',
@@ -61,7 +61,7 @@ export default function Home() {
         <div style={{
           position: 'relative', zIndex: 10,
           width: '100%', maxWidth: '1280px',
-          margin: '0 auto', padding: '2rem 1.5rem',
+          margin: '0 auto', padding: '4rem 1.5rem',
           textAlign: 'center',
           opacity: heroLoaded ? 1 : 0,
           transform: heroLoaded ? 'none' : 'translateY(30px)',
@@ -112,7 +112,7 @@ export default function Home() {
             <Link to="/shop" style={{
               background: '#c9a84c', color: '#000000',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '16px',
+              fontWeight: 800, fontSize: '25px',
               letterSpacing: '0.2em',
               padding: '1.2rem 2.5rem', textDecoration: 'none',
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -120,7 +120,7 @@ export default function Home() {
             <Link to="/about" style={{
               border: '2px solid rgba(255,255,255,0.5)', color: '#ffffff',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '16px',
+              fontWeight: 700, fontSize: '25px',
               letterSpacing: '0.2em',
               padding: '1.2rem 2.5rem', textDecoration: 'none',
             }}>OUR STORY</Link>
@@ -132,7 +132,7 @@ export default function Home() {
       <div style={{ background: '#c9a84c', padding: '0.8rem 0', overflow: 'hidden' }}>
         <div className="marquee-content" style={{
           fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 700, fontSize: '15px',
+          fontWeight: 700, fontSize: '25px',
           letterSpacing: '0.2em', color: '#000000', whiteSpace: 'nowrap',
         }}>
           {Array(8).fill('INSPIRED BY GOD · LUXURY STREETWEAR · FREE SHIPPING OVER $150 · NEW ARRIVALS NOW LIVE · CHOSEN ONES ONLY · ').join('')}
@@ -140,7 +140,7 @@ export default function Home() {
       </div>
 
       {/* PRODUCTS */}
-      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '2rem 1.5rem' }}>
+      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
         <FadeUp>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
             <h2 style={{
@@ -150,7 +150,7 @@ export default function Home() {
             }}>THE COLLECTION</h2>
             <Link to="/shop" style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '18px',
+              fontWeight: 700, fontSize: '25px',
               letterSpacing: '0.15em', color: '#000000',
               textDecoration: 'none', borderBottom: '2px solid #000',
               paddingBottom: '2px',
@@ -185,7 +185,7 @@ export default function Home() {
             </blockquote>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 500, fontSize: '22px',
+              fontWeight: 500, fontSize: '25px',
               color: '#444444', marginTop: '2rem', lineHeight: 1.8,
             }}>
               Every piece is crafted with intention. Sacred materials. Deliberate silhouettes. For those who know their purpose and dress accordingly.
@@ -193,7 +193,7 @@ export default function Home() {
             <Link to="/about" style={{
               display: 'inline-block', marginTop: '2rem',
               fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
-              fontSize: '16px', letterSpacing: '0.2em',
+              fontSize: '25px', letterSpacing: '0.2em',
               color: '#000000', border: '2px solid #000000',
               padding: '1rem 2rem', textDecoration: 'none',
             }}>LEARN MORE</Link>
@@ -202,7 +202,7 @@ export default function Home() {
       </section>
 
       {/* PANELS */}
-      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '2rem 1.5rem' }}>
+      <section style={{ background: '#ffffff', maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
           {[
             { title: 'ARRIVALS', btn: 'SHOP NOW', img: products[0].images[0] },
@@ -210,7 +210,7 @@ export default function Home() {
           ].map((panel, i) => (
             <FadeUp key={panel.title} delay={i * 0.1}>
               <div style={{ position: 'relative', aspectRatio: '4/5', overflow: 'hidden' }}>
-                <img src={panel.img} alt={panel.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55)' }} />
+                <img src={panel.img} alt={panel.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left top', filter: 'brightness(0.55)' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)' }} />
                 <div style={{ position: 'absolute', bottom: '2rem', left: '1.5rem', right: '1.5rem' }}>
                   <h3 style={{
@@ -220,7 +220,7 @@ export default function Home() {
                   }}>{panel.title}</h3>
                   <Link to="/shop" style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 700, fontSize: '16px',
+                    fontWeight: 700, fontSize: '25px',
                     letterSpacing: '0.2em', color: '#ffffff',
                     border: '2px solid rgba(255,255,255,0.7)',
                     padding: '0.8rem 1.8rem', textDecoration: 'none',
@@ -234,7 +234,7 @@ export default function Home() {
       </section>
 
       {/* NEWSLETTER */}
-      <section style={{ background: '#f5f5f5', padding: '2rem 1.5rem', textAlign: 'center' }}>
+      <section style={{ background: '#f5f5f5', padding: '4rem 1.5rem', textAlign: 'center' }}>
         <FadeUp>
           <h2 style={{
             fontFamily: "'Montserrat', sans-serif",
@@ -243,7 +243,7 @@ export default function Home() {
           }}>JOIN THE CHOSEN</h2>
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500, fontSize: '22px',
+            fontWeight: 500, fontSize: '25px',
             color: '#444444', marginBottom: '2rem',
           }}>
             Sign up to get the latest on drops, sales, new releases and more.
@@ -257,14 +257,14 @@ export default function Home() {
                 border: '2px solid #000000', borderRight: 'none',
                 padding: '1.2rem 1.25rem',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 500, fontSize: '18px',
+                fontWeight: 500, fontSize: '25px',
                 color: '#000000', outline: 'none',
               }}
             />
             <button style={{
               background: '#000000', color: '#ffffff', border: 'none',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '16px',
+              fontWeight: 800, fontSize: '25px',
               letterSpacing: '0.15em', padding: '1.2rem 1.5rem', cursor: 'pointer',
             }}>SIGN UP</button>
           </div>
