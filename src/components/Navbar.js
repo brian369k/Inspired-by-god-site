@@ -47,14 +47,73 @@ export default function Navbar() {
   return (
     <>
       <style>{`
-        /* MOBILE ONLY — max 768px */
+        .ibg-ann-bar {
+          font-size: 13px;
+          padding: 0.7rem 3rem;
+        }
+        .ibg-nav-height {
+          height: 72px;
+        }
+        .ibg-menu-text {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900;
+          letter-spacing: 0.2em;
+          transition: color 0.3s;
+          user-select: none;
+          font-size: 16px;
+        }
+        .ibg-cart-text {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 800;
+          letter-spacing: 0.2em;
+          transition: color 0.3s;
+          font-size: 13px;
+        }
+        .ibg-hamburger-icon {
+          width: 24px;
+          height: 24px;
+        }
+        .ibg-cart-icon {
+          width: 22px;
+          height: 22px;
+          min-width: 22px;
+          transition: stroke 0.3s;
+        }
+        .ibg-fullmenu-link {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900;
+          font-size: 2.5rem;
+          text-decoration: none;
+          letter-spacing: 0.02em;
+          line-height: 1.1;
+          display: block;
+          padding: 0.4rem 0;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .ibg-fullmenu-cart {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900;
+          font-size: 2.5rem;
+          letter-spacing: 0.02em;
+          line-height: 1.1;
+          text-align: left;
+          padding: 0.4rem 0;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+          background: none;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          cursor: pointer;
+        }
+
+        /* MOBILE ONLY */
         @media (max-width: 768px) {
           .ibg-ann-bar { font-size: 13px !important; }
+          .ibg-nav-height { height: 80px !important; }
           .ibg-menu-text { font-size: 22px !important; }
           .ibg-cart-text { font-size: 22px !important; }
           .ibg-hamburger-icon { width: 40px !important; height: 40px !important; }
-          .ibg-cart-icon { width: 28px !important; height: 28px !important; }
-          .ibg-nav-height { height: 80px !important; }
+          .ibg-cart-icon { width: 28px !important; height: 28px !important; min-width: 28px !important; }
           .ibg-fullmenu-link { font-size: 55px !important; }
           .ibg-fullmenu-cart { font-size: 55px !important; }
         }
@@ -65,10 +124,8 @@ export default function Navbar() {
         <div className="ibg-ann-bar" style={{
           background: '#000000', color: '#ffffff',
           textAlign: 'center',
-          padding: '0.7rem 3rem',
           fontFamily: "'Montserrat', sans-serif",
           fontWeight: 700,
-          fontSize: '13px',
           letterSpacing: '0.06em',
           position: 'relative',
           zIndex: 60,
@@ -98,7 +155,6 @@ export default function Navbar() {
           display: 'grid',
           gridTemplateColumns: '1fr auto 1fr',
           alignItems: 'center',
-          height: '72px',
         }}>
 
           {/* Left — Hamburger + MENU/CLOSE */}
@@ -109,12 +165,12 @@ export default function Navbar() {
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
             >
               {menuOpen ? (
-                <svg className="ibg-hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
+                <svg className="ibg-hamburger-icon" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/>
                   <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
               ) : (
-                <svg className="ibg-hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
+                <svg className="ibg-hamburger-icon" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
                   <line x1="3" y1="6" x2="21" y2="6"/>
                   <line x1="3" y1="12" x2="21" y2="12"/>
                   <line x1="3" y1="18" x2="21" y2="18"/>
@@ -122,15 +178,7 @@ export default function Navbar() {
               )}
             </button>
 
-            <span className="ibg-menu-text" style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900,
-              fontSize: '16px',
-              letterSpacing: '0.2em',
-              color: textColor,
-              transition: 'color 0.3s',
-              userSelect: 'none',
-            }}>
+            <span className="ibg-menu-text" style={{ color: textColor }}>
               {menuOpen ? 'CLOSE' : 'MENU'}
             </span>
           </div>
@@ -157,16 +205,9 @@ export default function Navbar() {
               background: 'none', border: 'none', cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: '8px',
             }}>
-              <span className="ibg-cart-text" style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800,
-                fontSize: '13px',
-                letterSpacing: '0.2em',
-                color: textColor,
-                transition: 'color 0.3s',
-              }}>CART</span>
+              <span className="ibg-cart-text" style={{ color: textColor }}>CART</span>
 
-              <svg className="ibg-cart-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" style={{ transition: 'stroke 0.3s', minWidth: '22px' }}>
+              <svg className="ibg-cart-icon" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 01-8 0"/>
@@ -202,18 +243,7 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className="ibg-fullmenu-link"
-                style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 900,
-                  fontSize: '2.5rem',
-                  color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
-                  textDecoration: 'none',
-                  letterSpacing: '0.02em',
-                  lineHeight: 1.1,
-                  display: 'block',
-                  padding: '0.4rem 0',
-                  borderBottom: '1px solid rgba(255,255,255,0.1)',
-                }}
+                style={{ color: location.pathname === link.to ? '#c9a84c' : '#ffffff' }}
               >
                 {link.label}
               </Link>
@@ -221,18 +251,7 @@ export default function Navbar() {
             <button
               onClick={() => { toggleCart(); setMenuOpen(false); }}
               className="ibg-fullmenu-cart"
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 900,
-                fontSize: '2.5rem',
-                color: '#ffffff',
-                letterSpacing: '0.02em',
-                lineHeight: 1.1,
-                textAlign: 'left',
-                padding: '0.4rem 0',
-                borderBottom: '1px solid rgba(255,255,255,0.1)',
-              }}
+              style={{ color: '#ffffff' }}
             >
               CART {totalItems > 0 && <span style={{ color: '#c9a84c' }}>({totalItems})</span>}
             </button>
