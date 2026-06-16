@@ -47,6 +47,7 @@ export default function Navbar() {
   return (
     <>
       <style>{`
+        /* Desktop defaults */
         .ibg-ann-bar {
           font-size: 13px;
           padding: 0.7rem 3rem;
@@ -104,16 +105,17 @@ export default function Navbar() {
           border-left: none;
           border-right: none;
           cursor: pointer;
+          width: 100%;
         }
 
-        /* MOBILE ONLY */
+        /* MOBILE ONLY — matches caricature site */
         @media (max-width: 768px) {
           .ibg-ann-bar { font-size: 13px !important; }
           .ibg-nav-height { height: 80px !important; }
-          .ibg-menu-text { font-size: 22px !important; }
-          .ibg-cart-text { font-size: 22px !important; }
-          .ibg-hamburger-icon { width: 40px !important; height: 40px !important; }
-          .ibg-cart-icon { width: 28px !important; height: 28px !important; min-width: 28px !important; }
+          .ibg-menu-text { font-size: 30px !important; }
+          .ibg-cart-text { font-size: 30px !important; }
+          .ibg-hamburger-icon { width: 55px !important; height: 55px !important; }
+          .ibg-cart-icon { width: 35px !important; height: 35px !important; min-width: 35px !important; }
           .ibg-fullmenu-link { font-size: 55px !important; }
           .ibg-fullmenu-cart { font-size: 55px !important; }
         }
