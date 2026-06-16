@@ -27,12 +27,12 @@ export default function ProductCard({ product, index = 0 }) {
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
       }}>
         {/* Image */}
-        <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/5', background: '#f0f0f0' }}>
+        <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '3/4', background: '#f0f0f0' }}>
           <img
             src={product.images[imgIdx]}
             alt={product.name}
             style={{
-              width: '100%', height: '100%', objectFit: 'cover',
+              width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top',
               transform: hovered ? 'scale(1.04)' : 'scale(1)',
               transition: 'transform 0.5s ease',
             }}
