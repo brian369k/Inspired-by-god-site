@@ -48,7 +48,7 @@ export default function Navbar() {
       {/* Announcement Bar */}
       {announcementVisible && !open && (
         <div className={`relative z-50 text-center font-bold tracking-wider ${isTransparent ? 'bg-black' : 'bg-black'}`}
-          style={{ padding: '0.7rem 3rem', fontSize: '13px', fontFamily: "'Montserrat', sans-serif", color: '#ffffff', letterSpacing: '0.06em', lineHeight: 1.5 }}
+          style={{ padding: '0.7rem 3rem', fontSize: '25px', fontFamily: "'Montserrat', sans-serif", color: '#ffffff', letterSpacing: '0.06em', lineHeight: 1.5 }}
         >
           FREE SHIPPING ON ORDERS OVER $150 · USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
           <button onClick={() => setAnnouncementVisible(false)}
@@ -89,7 +89,7 @@ export default function Navbar() {
               {navLinks.map((l) => (
                 <Link key={l.to} to={l.to} style={{
                   fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 700, fontSize: '13px',
+                  fontWeight: 700, fontSize: '25px',
                   letterSpacing: '0.15em',
                   color: location.pathname === l.to ? '#c9a84c' : isTransparent ? '#ffffff' : '#000000',
                   textDecoration: 'none', transition: 'color 0.2s',
@@ -105,7 +105,7 @@ export default function Navbar() {
                 background: 'none', border: 'none', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '13px',
+                fontWeight: 800, fontSize: '25px',
                 letterSpacing: '0.15em',
                 color: isTransparent ? '#ffffff' : '#000000',
               }}>
@@ -143,7 +143,7 @@ export default function Navbar() {
                   <span style={{
                     minWidth: '26px', height: '26px',
                     background: '#c9a84c', color: '#000000',
-                    fontSize: '13px', fontWeight: 800,
+                    fontSize: '25px', fontWeight: 800,
                     borderRadius: '13px',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     padding: '0 4px',
@@ -237,7 +237,7 @@ export default function Navbar() {
                 >{s}</a>
               ))}
             </div>
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '13px', color: '#555555' }}>© 2026 IBG</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '25px', color: '#555555' }}>© 2026 IBG</p>
           </div>
         </div>
       )}
