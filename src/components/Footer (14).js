@@ -11,7 +11,7 @@ export default function Footer() {
       <div style={{ background: '#c9a84c', padding: '0.8rem 0', overflow: 'hidden' }}>
         <div className="marquee-content" style={{
           fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 700, fontSize: '25px',
+          fontWeight: 800, fontSize: '25px',
           letterSpacing: '0.2em', color: '#000000', whiteSpace: 'nowrap',
         }}>
           {Array(10).fill('INSPIRED BY GOD · LUXURY STREETWEAR · ELEVATED ESSENTIALS · CHOSEN · ').join('')}
@@ -39,20 +39,21 @@ export default function Footer() {
               }}>INSPIRED</span>
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 700, fontSize: '9px',
+                fontWeight: 800, fontSize: '9px',
                 color: '#c9a84c', letterSpacing: '0.4em',
               }}>BY GOD</span>
             </Link>
+            {/* Footer description — bold 30px */}
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 500, fontSize: '25px',
+              fontWeight: 800, fontSize: '30px',
               color: '#444444', lineHeight: 1.7, marginBottom: '1rem',
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700, fontSize: '25px',
+              fontWeight: 800, fontSize: '25px',
               letterSpacing: '0.08em', color: '#000000', marginBottom: '1rem',
             }}>
               © {year} INSPIRED BY GOD.<br />ALL RIGHTS RESERVED.
@@ -70,7 +71,7 @@ export default function Footer() {
                     border: '1px solid #cccccc',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 700, fontSize: '13px',
+                    fontWeight: 800, fontSize: '13px',
                     color: '#333333', textDecoration: 'none',
                     background: '#ffffff',
                   }}
@@ -98,7 +99,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link to={item.to} style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 500, fontSize: '25px',
+                    fontWeight: 800, fontSize: '25px',
                     color: '#333333', textDecoration: 'none',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
@@ -125,7 +126,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link to={item.to} style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 500, fontSize: '25px',
+                    fontWeight: 800, fontSize: '25px',
                     color: '#333333', textDecoration: 'none',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}

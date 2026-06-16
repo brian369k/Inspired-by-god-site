@@ -42,9 +42,9 @@ export default function Home() {
   return (
     <div style={{ background: '#ffffff' }}>
 
-      {/* HERO */}
+      {/* HERO — reduced padding to remove extra space */}
       <section style={{
-        minHeight: '100svh',
+        minHeight: 'auto',
         display: 'flex', flexDirection: 'column',
         justifyContent: 'center', alignItems: 'center',
         background: '#000000', position: 'relative', overflow: 'hidden',
@@ -61,7 +61,7 @@ export default function Home() {
         <div style={{
           position: 'relative', zIndex: 10,
           width: '100%', maxWidth: '1280px',
-          margin: '0 auto', padding: '4rem 1.5rem',
+          margin: '0 auto', padding: '2.5rem 1.5rem',
           textAlign: 'center',
           opacity: heroLoaded ? 1 : 0,
           transform: heroLoaded ? 'none' : 'translateY(30px)',
@@ -105,7 +105,7 @@ export default function Home() {
           <div style={{
             display: 'flex', gap: '1rem',
             justifyContent: 'center', flexWrap: 'wrap',
-            marginTop: '2.5rem',
+            marginTop: '2rem',
             opacity: heroLoaded ? 1 : 0,
             transition: 'opacity 0.8s ease 1s',
           }}>
@@ -183,16 +183,17 @@ export default function Home() {
             }}>
               "We don't make clothes. We make armor for the anointed."
             </blockquote>
+            {/* Every piece — now BOLD 30px */}
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 500, fontSize: '25px',
+              fontWeight: 800, fontSize: '30px',
               color: '#444444', marginTop: '2rem', lineHeight: 1.8,
             }}>
               Every piece is crafted with intention. Sacred materials. Deliberate silhouettes. For those who know their purpose and dress accordingly.
             </p>
             <Link to="/about" style={{
               display: 'inline-block', marginTop: '2rem',
-              fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
+              fontFamily: "'Montserrat', sans-serif", fontWeight: 800,
               fontSize: '25px', letterSpacing: '0.2em',
               color: '#000000', border: '2px solid #000000',
               padding: '1rem 2rem', textDecoration: 'none',
@@ -241,9 +242,10 @@ export default function Home() {
             fontWeight: 800, fontSize: 'clamp(32px, 6vw, 52px)',
             color: '#000000', marginBottom: '1rem',
           }}>JOIN THE CHOSEN</h2>
+          {/* Sign up text — now BOLD 30px */}
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500, fontSize: '25px',
+            fontWeight: 800, fontSize: '30px',
             color: '#444444', marginBottom: '2rem',
           }}>
             Sign up to get the latest on drops, sales, new releases and more.
@@ -257,7 +259,7 @@ export default function Home() {
                 border: '2px solid #000000', borderRight: 'none',
                 padding: '1.2rem 1.25rem',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 500, fontSize: '25px',
+                fontWeight: 800, fontSize: '25px',
                 color: '#000000', outline: 'none',
               }}
             />
