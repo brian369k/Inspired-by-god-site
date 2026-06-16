@@ -47,18 +47,22 @@ export default function Navbar() {
   return (
     <>
       <style>{`
+        /* MOBILE ONLY — max 768px */
         @media (max-width: 768px) {
-          .ann-bar { font-size: 13px !important; padding: 0.6rem 3rem !important; }
-          .menu-text { font-size: 22px !important; }
-          .cart-text { font-size: 22px !important; }
-          .hamburger-line { width: 35px !important; height: 4px !important; }
-          .cart-icon { width: 26px !important; height: 26px !important; }
+          .ibg-ann-bar { font-size: 13px !important; }
+          .ibg-menu-text { font-size: 22px !important; }
+          .ibg-cart-text { font-size: 22px !important; }
+          .ibg-hamburger-icon { width: 40px !important; height: 40px !important; }
+          .ibg-cart-icon { width: 28px !important; height: 28px !important; }
+          .ibg-nav-height { height: 80px !important; }
+          .ibg-fullmenu-link { font-size: 55px !important; }
+          .ibg-fullmenu-cart { font-size: 55px !important; }
         }
       `}</style>
 
       {/* Announcement Bar */}
       {announcementVisible && !menuOpen && (
-        <div className="ann-bar" style={{
+        <div className="ibg-ann-bar" style={{
           background: '#000000', color: '#ffffff',
           textAlign: 'center',
           padding: '0.7rem 3rem',
@@ -88,7 +92,7 @@ export default function Navbar() {
         borderBottom: borderColor,
         transition: 'background 0.3s ease',
       }}>
-        <div style={{
+        <div className="ibg-nav-height" style={{
           maxWidth: '1280px', margin: '0 auto',
           padding: '0 1.5rem',
           display: 'grid',
@@ -102,22 +106,15 @@ export default function Navbar() {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
-              style={{
-                background: 'none', border: 'none',
-                cursor: 'pointer', padding: '4px',
-                display: 'flex', flexDirection: 'column', gap: '7px',
-                color: textColor,
-              }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
             >
               {menuOpen ? (
-                /* X icon like caricature site — size 55 on mobile */
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5" className="hamburger-icon">
+                <svg className="ibg-hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/>
                   <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
               ) : (
-                /* Hamburger — size 55 on mobile */
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5" className="hamburger-icon">
+                <svg className="ibg-hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
                   <line x1="3" y1="6" x2="21" y2="6"/>
                   <line x1="3" y1="12" x2="21" y2="12"/>
                   <line x1="3" y1="18" x2="21" y2="18"/>
@@ -125,8 +122,7 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* MENU text — 22px mobile */}
-            <span className="menu-text" style={{
+            <span className="ibg-menu-text" style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 900,
               fontSize: '16px',
@@ -161,7 +157,7 @@ export default function Navbar() {
               background: 'none', border: 'none', cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: '8px',
             }}>
-              <span className="cart-text" style={{
+              <span className="ibg-cart-text" style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 800,
                 fontSize: '13px',
@@ -170,7 +166,7 @@ export default function Navbar() {
                 transition: 'color 0.3s',
               }}>CART</span>
 
-              <svg className="cart-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" style={{ transition: 'stroke 0.3s', minWidth: '22px' }}>
+              <svg className="ibg-cart-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" style={{ transition: 'stroke 0.3s', minWidth: '22px' }}>
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 01-8 0"/>
@@ -191,7 +187,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* FULLSCREEN MENU — matching caricature site style */}
+      {/* FULLSCREEN MENU */}
       {menuOpen && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 40,
@@ -205,10 +201,11 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
+                className="ibg-fullmenu-link"
                 style={{
                   fontFamily: "'Montserrat', sans-serif",
                   fontWeight: 900,
-                  fontSize: '55px',
+                  fontSize: '2.5rem',
                   color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
                   textDecoration: 'none',
                   letterSpacing: '0.02em',
@@ -223,11 +220,12 @@ export default function Navbar() {
             ))}
             <button
               onClick={() => { toggleCart(); setMenuOpen(false); }}
+              className="ibg-fullmenu-cart"
               style={{
                 background: 'none', border: 'none', cursor: 'pointer',
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 900,
-                fontSize: '55px',
+                fontSize: '2.5rem',
                 color: '#ffffff',
                 letterSpacing: '0.02em',
                 lineHeight: 1.1,
@@ -240,7 +238,6 @@ export default function Navbar() {
             </button>
           </nav>
 
-          {/* Bottom social links */}
           <div style={{
             marginTop: 'auto',
             paddingTop: '2rem',
