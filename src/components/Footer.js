@@ -43,21 +43,28 @@ export default function Footer() {
                 color: '#c9a84c', letterSpacing: '0.4em',
               }}>BY GOD</span>
             </Link>
-            {/* Footer description — bold 30px */}
+
+            {/* Description + copyright on same line at bottom */}
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '30px',
-              color: '#444444', lineHeight: 1.7, marginBottom: '1rem',
+              color: '#444444', lineHeight: 1.7, marginBottom: '0.5rem',
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
-            <p style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '25px',
-              letterSpacing: '0.08em', color: '#000000', marginBottom: '1rem',
-            }}>
-              © {year} INSPIRED BY GOD.<br />ALL RIGHTS RESERVED.
-            </p>
+
+            {/* Copyright inline with Shop/Legal alignment */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
+              <p style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 800, fontSize: '25px',
+                letterSpacing: '0.08em', color: '#000000',
+                margin: 0, textAlign: 'left',
+              }}>
+                © {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.
+              </p>
+            </div>
+
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
               {[
                 { name: 'IG', href: 'https://instagram.com' },
