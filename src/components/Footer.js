@@ -83,13 +83,13 @@ export default function Footer() {
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
 
-            {/* Social icons + copyright on same row */}
+            {/* Social icons + copyright on same row — both 25px */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '12px',
-              flexWrap: 'nowrap',
+              gap: '14px',
+              flexWrap: 'wrap',
             }}>
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer"
@@ -98,15 +98,14 @@ export default function Footer() {
                   onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
                   onMouseLeave={e => e.currentTarget.style.color = '#000000'}
                 >
-                  <Icon style={{ width: '22px', height: '22px' }} />
+                  <Icon style={{ width: '25px', height: '25px' }} />
                 </a>
               ))}
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '11px',
+                fontWeight: 800, fontSize: '25px',
                 color: '#000000', whiteSpace: 'nowrap',
-                marginLeft: '6px',
-              }}>© {year} IBG</span>
+              }}>© {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.</span>
             </div>
           </div>
 
