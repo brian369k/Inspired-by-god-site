@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <div style={{ background: '#ffffff' }}>
 
-      {/* HERO — reduced padding to remove extra space */}
+      {/* HERO */}
       <section style={{
         minHeight: 'auto',
         display: 'flex', flexDirection: 'column',
@@ -183,7 +183,6 @@ export default function Home() {
             }}>
               "We don't make clothes. We make armor for the anointed."
             </blockquote>
-            {/* Every piece — now BOLD 30px */}
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '30px',
@@ -242,7 +241,6 @@ export default function Home() {
             fontWeight: 800, fontSize: 'clamp(32px, 6vw, 52px)',
             color: '#000000', marginBottom: '1rem',
           }}>JOIN THE CHOSEN</h2>
-          {/* Sign up text — now BOLD 30px */}
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
             fontWeight: 800, fontSize: '30px',
@@ -256,7 +254,7 @@ export default function Home() {
               placeholder="Enter your email address..."
               style={{
                 flex: 1, background: '#ffffff',
-                border: '2px solid #000000', borderRight: 'none',
+                border: '4px solid #000000', borderRight: 'none',
                 padding: '1.2rem 1.25rem',
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 800, fontSize: '25px',
