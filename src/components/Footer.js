@@ -20,6 +20,8 @@ export default function Footer() {
 
       {/* Main footer */}
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
+
+        {/* 3 columns */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
@@ -43,28 +45,13 @@ export default function Footer() {
                 color: '#c9a84c', letterSpacing: '0.4em',
               }}>BY GOD</span>
             </Link>
-
-            {/* Description + copyright on same line at bottom */}
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '30px',
-              color: '#444444', lineHeight: 1.7, marginBottom: '0.5rem',
+              color: '#444444', lineHeight: 1.7, marginBottom: '1rem',
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
-
-            {/* Copyright inline with Shop/Legal alignment */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
-              <p style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '25px',
-                letterSpacing: '0.08em', color: '#000000',
-                margin: 0, textAlign: 'left',
-              }}>
-                © {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.
-              </p>
-            </div>
-
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
               {[
                 { name: 'IG', href: 'https://instagram.com' },
@@ -145,6 +132,34 @@ export default function Footer() {
           </div>
 
         </div>
+
+        {/* Copyright — centered under shop and legal columns */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '3rem',
+          marginTop: '2rem',
+          paddingTop: '1.5rem',
+          borderTop: '1px solid #e0e0e0',
+        }}>
+          {/* Empty column 1 */}
+          <div />
+          {/* Copyright spans columns 2 and 3 */}
+          <div style={{
+            gridColumn: '2 / 4',
+            textAlign: 'center',
+          }}>
+            <p style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 800, fontSize: '25px',
+              letterSpacing: '0.08em', color: '#000000',
+              margin: 0, lineHeight: 1.6,
+            }}>
+              © {year} INSPIRED BY GOD.<br />ALL RIGHTS RESERVED.
+            </p>
+          </div>
+        </div>
+
       </div>
     </footer>
   );
