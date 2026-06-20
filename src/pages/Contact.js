@@ -1,4 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
+
+const SERVICE_ID = 'service_nra7ohe';
+const TEMPLATE_ID = 'template_8wd511b';
+const PUBLIC_KEY = '0yyp_dysPGeaCMqE';
 
 function useInView() {
   const ref = useRef(null);
@@ -17,47 +22,56 @@ const FadeUp = ({ children, delay = 0, className = '' }) => {
   const [ref, inView] = useInView();
   return (
     <div ref={ref} className={className}
-      style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(32px)', transition: `all 0.8s ease ${delay}s` }}>
+      style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(30px)', transition: `all 0.8s ease ${delay}s` }}>
       {children}
     </div>
   );
 };
 
-const inputClass = "w-full bg-transparent border border-grey-dark px-5 py-4 font-mono text-xs text-ivory placeholder-grey-mid hover-gold-border focus:border-gold/50 transition-all";
+const inputClass = "w-full bg-transparent border border-white px-5 py-4 font-mono text-white placeholder-white hover:border-gold focus:border-gold transition-all";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const formRef = useRef(null);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY);
       setSubmitted(true);
-    }, 1500);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setError('Failed to send message. Please try again or email us directly at support@inspiredbygod.com');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="bg-black pt-16 md:pt-20">
+    <div className="bg-black">
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 border-b border-gold/10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-2.5 border-b border-gold">
         <FadeUp>
-          <p className="font-mono text-xs tracking-widest text-gold mb-4">— GET IN TOUCH</p>
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-ivory tracking-wide leading-none">CONTACT</h1>
+          <p className="font-mono tracking-widest text-gold" style={{ fontSize: '30px' }}>— GET IN TOUCH</p>
+          <h1 className="font-display text-ivory tracking-wide leading-none" style={{ fontSize: '60px' }}>CONTACT</h1>
         </FadeUp>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-2.5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Info */}
           <FadeUp>
             <div className="space-y-12">
               <div>
-                <p className="font-body text-sm text-grey-light leading-relaxed max-w-md">
+                <p className="font-body text-white leading-relaxed max-w-md" style={{ fontSize: '30px', fontWeight: 'bold' }}>
                   Questions about your order, sizing, or a wholesale inquiry? We aim to respond within 24–48 hours. For the quickest response, check our <span className="text-gold">FAQ</span> page first.
                 </p>
               </div>
@@ -76,11 +90,11 @@ export default function Contact() {
                   lines: ['wholesale@inspiredbygod.com', 'Minimum order quantities apply', 'Brand-aligned retailers only'],
                 },
               ].map((item) => (
-                <div key={item.title} className="border-l-2 border-gold/30 pl-6">
-                  <p className="font-mono text-xs tracking-widest text-gold mb-3">{item.title}</p>
+                <div key={item.title} className="border-l-2 border-gold pl-6">
+                  <p className="font-mono tracking-widest text-gold mb-3" style={{ fontSize: '30px' }}>{item.title}</p>
                   <div className="space-y-1">
                     {item.lines.map((line) => (
-                      <p key={line} className="font-body text-sm text-grey-light">{line}</p>
+                      <p key={line} className="font-body text-white" style={{ fontSize: '30px', fontWeight: 'bold' }}>{line}</p>
                     ))}
                   </div>
                 </div>
@@ -88,7 +102,7 @@ export default function Contact() {
 
               {/* Social */}
               <div>
-                <p className="font-mono text-xs tracking-widest text-gold mb-4">FOLLOW US</p>
+                <p className="font-mono tracking-widest text-gold mb-4" style={{ fontSize: '30px' }}>FOLLOW US</p>
                 <div className="flex gap-4">
                   {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
                     <a
@@ -96,7 +110,8 @@ export default function Contact() {
                       href={`https://${s.toLowerCase()}.com`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-xs text-grey-light hover:text-gold transition-colors border-b border-transparent hover:border-gold pb-0.5"
+                      className="font-mono text-white hover:text-gold transition-colors border-b border-transparent hover:border-gold pb-0.5"
+                      style={{ fontSize: '30px', fontWeight: 'bold' }}
                     >
                       {s}
                     </a>
@@ -110,27 +125,33 @@ export default function Contact() {
           <FadeUp delay={0.2}>
             {submitted ? (
               <div className="flex flex-col items-start justify-center h-full min-h-96 gap-6">
-                <div className="w-16 h-16 border border-gold/30 flex items-center justify-center">
+                <div className="w-16 h-16 border border-gold flex items-center justify-center">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <polyline points="20 6 9 17 4 12" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <div>
-                  <p className="font-display text-3xl text-ivory tracking-widest mb-2">MESSAGE RECEIVED</p>
-                  <p className="font-body text-sm text-grey-light">We'll be in touch within 24–48 hours.</p>
+                  <p className="font-display text-white tracking-widest mb-2" style={{ fontSize: '30px', fontWeight: 'bold' }}>MESSAGE RECEIVED</p>
+                  <p className="font-body text-white" style={{ fontSize: '30px', fontWeight: 'bold' }}>We'll be in touch within 24–48 hours.</p>
                 </div>
                 <button
                   onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: '', message: '' }); }}
-                  className="font-mono text-xs tracking-widest text-gold border border-gold/30 px-6 py-3 hover:border-gold transition-colors"
+                  className="font-mono tracking-widest text-gold border border-gold px-6 py-3 hover:border-gold transition-colors"
+                  style={{ fontSize: '30px' }}
                 >
                   SEND ANOTHER
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                {error && (
+                  <div className="border border-red-500 text-red-500 px-4 py-3" style={{ fontSize: '20px' }}>
+                    {error}
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="font-mono text-[10px] tracking-widest text-gold block mb-2">NAME *</label>
+                    <label className="font-mono tracking-widest text-gold block mb-2" style={{ fontSize: '30px' }}>NAME *</label>
                     <input
                       type="text"
                       name="name"
@@ -139,10 +160,11 @@ export default function Contact() {
                       required
                       placeholder="YOUR NAME"
                       className={inputClass}
+                      style={{ fontSize: '30px', fontWeight: 'bold' }}
                     />
                   </div>
                   <div>
-                    <label className="font-mono text-[10px] tracking-widest text-gold block mb-2">EMAIL *</label>
+                    <label className="font-mono tracking-widest text-gold block mb-2" style={{ fontSize: '30px' }}>EMAIL *</label>
                     <input
                       type="email"
                       name="email"
@@ -151,16 +173,18 @@ export default function Contact() {
                       required
                       placeholder="YOUR EMAIL"
                       className={inputClass}
+                      style={{ fontSize: '30px', fontWeight: 'bold' }}
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="font-mono text-[10px] tracking-widest text-gold block mb-2">SUBJECT</label>
+                  <label className="font-mono tracking-widest text-gold block mb-2" style={{ fontSize: '30px' }}>SUBJECT</label>
                   <select
                     name="subject"
                     value={form.subject}
                     onChange={handleChange}
                     className={inputClass + ' appearance-none'}
+                    style={{ fontSize: '30px', fontWeight: 'bold' }}
                   >
                     <option value="" className="bg-black">SELECT A TOPIC</option>
                     <option value="order" className="bg-black">ORDER INQUIRY</option>
@@ -172,7 +196,7 @@ export default function Contact() {
                   </select>
                 </div>
                 <div>
-                  <label className="font-mono text-[10px] tracking-widest text-gold block mb-2">MESSAGE *</label>
+                  <label className="font-mono tracking-widest text-gold block mb-2" style={{ fontSize: '30px' }}>MESSAGE *</label>
                   <textarea
                     name="message"
                     value={form.message}
@@ -181,12 +205,14 @@ export default function Contact() {
                     rows={8}
                     placeholder="HOW CAN WE HELP?"
                     className={inputClass + ' resize-none'}
+                    style={{ fontSize: '30px', fontWeight: 'bold' }}
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gold text-black font-mono text-xs tracking-widest py-4 hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full bg-gold text-black font-mono tracking-widest py-4 hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={{ fontSize: '30px', fontWeight: 'bold' }}
                 >
                   {loading ? 'SENDING...' : 'SEND MESSAGE →'}
                 </button>

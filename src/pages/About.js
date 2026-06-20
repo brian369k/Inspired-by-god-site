@@ -34,16 +34,16 @@ const values = [
 export default function About() {
   return (
     <div className="bg-black pt-16 md:pt-20">
-      {/* Hero — clean dark, no image */}
-      <div className="relative min-h-[50vh] flex items-end overflow-hidden bg-black border-b border-gold/10">
+      {/* Hero — no empty space */}
+      <div className="relative overflow-hidden bg-black border-b border-gold/10">
         <div
           className="absolute inset-0"
           style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.07) 0%, transparent 70%)' }}
         />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pb-16 md:pb-24 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-6 w-full">
           <FadeUp>
-            <p className="font-mono text-xs tracking-ultra-wide text-gold mb-4">— OUR STORY</p>
-            <h1 className="font-display text-[15vw] md:text-[10vw] text-ivory tracking-wide leading-none">
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', letterSpacing: '0.15em', marginBottom: '8px' }}>— OUR STORY</p>
+            <h1 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '60px', color: '#ffffff', letterSpacing: '0.05em', lineHeight: 1, textAlign: 'center' }}>
               ABOUT
             </h1>
           </FadeUp>
@@ -51,60 +51,38 @@ export default function About() {
       </div>
 
       {/* Mission statement */}
-      <section className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-          <FadeUp>
-            <div className="gold-line w-16 mb-8" />
-            <p className="font-mono text-xs tracking-widest text-gold mb-6">FOUNDED WITH PURPOSE</p>
-            <p className="font-heading text-2xl md:text-3xl text-ivory leading-relaxed italic">
-              "Inspired by God was born from the belief that what you wear is a declaration. A statement of identity, faith, and intention."
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <div className="space-y-5 font-body text-sm text-grey-light leading-relaxed">
-              <p>
-                In 2020, we set out to create something that transcended fashion. Not trends — but timelessness. Not hype — but heritage. Inspired by God is a luxury streetwear label born from a deep conviction that clothing should mean something.
-              </p>
-              <p>
-                Every drop is curated with restraint. We release limited quantities, using premium materials and artisan construction techniques. Each piece is a considered investment — in craftsmanship, in self-expression, in the belief that how you present yourself matters.
-              </p>
-              <p>
-                The name is not religious doctrine. It is an acknowledgment: that creativity, purpose, and the drive to build something meaningful comes from a place higher than commerce. We make clothes for people who feel that.
-              </p>
-            </div>
-          </FadeUp>
-        </div>
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-12">
+        <FadeUp>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', letterSpacing: '0.15em', marginBottom: '16px' }}>
+            In 2020, we set out to create something that transcended fashion. Not trends — but timelessness. Not hype — but heritage. Inspired by God is a luxury streetwear label born from a deep conviction that clothing should mean something.
+          </p>
+        </FadeUp>
+        <FadeUp delay={0.1}>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '60px', color: '#ffffff', letterSpacing: '0.15em', marginBottom: '16px', textAlign: 'center' }}>
+            FOUNDED WITH PURPOSE
+          </p>
+        </FadeUp>
+        <FadeUp delay={0.2}>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', lineHeight: 1.6 }}>
+            "Inspired by God was born from the belief that what you wear is a declaration. A statement of identity, faith, and intention."
+          </p>
+        </FadeUp>
       </section>
 
-      {/* Brand statement — dark bg, no image */}
-      <div className="relative py-24 bg-off-black border-t border-b border-gold/10">
-        <div
-          className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)' }}
-        />
-        <div className="relative flex items-center justify-center">
-          <FadeUp>
-            <p className="font-display text-[8vw] text-ivory/10 tracking-widest text-center select-none">
-              CHOSEN ONES
-            </p>
-          </FadeUp>
-        </div>
-      </div>
-
       {/* Values */}
-      <section className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28">
-        <FadeUp className="mb-14">
-          <p className="font-mono text-xs tracking-widest text-gold mb-3">— OUR PILLARS</p>
-          <h2 className="font-display text-5xl md:text-7xl text-ivory tracking-wide">WHAT WE<br />STAND FOR</h2>
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-12">
+        <FadeUp className="mb-8">
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', letterSpacing: '0.15em', marginBottom: '8px' }}>— OUR PILLARS</p>
+          <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '60px', color: '#ffffff', letterSpacing: '0.05em', lineHeight: 1, textAlign: 'center' }}>WHAT WE<br />STAND FOR</h2>
         </FadeUp>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {values.map((v, i) => (
             <FadeUp key={v.num} delay={i * 0.1}>
-              <div className="border border-gold/10 p-8 hover:border-gold/30 transition-colors">
-                <span className="font-mono text-xs text-gold/50 tracking-widest">{v.num}</span>
-                <h3 className="font-display text-2xl text-ivory tracking-widest mt-3 mb-4">{v.title}</h3>
-                <p className="font-body text-sm text-grey-light leading-relaxed">{v.body}</p>
+              <div className="border border-gold/10 p-6 hover:border-gold/30 transition-colors">
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#ffffff', letterSpacing: '0.15em' }}>{v.num}</span>
+                <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '30px', color: '#ffffff', letterSpacing: '0.15em', marginTop: '8px', marginBottom: '12px' }}>{v.title}</h3>
+                <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', lineHeight: 1.6 }}>{v.body}</p>
               </div>
             </FadeUp>
           ))}
@@ -112,9 +90,9 @@ export default function About() {
       </section>
 
       {/* Stats */}
-      <section className="border-t border-b border-gold/10 py-16">
+      <section className="border-t border-b border-gold/10 py-12">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { num: '2020', label: 'FOUNDED' },
               { num: '50K+', label: 'COMMUNITY MEMBERS' },
@@ -122,8 +100,8 @@ export default function About() {
               { num: '100%', label: 'INTENTIONAL' },
             ].map((stat, i) => (
               <FadeUp key={stat.label} delay={i * 0.1} className="text-center">
-                <p className="font-display text-5xl md:text-6xl text-gradient-gold">{stat.num}</p>
-                <p className="font-mono text-xs tracking-widest text-grey-light mt-2">{stat.label}</p>
+                <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '60px', background: 'linear-gradient(135deg, #c9a84c 0%, #ffffff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{stat.num}</p>
+                <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#ffffff', letterSpacing: '0.15em', marginTop: '8px' }}>{stat.label}</p>
               </FadeUp>
             ))}
           </div>
@@ -131,13 +109,13 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="max-w-2xl mx-auto px-6 py-24 text-center">
+      <section className="max-w-2xl mx-auto px-6 py-16 text-center">
         <FadeUp>
-          <p className="font-mono text-xs tracking-widest text-gold mb-4">— JOIN US</p>
-          <h2 className="font-display text-5xl md:text-6xl text-ivory tracking-wide mb-8">READY TO<br />BE CHOSEN?</h2>
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', letterSpacing: '0.15em', marginBottom: '16px' }}>— JOIN US</p>
+          <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '60px', color: '#ffffff', letterSpacing: '0.05em', lineHeight: 1, marginBottom: '24px' }}>READY TO<br />BE CHOSEN?</h2>
           <Link
             to="/shop"
-            className="inline-block bg-gold text-black font-mono text-xs tracking-widest px-12 py-4 hover:bg-gold-light transition-colors"
+            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#000000', background: '#c9a84c', letterSpacing: '0.15em', padding: '16px 48px', textDecoration: 'none', display: 'inline-block' }}
           >
             SHOP THE COLLECTION
           </Link>

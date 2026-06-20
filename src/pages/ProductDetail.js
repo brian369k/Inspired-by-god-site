@@ -28,7 +28,7 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-        <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '1.5rem' }}>PRODUCT NOT FOUND</p>
+        <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px' }}>PRODUCT NOT FOUND</p>
         <Link to="/shop" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, color: '#c9a84c' }}>← BACK TO SHOP</Link>
       </div>
     );
@@ -65,7 +65,7 @@ export default function ProductDetail() {
     <div style={{ background: '#ffffff', paddingTop: '0' }}>
       {/* Breadcrumb */}
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '1rem 1.5rem', borderBottom: '1px solid #eeeeee' }}>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '12px', color: '#888888' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#888888' }}>
           <Link to="/" style={{ color: '#888888', textDecoration: 'none' }}>HOME</Link>
           <span>/</span>
           <Link to="/shop" style={{ color: '#888888', textDecoration: 'none' }}>SHOP</Link>
@@ -85,7 +85,7 @@ export default function ProductDetail() {
               <img src={product.images[activeImg]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               {product.tag && (
                 <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
-                  <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '10px', letterSpacing: '0.1em', background: '#c9a84c', color: '#000000', padding: '4px 10px' }}>{product.tag}</span>
+                  <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', letterSpacing: '0.1em', background: '#c9a84c', color: '#000000', padding: '4px 10px' }}>{product.tag}</span>
                 </div>
               )}
             </div>
@@ -105,35 +105,35 @@ export default function ProductDetail() {
 
           {/* Product Info */}
           <div>
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: '12px', letterSpacing: '0.15em', color: '#888888', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{product.category}</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', letterSpacing: '0.15em', color: '#888888', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{product.category}</p>
             <h1 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 'clamp(22px, 4vw, 32px)', color: '#000000', marginBottom: '0.75rem', lineHeight: 1.2 }}>{product.name}</h1>
 
             {/* Price */}
             <div style={{ marginBottom: '1rem' }}>
-              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '1.75rem', color: '#000000' }}>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000' }}>
                 ${currentPrice.toFixed(2)}
               </span>
               {selectedSize && ['2X', '3X'].includes(selectedSize) && (
-                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: '12px', color: '#888888', marginLeft: '0.5rem' }}>Extended size</span>
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#888888', marginLeft: '0.5rem' }}>Extended size</span>
               )}
             </div>
 
             {/* Size pricing info */}
             <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', padding: '0.75rem', background: '#f5f5f5' }}>
-              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: '12px', color: '#444' }}>S–XL: ${product.price.toFixed(2)}</span>
-              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: '12px', color: '#444' }}>2X: ${product.price2x.toFixed(2)}</span>
-              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: '12px', color: '#444' }}>3X: ${product.price3x.toFixed(2)}</span>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000' }}>S–XL: ${product.price.toFixed(2)}</span>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000' }}>2X: ${product.price2x.toFixed(2)}</span>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000' }}>3X: ${product.price3x.toFixed(2)}</span>
             </div>
 
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '14px', color: '#444444', lineHeight: 1.8, marginBottom: '1.5rem' }}>{product.description}</p>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000', lineHeight: 1.8, marginBottom: '1.5rem' }}>{product.description}</p>
 
             <div style={{ height: '1px', background: '#eeeeee', marginBottom: '1.5rem' }} />
 
             {/* Color */}
             <div style={{ marginBottom: '1.5rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '13px', color: '#000000' }}>COLOR</span>
-                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: '13px', color: '#c9a84c' }}>{selectedColor}</span>
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000' }}>COLOR</span>
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000', paddingRight: '5px' }}>{selectedColor}</span>
               </div>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                 {product.colors.map((color) => (
@@ -154,8 +154,8 @@ export default function ProductDetail() {
             {/* Size — DROPDOWN like God Is Dope */}
             <div style={{ marginBottom: '1.5rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '13px', color: '#000000' }}>SIZE</span>
-                {sizeError && <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, fontSize: '12px', color: '#cc0000' }}>Please select a size</span>}
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000' }}>SIZE</span>
+                {sizeError && <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#cc0000' }}>Please select a size</span>}
               </div>
               <select
                 value={selectedSize}
@@ -163,7 +163,7 @@ export default function ProductDetail() {
                 style={{
                   width: '100%', padding: '1rem 1.25rem',
                   fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 600, fontSize: '14px',
+                  fontWeight: 700, fontSize: '25px',
                   color: '#000000', background: '#ffffff',
                   border: `2px solid ${sizeError ? '#cc0000' : '#000000'}`,
                   borderRadius: 0, cursor: 'pointer',
@@ -173,18 +173,18 @@ export default function ProductDetail() {
                   backgroundPosition: 'right 1rem center',
                 }}
               >
-                <option value="">Select a size</option>
+                <option value="" style={{ fontWeight: 700, fontSize: '25px', color: '#000000' }}>Select a size</option>
                 {product.sizes.map((size) => {
                   const price = getPriceBySize(product, size);
                   const isUpcharge = ['2X', '3X'].includes(size);
                   return (
-                    <option key={size} value={size}>
+                    <option key={size} value={size} style={{ fontWeight: 700, fontSize: '25px', color: '#000000' }}>
                       {size}{isUpcharge ? ` — $${price.toFixed(2)}` : ''}
                     </option>
                   );
                 })}
               </select>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '12px', color: '#888888', marginTop: '0.5rem' }}>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000', marginTop: '0.5rem' }}>
                 2X and 3X sizes have a small upcharge
               </p>
             </div>
@@ -196,7 +196,7 @@ export default function ProductDetail() {
                 background: added ? '#2d6a2d' : '#000000',
                 color: '#ffffff', border: 'none', cursor: 'pointer',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '13px',
+                fontWeight: 700, fontSize: '25px',
                 letterSpacing: '0.15em', transition: 'background 0.2s',
               }}>
                 {selectedSize ? `BUY NOW — $${currentPrice.toFixed(2)}` : 'SELECT SIZE TO BUY'}
@@ -209,14 +209,14 @@ export default function ProductDetail() {
                 border: `2px solid ${added ? '#2d6a2d' : '#000000'}`,
                 cursor: 'pointer',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '13px',
+                fontWeight: 700, fontSize: '25px',
                 letterSpacing: '0.15em', transition: 'all 0.2s',
               }}>
                 {added ? '✓ ADDED TO BAG' : 'ADD TO BAG'}
               </button>
             </div>
 
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '12px', color: '#888888', textAlign: 'center', marginTop: '1rem' }}>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000', textAlign: 'center', marginTop: '1rem' }}>
               🔒 Secure checkout · Free shipping over $150
             </p>
 
@@ -234,7 +234,7 @@ export default function ProductDetail() {
         {/* Related */}
         {related.length > 0 && (
           <div style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid #eeeeee' }}>
-            <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: '1.5rem', color: '#000000', marginBottom: '1.5rem' }}>YOU MAY ALSO LIKE</h2>
+            <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000', marginBottom: '1.5rem' }}>YOU MAY ALSO LIKE</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1.5rem' }}>
               {related.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}
             </div>
@@ -252,16 +252,16 @@ function Accordion({ title, items }) {
       <button onClick={() => setOpen(!open)} style={{
         width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '1rem 0', background: 'none', border: 'none', cursor: 'pointer',
-        fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '12px',
+        fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px',
         letterSpacing: '0.15em', color: '#000000',
       }}>
         {title}
-        <span style={{ fontSize: '1.25rem', fontWeight: 300, transform: open ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s' }}>+</span>
+        <span style={{ fontSize: '25px', fontWeight: 700, transform: open ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s' }}>+</span>
       </button>
       <div style={{ maxHeight: open ? '400px' : '0', overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
         <ul style={{ listStyle: 'none', padding: '0 0 1rem', margin: 0 }}>
           {items.map((item, i) => (
-            <li key={i} style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '14px', color: '#444444', padding: '0.3rem 0', display: 'flex', gap: '0.5rem' }}>
+            <li key={i} style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '25px', color: '#000000', padding: '0.3rem 0', display: 'flex', gap: '0.5rem' }}>
               <span style={{ color: '#c9a84c' }}>—</span> {item}
             </li>
           ))}

@@ -25,8 +25,8 @@ const FadeUp = ({ children, delay = 0, className = '' }) => {
 
 const Section = ({ title, children }) => (
   <div className="mb-10">
-    <h2 className="font-display text-2xl text-gold tracking-widest mb-4">{title}</h2>
-    <div className="font-body text-sm text-grey-light leading-relaxed space-y-3">
+    <h2 className="font-display text-gold tracking-widest mb-4" style={{ fontSize: '30px' }}>{title}</h2>
+    <div className="font-body text-white leading-relaxed space-y-3" style={{ fontSize: '30px', fontWeight: 'bold' }}>
       {children}
     </div>
   </div>
@@ -34,16 +34,16 @@ const Section = ({ title, children }) => (
 
 export default function TermsConditions() {
   return (
-    <div className="bg-black pt-16 md:pt-20">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 border-b border-gold/10">
+    <div className="bg-black">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-2.5 border-b border-gold">
         <FadeUp>
-          <p className="font-mono text-xs tracking-widest text-gold mb-4">— LEGAL</p>
-          <h1 className="font-display text-6xl md:text-8xl text-ivory tracking-wide leading-none">TERMS &<br />CONDITIONS</h1>
-          <p className="font-mono text-xs text-grey-light mt-4">Last updated: June 2024</p>
+          <p className="font-mono tracking-widest text-gold mb-4" style={{ fontSize: '30px' }}>— LEGAL</p>
+          <h1 className="font-display text-white tracking-wide leading-none" style={{ fontSize: '60px' }}>TERMS &<br />CONDITIONS</h1>
+          <p className="font-mono text-white mt-4" style={{ fontSize: '30px' }}>Last updated: June 2026</p>
         </FadeUp>
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 md:px-10 py-16 md:py-24">
+      <div className="max-w-3xl mx-auto px-6 md:px-10 py-2.5">
         <FadeUp>
           <Section title="AGREEMENT">
             <p>By accessing and using inspiredbygod.us, you accept and agree to be bound by these Terms and Conditions. If you do not agree, please do not use our website or services.</p>
@@ -114,7 +114,7 @@ export default function TermsConditions() {
           <Section title="CONTACT US">
             <p>Questions about these Terms? Contact us at:</p>
             <p className="text-gold mt-2">inspiredscentsatl@gmail.com</p>
-            <p className="mt-1">Inspired By God — Dallas, Texas</p>
+            <p className="mt-1">Inspired By God — Houston, TX</p>
           </Section>
         </FadeUp>
       </div>
