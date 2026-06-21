@@ -91,7 +91,7 @@ export default function Home() {
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
             fontWeight: 500,
-            fontSize: 'clamp(18px, 3vw, 24px)',
+            fontSize: 'clamp(24px, 3vw, 30px)',
             color: 'rgba(255,255,255,0.85)',
             marginTop: '1.5rem', maxWidth: '480px',
             marginLeft: 'auto', marginRight: 'auto',

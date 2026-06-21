@@ -13,9 +13,16 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [announcementVisible, setAnnouncementVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { totalItems, toggleCart } = useCart();
   const location = useLocation();
   const isHome = location.pathname === '/';
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -37,207 +44,224 @@ export default function Navbar() {
     };
   }, [open]);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [location]);
+  useEffect(() => { setOpen(false); }, [location]);
 
   const isTransparent = isHome && !scrolled && !open;
+
+  // Mobile sizes — matching caricature site
+  const hamburgerSize = isMobile ? 55 : 24;
+  const menuTextSize = isMobile ? '30px' : '25px';
+  const cartTextSize = isMobile ? '30px' : '25px';
+  const cartIconSize = isMobile ? 32 : 25;
+  const navHeight = isMobile ? '80px' : '72px';
+  const menuLinkSize = isMobile ? '55px' : '2.5rem';
+  const annBarSize = isMobile ? '16px' : '25px';
+
+  const textColor = open ? '#ffffff' : isTransparent ? '#ffffff' : '#000000';
+  const bgColor = open ? '#000000' : isTransparent ? 'transparent' : '#ffffff';
 
   return (
     <>
       {/* Announcement Bar */}
       {announcementVisible && !open && (
-        <div className={`relative z-50 text-center font-bold tracking-wider ${isTransparent ? 'bg-black' : 'bg-black'}`}
-          style={{ padding: '0.7rem 3rem', fontSize: '25px', fontFamily: "'Montserrat', sans-serif", color: '#ffffff', letterSpacing: '0.06em', lineHeight: 1.5 }}
-        >
-          FREE SHIPPING ON ORDERS OVER $150 · USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
-          <button onClick={() => setAnnouncementVisible(false)}
-            style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', fontSize: '20px' }}
-          >×</button>
+        <div style={{
+          background: '#000000', color: '#ffffff',
+          textAlign: 'center',
+          padding: '0.7rem 3rem',
+          fontFamily: "'Montserrat', sans-serif",
+          fontWeight: 700,
+          fontSize: annBarSize,
+          letterSpacing: '0.06em',
+          position: 'relative',
+          zIndex: 60,
+          lineHeight: 1.5,
+        }}>
+          FREE SHIPPING ON ORDERS OVER $150<br />USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
+          <button onClick={() => setAnnouncementVisible(false)} style={{
+            position: 'absolute', right: '1rem', top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'none', border: 'none',
+            color: '#ffffff', cursor: 'pointer',
+            fontSize: '20px', lineHeight: 1,
+          }}>×</button>
         </div>
       )}
 
-      {/* Header */}
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled || open ? 'border-b' : ''}`}
-        style={{
-          background: open ? '#000000' : isTransparent ? 'transparent' : '#ffffff',
-          borderColor: scrolled && !open ? '#e0e0e0' : 'transparent',
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
+      {/* Navbar */}
+      <nav style={{
+        position: 'sticky', top: 0, zIndex: 50,
+        background: bgColor,
+        borderBottom: scrolled && !open ? '1px solid #e0e0e0' : 'none',
+        transition: 'background 0.3s ease',
+      }}>
+        <div style={{
+          maxWidth: '1280px', margin: '0 auto',
+          padding: '0 1.5rem',
+          display: 'grid',
+          gridTemplateColumns: '1fr auto 1fr',
+          alignItems: 'center',
+          height: navHeight,
+        }}>
 
-            {/* Logo */}
-            <Link to="/" onClick={() => setOpen(false)} style={{ textDecoration: 'none', textAlign: 'center', lineHeight: 1 }}>
-              <span style={{
-                fontFamily: "'Bebas Neue', cursive",
-                fontSize: '1.75rem',
-                color: open ? '#ffffff' : isTransparent ? '#ffffff' : '#000000',
-                letterSpacing: '0.2em', display: 'block',
-                transition: 'color 0.3s',
-              }}>INSPIRED</span>
-              <span style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 700, fontSize: '9px',
-                color: '#c9a84c', letterSpacing: '0.4em',
-                display: 'block', marginTop: '-2px',
-              }}>BY GOD</span>
-            </Link>
-
-            {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map((l) => (
-                <Link key={l.to} to={l.to} style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 700, fontSize: '25px',
-                  letterSpacing: '0.15em',
-                  color: location.pathname === l.to ? '#c9a84c' : isTransparent ? '#ffffff' : '#000000',
-                  textDecoration: 'none', transition: 'color 0.2s',
-                }}>
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Desktop Cart */}
-            <div className="hidden lg:flex items-center gap-3">
-              <button onClick={toggleCart} style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '6px',
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '25px',
-                letterSpacing: '0.15em',
-                color: isTransparent ? '#ffffff' : '#000000',
-              }}>
-                CART
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-                  <line x1="3" y1="6" x2="21" y2="6"/>
-                  <path d="M16 10a4 4 0 01-8 0"/>
+          {/* Left — Hamburger + MENU/CLOSE */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <button
+              onClick={() => setOpen(!open)}
+              aria-label="Menu"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
+            >
+              {open ? (
+                <svg width={hamburgerSize} height={hamburgerSize} viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
-                {totalItems > 0 && (
-                  <span style={{
-                    minWidth: '20px', height: '20px',
-                    background: '#c9a84c', color: '#000000',
-                    fontSize: '10px', fontWeight: 800,
-                    borderRadius: '10px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    padding: '0 4px',
-                  }}>{totalItems}</span>
-                )}
-              </button>
-            </div>
+              ) : (
+                <svg width={hamburgerSize} height={hamburgerSize} viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2.5">
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                  <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+              )}
+            </button>
 
-            {/* Mobile: Cart + Hamburger — matching caricature exactly */}
-            <div className="flex lg:hidden items-center gap-2">
-              <button onClick={toggleCart} className="text-white p-2" style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '4px',
+            <span style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 900,
+              fontSize: menuTextSize,
+              letterSpacing: '0.2em',
+              color: textColor,
+              transition: 'color 0.3s',
+              userSelect: 'none',
+            }}>
+              {open ? 'CLOSE' : 'MENU'}
+            </span>
+          </div>
+
+          {/* Center — Logo */}
+          <Link to="/" onClick={() => setOpen(false)} style={{ textDecoration: 'none', textAlign: 'center', lineHeight: 1 }}>
+            <span style={{
+              fontFamily: "'Bebas Neue', cursive",
+              fontSize: '1.75rem', color: textColor,
+              letterSpacing: '0.2em', display: 'block',
+              transition: 'color 0.3s',
+            }}>INSPIRED</span>
+            <span style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700, fontSize: '9px',
+              color: '#c9a84c', letterSpacing: '0.4em',
+              display: 'block', marginTop: '-2px',
+            }}>BY GOD</span>
+          </Link>
+
+          {/* Right — CART */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <button onClick={toggleCart} style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: '8px',
+            }}>
+              <span style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '30px',
-                letterSpacing: '0.15em',
-                color: open ? '#ffffff' : isTransparent ? '#ffffff' : '#000000',
-              }}>
-                CART
-                {totalItems > 0 && (
-                  <span style={{
-                    minWidth: '26px', height: '26px',
-                    background: '#c9a84c', color: '#000000',
-                    fontSize: '25px', fontWeight: 800,
-                    borderRadius: '13px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    padding: '0 4px',
-                  }}>{totalItems}</span>
-                )}
-              </button>
+                fontWeight: 800,
+                fontSize: cartTextSize,
+                letterSpacing: '0.2em',
+                color: textColor,
+                transition: 'color 0.3s',
+              }}>CART</span>
 
-              <button
-                onClick={() => setOpen(!open)}
-                className="p-2"
-                aria-label="Toggle menu"
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  color: open ? '#ffffff' : isTransparent ? '#ffffff' : '#000000',
-                }}
-              >
-                {open ? (
-                  /* X icon — size 55 like caricature */
-                  <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                  </svg>
-                ) : (
-                  /* Hamburger — size 55 like caricature */
-                  <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
-                  </svg>
-                )}
-              </button>
-            </div>
+              <svg width={cartIconSize} height={cartIconSize} viewBox="0 0 24 24" fill="none" stroke={textColor} strokeWidth="2" style={{ transition: 'stroke 0.3s', minWidth: cartIconSize }}>
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+
+              {totalItems > 0 && (
+                <span style={{
+                  minWidth: '24px', height: '24px', padding: '0 4px',
+                  background: '#c9a84c', color: '#000000',
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '12px', fontWeight: 800,
+                  borderRadius: '12px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>{totalItems}</span>
+              )}
+            </button>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Mobile menu — full screen solid overlay — matching caricature exactly */}
+      {/* FULLSCREEN MENU */}
       {open && (
-        <div className="lg:hidden fixed inset-0 z-40" style={{ backgroundColor: '#000000' }}>
-          <nav className="px-6 pt-24 flex flex-col">
-            {navLinks.map((l) => (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 40,
+          backgroundColor: '#000000',
+          display: 'flex', flexDirection: 'column',
+          padding: '100px 1.5rem 2.5rem',
+          overflowY: 'auto',
+        }}>
+          <nav style={{ display: 'flex', flexDirection: 'column' }}>
+            {navLinks.map((link) => (
               <Link
-                key={l.to}
-                to={l.to}
-                onClick={() => setOpen(false)}
-                className="text-white py-5 border-b border-white/10 tracking-widest"
+                key={link.to}
+                to={link.to}
                 style={{
-                  fontSize: '55px',
                   fontFamily: "'Montserrat', sans-serif",
                   fontWeight: 900,
+                  fontSize: menuLinkSize,
+                  color: location.pathname === link.to ? '#c9a84c' : '#ffffff',
                   textDecoration: 'none',
-                  color: location.pathname === l.to ? '#c9a84c' : '#ffffff',
+                  letterSpacing: '0.02em',
                   lineHeight: 1.1,
+                  display: 'block',
+                  padding: '0.4rem 0',
+                  borderBottom: '1px solid rgba(255,255,255,0.1)',
                 }}
               >
-                {l.label}
+                {link.label}
               </Link>
             ))}
             <button
               onClick={() => { toggleCart(); setOpen(false); }}
-              className="mt-2 py-5 border-b border-white/10 text-left"
               style={{
-                fontSize: '55px',
+                background: 'none', border: 'none', cursor: 'pointer',
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 900,
+                fontSize: menuLinkSize,
                 color: '#ffffff',
-                background: 'none',
-                border: 'none',
-                borderBottom: '1px solid rgba(255,255,255,0.1)',
-                cursor: 'pointer',
                 letterSpacing: '0.02em',
                 lineHeight: 1.1,
-                padding: '1.25rem 0',
+                textAlign: 'left',
+                padding: '0.4rem 0',
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                width: '100%',
               }}
             >
               CART {totalItems > 0 && <span style={{ color: '#c9a84c' }}>({totalItems})</span>}
             </button>
           </nav>
 
-          {/* Bottom social */}
           <div style={{
-            position: 'absolute', bottom: '2rem', left: '1.5rem', right: '1.5rem',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-            borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem',
+            marginTop: 'auto',
+            paddingTop: '2rem',
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            display: 'flex', justifyContent: 'space-between',
+            alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
           }}>
             <div style={{ display: 'flex', gap: '1.5rem' }}>
               {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
                 <a key={s} href={`https://${s.toLowerCase()}.com`}
                   target="_blank" rel="noopener noreferrer"
-                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '14px', letterSpacing: '0.15em', color: '#888888', textDecoration: 'none' }}
-                >{s}</a>
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontWeight: 700, fontSize: '14px',
+                    letterSpacing: '0.15em', color: '#888888',
+                    textDecoration: 'none',
+                  }}>{s}</a>
               ))}
             </div>
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 500, fontSize: '25px', color: '#555555' }}>© 2026 IBG</p>
+            <p style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 500, fontSize: '13px', color: '#555555',
+            }}>© {new Date().getFullYear()} INSPIRED BY GOD</p>
           </div>
         </div>
       )}
