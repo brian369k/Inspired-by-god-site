@@ -248,7 +248,8 @@ export default function Home() {
           }}>
             Sign up to get the latest on drops, sales, new releases and more.
           </p>
-          <div style={{ display: 'flex', maxWidth: '480px', margin: '0 auto' }}>
+          {/* Wider email input — SIGN UP on one line */}
+          <div style={{ display: 'flex', maxWidth: '600px', margin: '0 auto' }}>
             <input
               type="email"
               placeholder="Enter your email address..."
@@ -265,7 +266,10 @@ export default function Home() {
               background: '#000000', color: '#ffffff', border: 'none',
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '25px',
-              letterSpacing: '0.15em', padding: '1.2rem 1.5rem', cursor: 'pointer',
+              letterSpacing: '0.15em',
+              padding: '1.2rem 2rem',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
             }}>SIGN UP</button>
           </div>
         </FadeUp>

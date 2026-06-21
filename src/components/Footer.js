@@ -51,6 +51,8 @@ export default function Footer() {
 
       {/* Main footer */}
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
+
+        {/* 3 columns */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
@@ -58,6 +60,7 @@ export default function Footer() {
           alignItems: 'start',
           justifyItems: 'center',
           textAlign: 'center',
+          marginBottom: '2rem',
         }}>
 
           {/* Column 1 — Brand */}
@@ -74,39 +77,13 @@ export default function Footer() {
                 color: '#c9a84c', letterSpacing: '0.4em',
               }}>BY GOD</span>
             </Link>
-
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '25px',
-              color: '#444444', lineHeight: 1.7, marginBottom: '1rem',
+              color: '#444444', lineHeight: 1.7, margin: 0,
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
-
-            {/* Social icons + copyright same row */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              flexWrap: 'wrap',
-            }}>
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                  aria-label={label}
-                  style={{ color: '#000000', textDecoration: 'none', display: 'flex', alignItems: 'center' }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#000000'}
-                >
-                  <Icon style={{ width: '25px', height: '25px' }} />
-                </a>
-              ))}
-              <span style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '25px',
-                color: '#000000',
-              }}>© {year} IBG. ALL RIGHTS RESERVED.</span>
-            </div>
           </div>
 
           {/* Column 2 — Shop */}
@@ -165,6 +142,34 @@ export default function Footer() {
           </div>
 
         </div>
+
+        {/* Full width bottom row — icons + copyright */}
+        <div style={{
+          borderTop: '1px solid #e0e0e0',
+          paddingTop: '1.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '14px',
+          flexWrap: 'wrap',
+        }}>
+          {socialLinks.map(({ icon: Icon, href, label }) => (
+            <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+              aria-label={label}
+              style={{ color: '#000000', textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
+              onMouseLeave={e => e.currentTarget.style.color = '#000000'}
+            >
+              <Icon style={{ width: '25px', height: '25px' }} />
+            </a>
+          ))}
+          <span style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 800, fontSize: '25px',
+            color: '#000000',
+          }}>© {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.</span>
+        </div>
+
       </div>
     </footer>
   );
