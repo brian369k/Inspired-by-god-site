@@ -32,14 +32,14 @@ const faqSections = [
       { q: 'Do you offer free shipping?', a: 'Yes — all US orders over $150 qualify for free standard shipping. This is applied automatically at checkout.' },
       { q: 'Can I track my order?', a: "Absolutely. Once your order ships, you'll receive a tracking email with a link to monitor your package in real-time." },
       { q: 'Do you ship internationally?', a: 'We currently ship to the US, Canada, UK, EU, and Australia. Customs duties and taxes may apply — these are the responsibility of the customer.' },
-      { q: 'Can I change or cancel my order?', a: 'Orders can be modified or cancelled within 2 hours of placement. After that, they enter our fulfillment queue and cannot be changed. Contact us immediately at support@inspiredbygod.com.' },
+      { q: 'Can I change or cancel my order?', a: 'Orders can be modified or cancelled within 2 hours of placement. After that, they enter our fulfillment queue and cannot be changed. Contact us immediately at support@inspiredbygod.us.' },
     ],
   },
   {
     category: 'RETURNS & EXCHANGES',
     faqs: [
       { q: 'What is your return policy?', a: 'We accept returns within 30 days of delivery on unworn, unwashed items with all original tags attached. Items marked as "FINAL SALE" cannot be returned.' },
-      { q: 'How do I initiate a return?', a: "Email support@inspiredbygod.com with your order number and reason for return. We'll provide a prepaid return label within 24 hours." },
+      { q: 'How do I initiate a return?', a: "Email support@inspiredbygod.us with your order number and reason for return. We'll provide a prepaid return label within 24 hours." },
       { q: 'When will I receive my refund?', a: 'Refunds are processed within 5–7 business days of receiving your return. The credit will appear on your original payment method within 3–5 additional days.' },
       { q: 'Can I exchange for a different size?', a: 'Yes. We recommend initiating a return for a full refund and placing a new order for the correct size to ensure availability. Exchanges are subject to stock.' },
     ],
@@ -47,7 +47,7 @@ const faqSections = [
   {
     category: 'SIZING & FIT',
     faqs: [
-      { q: 'How do IBG pieces fit?', a: 'All IBG pieces are designed with an intentionally oversized, relaxed silhouette. If you prefer a closer fit, we recommend sizing down one size. See our size guide for measurements.' },
+      { q: 'How do INSPIRED BY GOD pieces fit?', a: 'All INSPIRED BY GOD pieces are designed with an intentionally oversized, relaxed silhouette. If you prefer a closer fit, we recommend sizing down one size. See our size guide for measurements.' },
       { q: 'Are your pieces true to size?', a: 'Our hoodies and tops run oversized by design. Bottoms fit true to size. We provide a detailed size chart on each product page.' },
       { q: 'Will my items shrink after washing?', a: 'All of our pieces are garment-washed pre-production to minimize further shrinkage. Cold wash and hang dry recommended to maintain size and quality.' },
     ],
@@ -56,7 +56,7 @@ const faqSections = [
     category: 'PRODUCT & CARE',
     faqs: [
       { q: 'What materials do you use?', a: 'We use premium heavyweight cottons (240–500gsm), technical nylons, and French terry fabrics. Full material breakdowns are listed on each product page.' },
-      { q: 'How should I care for my IBG pieces?', a: 'Turn garments inside out. Machine wash cold with like colors. Do not bleach. Tumble dry low or hang dry. Do not iron printed areas directly.' },
+      { q: 'How should I care for my INSPIRED BY GOD pieces?', a: 'Turn garments inside out. Machine wash cold with like colors. Do not bleach. Tumble dry low or hang dry. Do not iron printed areas directly.' },
       { q: 'Are your products ethically made?', a: 'Yes. We work exclusively with certified factories that uphold fair labor practices and safe working conditions. We are committed to responsible manufacturing.' },
       { q: 'Do you restock sold-out items?', a: 'Occasionally. Limited restocks are announced via our newsletter and social channels. Sign up to the Inner Circle to be notified first.' },
     ],

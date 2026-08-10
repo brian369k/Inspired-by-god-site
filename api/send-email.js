@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     const data = await resend.emails.send({
       from: 'contact@inspiredbygod.us',
       to: ['inspiredscentsatl@gmail.com'],
-      subject: subject ? `IBG Contact: ${subject}` : 'New Contact Form Submission',
+      subject: subject ? `INSPIRED BY GOD Contact: ${subject}` : 'New Contact Form Submission',
       replyTo: email,
       html: `
         <h2>New Contact Form Submission</h2>

@@ -11,6 +11,7 @@ import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import Success from './pages/Success';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ReturnPolicy from './pages/ReturnPolicy';
 import TermsConditions from './pages/TermsConditions';
@@ -46,6 +47,7 @@ const AppRoutes = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/success" element={<Success />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/returns" element={<ReturnPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />

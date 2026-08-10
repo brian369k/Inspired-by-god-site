@@ -79,15 +79,15 @@ export default function Contact() {
               {[
                 {
                   title: 'CUSTOMER SERVICE',
-                  lines: ['support@inspiredbygod.com', 'Response within 24–48 hours', 'Mon–Fri, 9AM–6PM EST'],
+                  lines: ['support@inspiredbygod.us', 'Response within 24–48 hours', 'Mon–Fri, 9AM–6PM EST'],
                 },
                 {
                   title: 'PRESS & MEDIA',
-                  lines: ['press@inspiredbygod.com', 'Editorial inquiries welcome', 'Please include your publication'],
+                  lines: ['press@inspiredbygod.us', 'Editorial inquiries welcome', 'Please include your publication'],
                 },
                 {
                   title: 'WHOLESALE',
-                  lines: ['wholesale@inspiredbygod.com', 'Minimum order quantities apply', 'Brand-aligned retailers only'],
+                  lines: ['wholesale@inspiredbygod.us', 'Minimum order quantities apply', 'Brand-aligned retailers only'],
                 },
               ].map((item) => (
                 <div key={item.title} className="border-l-2 border-gold pl-6">

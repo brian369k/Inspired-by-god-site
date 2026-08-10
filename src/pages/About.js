@@ -28,7 +28,7 @@ const values = [
   { num: '01', title: 'INTENTION', body: 'Every silhouette, every stitch is deliberate. We reject the throwaway culture. Each piece is built to last a generation.' },
   { num: '02', title: 'ELEVATION', body: 'We exist at the intersection of the sacred and the street. Inspired by divine architecture. Built for the concrete world.' },
   { num: '03', title: 'AUTHENTICITY', body: 'No trend chasing. No hollow collaborations. Just pure expression from a brand that knows exactly what it stands for.' },
-  { num: '04', title: 'COMMUNITY', body: 'IBG is not just clothing. It is a covenant. A tribe of individuals who choose to move through life with purpose and grace.' },
+  { num: '04', title: 'COMMUNITY', body: 'INSPIRED BY GOD is not just clothing. It is a covenant. A tribe of individuals who choose to move through life with purpose and grace.' },
 ];
 
 export default function About() {
