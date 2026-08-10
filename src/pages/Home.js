@@ -258,14 +258,14 @@ export default function Home() {
                 border: '4px solid #000000', borderRight: 'none',
                 padding: '1.2rem 1.25rem',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '25px',
+                fontWeight: 800, fontSize: '30px',
                 color: '#000000', outline: 'none',
               }}
             />
             <button style={{
               background: '#000000', color: '#ffffff', border: 'none',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '25px',
+              fontWeight: 800, fontSize: '30px',
               letterSpacing: '0.15em',
               padding: '1.2rem 2rem',
               cursor: 'pointer',

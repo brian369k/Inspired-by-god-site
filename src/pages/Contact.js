@@ -3,7 +3,18 @@ import emailjs from '@emailjs/browser';
 
 const SERVICE_ID = 'service_nra7ohe';
 const TEMPLATE_ID = 'template_8wd511b';
-const PUBLIC_KEY = '0yyp_dysPGeaCMqE';
+const PUBLIC_KEY = '-0yyp_dysPGeaCMqE';
+
+// Maps the dropdown's value attribute to a human-readable label for the email.
+const SUBJECT_LABELS = {
+  '': 'No subject selected',
+  order: 'Order Inquiry',
+  returns: 'Returns & Exchanges',
+  sizing: 'Sizing Help',
+  wholesale: 'Wholesale',
+  press: 'Press & Media',
+  other: 'Other',
+};
 
 function useInView() {
   const ref = useRef(null);
@@ -35,7 +46,6 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const formRef = useRef(null);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -44,12 +54,35 @@ export default function Contact() {
     setLoading(true);
     setError('');
 
+    const prettySubject = SUBJECT_LABELS[form.subject] || form.subject;
+
+    // The entire email is pre-formatted here and passed as {{message}}.
+    // As long as the EmailJS template body contains {{message}}, this renders
+    // in full — no need to edit the template in the EmailJS dashboard.
+    const params = {
+      name: form.name,
+      email: form.email,
+      subject: prettySubject,
+      reply_to: form.email,
+      message:
+        `New message from the Inspired by God contact form\n\n` +
+        `Name: ${form.name}\n` +
+        `Email: ${form.email}\n` +
+        `Subject: ${prettySubject}\n\n` +
+        `Message:\n${form.message}`,
+    };
+
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY);
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, params, PUBLIC_KEY);
       setSubmitted(true);
     } catch (err) {
       console.error('EmailJS error:', err);
-      setError('Failed to send message. Please try again or email us directly at support@inspiredbygod.com');
+      // Surface the real EmailJS reason so we can diagnose without the console.
+      const detail =
+        (err && err.text) ||
+        (err && err.message) ||
+        (err && err.status ? `HTTP ${err.status}` : 'Unknown error');
+      setError(`Send failed → ${detail}`);
     } finally {
       setLoading(false);
     }
@@ -143,7 +176,7 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
                   <div className="border border-red-500 text-red-500 px-4 py-3" style={{ fontSize: '20px' }}>
                     {error}

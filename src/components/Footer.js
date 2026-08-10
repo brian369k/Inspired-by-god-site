@@ -80,7 +80,7 @@ export default function Footer() {
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '25px',
-              color: '#444444', lineHeight: 1.7, margin: 0,
+              color: '#333333', lineHeight: 1.7, margin: 0,
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
             </p>
