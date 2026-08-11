@@ -32,14 +32,14 @@ const faqSections = [
       { q: 'Do you offer free shipping?', a: 'Yes — all US orders over $150 qualify for free standard shipping. This is applied automatically at checkout.' },
       { q: 'Can I track my order?', a: "Absolutely. Once your order ships, you'll receive a tracking email with a link to monitor your package in real-time." },
       { q: 'Do you ship internationally?', a: 'We currently ship to the US, Canada, UK, EU, and Australia. Customs duties and taxes may apply — these are the responsibility of the customer.' },
-      { q: 'Can I change or cancel my order?', a: 'Orders can be modified or cancelled within 2 hours of placement. After that, they enter our fulfillment queue and cannot be changed. Contact us immediately at support@inspiredbygod.us.' },
+      { q: 'Can I change or cancel my order?', a: 'Orders can be modified or cancelled within 2 hours of placement. After that, they enter our fulfillment queue and cannot be changed. Contact us immediately at inspiredscentsatl@gmail.com.' },
     ],
   },
   {
     category: 'RETURNS & EXCHANGES',
     faqs: [
       { q: 'What is your return policy?', a: 'We accept returns within 30 days of delivery on unworn, unwashed items with all original tags attached. Items marked as "FINAL SALE" cannot be returned.' },
-      { q: 'How do I initiate a return?', a: "Email support@inspiredbygod.us with your order number and reason for return. We'll provide a prepaid return label within 24 hours." },
+      { q: 'How do I initiate a return?', a: "Email inspiredscentsatl@gmail.com with your order number and reason for return. We'll provide a prepaid return label within 24 hours." },
       { q: 'When will I receive my refund?', a: 'Refunds are processed within 5–7 business days of receiving your return. The credit will appear on your original payment method within 3–5 additional days.' },
       { q: 'Can I exchange for a different size?', a: 'Yes. We recommend initiating a return for a full refund and placing a new order for the correct size to ensure availability. Exchanges are subject to stock.' },
     ],

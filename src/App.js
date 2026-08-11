@@ -15,6 +15,7 @@ import Success from './pages/Success';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ReturnPolicy from './pages/ReturnPolicy';
 import TermsConditions from './pages/TermsConditions';
+import NotFound from './pages/NotFound';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -51,6 +52,7 @@ const AppRoutes = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </PageWrapper>
   );

@@ -33,11 +33,21 @@ const FadeUp = ({ children, delay = 0 }) => {
 
 export default function Home() {
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterNotice, setNewsletterNotice] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setHeroLoaded(true), 100);
     return () => clearTimeout(t);
   }, []);
+
+  // Newsletter signup is not wired to a live service yet — no EmailJS
+  // newsletter template/service has been configured. This intentionally
+  // does not submit anywhere and never claims a subscription succeeded.
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    setNewsletterNotice(true);
+  };
 
   return (
     <div style={{ background: '#ffffff' }}>
@@ -249,9 +259,12 @@ export default function Home() {
             Sign up to get the latest on drops, sales, new releases and more.
           </p>
           {/* Wider email input — SIGN UP on one line */}
-          <div style={{ display: 'flex', maxWidth: '600px', margin: '0 auto' }}>
+          <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', maxWidth: '600px', margin: '0 auto' }}>
             <input
               type="email"
+              required
+              value={newsletterEmail}
+              onChange={(e) => { setNewsletterEmail(e.target.value); setNewsletterNotice(false); }}
               placeholder="Enter your email address..."
               style={{
                 flex: 1, background: '#ffffff',
@@ -262,7 +275,7 @@ export default function Home() {
                 color: '#000000', outline: 'none',
               }}
             />
-            <button style={{
+            <button type="submit" style={{
               background: '#000000', color: '#ffffff', border: 'none',
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 800, fontSize: '30px',
@@ -271,7 +284,16 @@ export default function Home() {
               cursor: 'pointer',
               whiteSpace: 'nowrap',
             }}>SIGN UP</button>
-          </div>
+          </form>
+          {newsletterNotice && (
+            <p style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700, fontSize: '20px',
+              color: '#444444', marginTop: '1rem',
+            }}>
+              Newsletter signup isn't live yet — check back soon.
+            </p>
+          )}
         </FadeUp>
       </section>
 

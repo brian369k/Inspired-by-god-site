@@ -247,7 +247,7 @@ export default function Navbar() {
             alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
           }}>
             <div style={{ display: 'flex', gap: '1.5rem' }}>
-              {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
+              {['FACEBOOK', 'INSTAGRAM', 'TIKTOK', 'PINTEREST'].map((s) => (
                 <a key={s} href={`https://${s.toLowerCase()}.com`}
                   target="_blank" rel="noopener noreferrer"
                   style={{

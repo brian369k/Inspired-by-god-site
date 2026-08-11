@@ -112,15 +112,15 @@ export default function Contact() {
               {[
                 {
                   title: 'CUSTOMER SERVICE',
-                  lines: ['support@inspiredbygod.us', 'Response within 24–48 hours', 'Mon–Fri, 9AM–6PM EST'],
+                  lines: ['inspiredscentsatl@gmail.com', 'Response within 24–48 hours', 'Mon–Fri, 9AM–6PM EST'],
                 },
                 {
                   title: 'PRESS & MEDIA',
-                  lines: ['press@inspiredbygod.us', 'Editorial inquiries welcome', 'Please include your publication'],
+                  lines: ['inspiredscentsatl@gmail.com', 'Editorial inquiries welcome', 'Please include your publication'],
                 },
                 {
                   title: 'WHOLESALE',
-                  lines: ['wholesale@inspiredbygod.us', 'Minimum order quantities apply', 'Brand-aligned retailers only'],
+                  lines: ['inspiredscentsatl@gmail.com', 'Minimum order quantities apply', 'Brand-aligned retailers only'],
                 },
               ].map((item) => (
                 <div key={item.title} className="border-l-2 border-gold pl-6">
@@ -137,7 +137,7 @@ export default function Contact() {
               <div>
                 <p className="font-mono tracking-widest text-gold mb-4" style={{ fontSize: '30px' }}>FOLLOW US</p>
                 <div className="flex gap-4">
-                  {['INSTAGRAM', 'TIKTOK', 'TWITTER'].map((s) => (
+                  {['FACEBOOK', 'INSTAGRAM', 'TIKTOK', 'PINTEREST'].map((s) => (
                     <a
                       key={s}
                       href={`https://${s.toLowerCase()}.com`}

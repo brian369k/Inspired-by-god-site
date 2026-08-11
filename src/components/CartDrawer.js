@@ -81,26 +81,25 @@ export default function CartDrawer() {
                 <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#ffffff' }}>Your bag is empty</p>
                 <p style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#ffffff', marginTop: '4px' }}>Add something sacred.</p>
               </div>
-              <button onClick={closeCart}>
-                <Link
-                  to="/shop"
-                  style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', border: '1px solid rgba(201,168,76,0.3)', padding: '12px 24px', textDecoration: 'none', display: 'inline-block', letterSpacing: '0.15em' }}
-                >
-                  SHOP NOW
-                </Link>
-              </button>
+              <Link
+                to="/shop"
+                onClick={closeCart}
+                style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#c9a84c', border: '1px solid rgba(201,168,76,0.3)', padding: '12px 24px', textDecoration: 'none', display: 'inline-block', letterSpacing: '0.15em' }}
+              >
+                SHOP NOW
+              </Link>
             </div>
           ) : (
             items.map((item) => (
-              <div key={item.cartKey} style={{ paddingBottom: '24px', borderBottom: '1px solid #333333' }}>
-                <div style={{ width: '100%', aspectRatio: '3/4', marginBottom: '12px', overflow: 'hidden', background: '#333333' }}>
+              <div key={item.cartKey} style={{ display: 'flex', gap: '16px', paddingBottom: '24px', borderBottom: '1px solid #333333' }}>
+                <div style={{ width: '90px', height: '120px', flexShrink: 0, overflow: 'hidden', background: '#333333' }}>
                   <img
                     src={item.images[0]}
                     alt={item.name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 </div>
-                <div>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
                     <div>
                       <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '30px', color: '#ffffff', letterSpacing: '0.15em' }}>
