@@ -48,14 +48,14 @@ export default function Navbar() {
 
   const isTransparent = isHome && !scrolled && !open;
 
-  // Mobile sizes — matching caricature site
-  const hamburgerSize = isMobile ? 55 : 24;
-  const menuTextSize = isMobile ? '30px' : '25px';
-  const cartTextSize = isMobile ? '30px' : '25px';
-  const cartIconSize = isMobile ? 32 : 25;
-  const navHeight = isMobile ? '80px' : '72px';
-  const menuLinkSize = isMobile ? '55px' : '2.5rem';
-  const annBarSize = isMobile ? '16px' : '25px';
+  // Mobile sizes — sized to fit small screens without overflow
+  const hamburgerSize = isMobile ? 26 : 24;
+  const menuTextSize = isMobile ? '16px' : '25px';
+  const cartTextSize = isMobile ? '16px' : '25px';
+  const cartIconSize = isMobile ? 22 : 25;
+  const navHeight = isMobile ? '60px' : '72px';
+  const menuLinkSize = isMobile ? '38px' : '2.5rem';
+  const annBarSize = isMobile ? '13px' : '25px';
 
   const textColor = open ? '#ffffff' : isTransparent ? '#ffffff' : '#000000';
   const bgColor = open ? '#000000' : isTransparent ? 'transparent' : '#ffffff';
@@ -67,22 +67,22 @@ export default function Navbar() {
         <div style={{
           background: '#000000', color: '#ffffff',
           textAlign: 'center',
-          padding: '0.7rem 3rem',
+          padding: isMobile ? '0.55rem 2rem' : '0.7rem 3rem',
           fontFamily: "'Montserrat', sans-serif",
           fontWeight: 700,
           fontSize: annBarSize,
-          letterSpacing: '0.06em',
+          letterSpacing: isMobile ? '0.02em' : '0.06em',
           position: 'relative',
           zIndex: 60,
-          lineHeight: 1.5,
+          lineHeight: 1.4,
         }}>
           FREE SHIPPING ON ORDERS OVER $150<br />USE CODE: <span style={{ color: '#c9a84c' }}>CHOSEN</span> FOR 10% OFF
           <button onClick={() => setAnnouncementVisible(false)} style={{
-            position: 'absolute', right: '1rem', top: '50%',
+            position: 'absolute', right: isMobile ? '0.5rem' : '1rem', top: '50%',
             transform: 'translateY(-50%)',
             background: 'none', border: 'none',
             color: '#ffffff', cursor: 'pointer',
-            fontSize: '20px', lineHeight: 1,
+            fontSize: isMobile ? '16px' : '20px', lineHeight: 1,
           }}>×</button>
         </div>
       )}
@@ -96,15 +96,15 @@ export default function Navbar() {
       }}>
         <div style={{
           maxWidth: '1280px', margin: '0 auto',
-          padding: '0 1.5rem',
+          padding: isMobile ? '0 1rem' : '0 1.5rem',
           display: 'grid',
-          gridTemplateColumns: '1fr auto 1fr',
+          gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)',
           alignItems: 'center',
           height: navHeight,
         }}>
 
           {/* Left — Hamburger + MENU/CLOSE */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '14px', minWidth: 0 }}>
             <button
               onClick={() => setOpen(!open)}
               aria-label="Menu"
@@ -141,7 +141,7 @@ export default function Navbar() {
           <Link to="/" onClick={() => setOpen(false)} style={{ textDecoration: 'none', textAlign: 'center', lineHeight: 1 }}>
             <span style={{
               fontFamily: "'Bebas Neue', cursive",
-              fontSize: '1.75rem', color: textColor,
+              fontSize: isMobile ? '1.3rem' : '1.75rem', color: textColor,
               letterSpacing: '0.2em', display: 'block',
               transition: 'color 0.3s',
             }}>INSPIRED</span>
@@ -154,10 +154,10 @@ export default function Navbar() {
           </Link>
 
           {/* Right — CART */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', minWidth: 0 }}>
             <button onClick={toggleCart} style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              display: 'flex', alignItems: 'center', gap: '8px',
+              display: 'flex', alignItems: 'center', gap: isMobile ? '6px' : '8px',
             }}>
               <span style={{
                 fontFamily: "'Montserrat', sans-serif",

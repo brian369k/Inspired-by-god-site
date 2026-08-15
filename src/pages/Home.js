@@ -253,12 +253,12 @@ export default function Home() {
           }}>JOIN THE CHOSEN</h2>
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 800, fontSize: '30px',
+            fontWeight: 800, fontSize: 'clamp(17px, 3.2vw, 30px)',
             color: '#444444', marginBottom: '2rem',
           }}>
             Sign up to get the latest on drops, sales, new releases and more.
           </p>
-          {/* Wider email input — SIGN UP on one line */}
+          {/* Wider email input — SIGN UP on one line, shrinks to fit on mobile */}
           <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', maxWidth: '600px', margin: '0 auto' }}>
             <input
               type="email"
@@ -267,22 +267,23 @@ export default function Home() {
               onChange={(e) => { setNewsletterEmail(e.target.value); setNewsletterNotice(false); }}
               placeholder="Enter your email address..."
               style={{
-                flex: 1, background: '#ffffff',
+                flex: '1 1 0', minWidth: 0, background: '#ffffff',
                 border: '4px solid #000000', borderRight: 'none',
-                padding: '1.2rem 1.25rem',
+                padding: 'clamp(0.7rem, 2.5vw, 1.2rem) clamp(0.7rem, 2.5vw, 1.25rem)',
                 fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 800, fontSize: '30px',
+                fontWeight: 800, fontSize: 'clamp(14px, 3.2vw, 30px)',
                 color: '#000000', outline: 'none',
               }}
             />
             <button type="submit" style={{
               background: '#000000', color: '#ffffff', border: 'none',
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '30px',
-              letterSpacing: '0.15em',
-              padding: '1.2rem 2rem',
+              fontWeight: 800, fontSize: 'clamp(14px, 3.2vw, 30px)',
+              letterSpacing: '0.1em',
+              padding: 'clamp(0.7rem, 2.5vw, 1.2rem) clamp(0.9rem, 3vw, 2rem)',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
+              flex: '0 0 auto',
             }}>SIGN UP</button>
           </form>
           {newsletterNotice && (

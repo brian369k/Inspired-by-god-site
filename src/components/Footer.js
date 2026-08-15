@@ -40,9 +40,9 @@ export default function Footer() {
 
       {/* Marquee */}
       <div style={{ background: '#c9a84c', padding: '0.8rem 0', overflow: 'hidden' }}>
-        <div className="marquee-content" style={{
+        <div className="marquee-content footer-marquee" style={{
           fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 800, fontSize: '25px',
+          fontWeight: 800,
           letterSpacing: '0.2em', color: '#000000', whiteSpace: 'nowrap',
         }}>
           {Array(10).fill('INSPIRED BY GOD · LUXURY STREETWEAR · ELEVATED ESSENTIALS · CHOSEN · ').join('')}
@@ -52,11 +52,8 @@ export default function Footer() {
       {/* Main footer */}
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '3rem 1.5rem 2.5rem' }}>
 
-        {/* 3 columns */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2rem',
+        {/* 3 columns (stacks to 1 on mobile) */}
+        <div className="footer-cols" style={{
           alignItems: 'start',
           justifyItems: 'center',
           textAlign: 'center',
@@ -77,9 +74,9 @@ export default function Footer() {
                 color: '#c9a84c', letterSpacing: '0.4em',
               }}>BY GOD</span>
             </Link>
-            <p style={{
+            <p className="footer-body" style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '25px',
+              fontWeight: 800,
               color: '#333333', lineHeight: 1.7, margin: 0,
             }}>
               Luxury streetwear for the chosen. Elevated essentials worn by those who move with purpose.
@@ -88,9 +85,9 @@ export default function Footer() {
 
           {/* Column 2 — Shop */}
           <div style={{ width: '100%' }}>
-            <p style={{
+            <p className="footer-heading" style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '25px',
+              fontWeight: 800,
               letterSpacing: '0.2em', color: '#000000', marginBottom: '1.25rem',
             }}>SHOP</p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -101,9 +98,9 @@ export default function Footer() {
                 { label: 'Contact', to: '/contact' },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link to={item.to} style={{
+                  <Link to={item.to} className="footer-link" style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800, fontSize: '25px',
+                    fontWeight: 800,
                     color: '#333333', textDecoration: 'none',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
@@ -116,9 +113,9 @@ export default function Footer() {
 
           {/* Column 3 — Legal */}
           <div style={{ width: '100%' }}>
-            <p style={{
+            <p className="footer-heading" style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 800, fontSize: '25px',
+              fontWeight: 800,
               letterSpacing: '0.2em', color: '#000000', marginBottom: '1.25rem',
             }}>LEGAL</p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -128,9 +125,9 @@ export default function Footer() {
                 { label: 'Terms & Conditions', to: '/terms' },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link to={item.to} style={{
+                  <Link to={item.to} className="footer-link" style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800, fontSize: '25px',
+                    fontWeight: 800,
                     color: '#333333', textDecoration: 'none',
                   }}
                     onMouseEnter={e => e.currentTarget.style.color = '#c9a84c'}
@@ -163,10 +160,11 @@ export default function Footer() {
               <Icon style={{ width: '25px', height: '25px' }} />
             </a>
           ))}
-          <span style={{
+          <span className="footer-copyright" style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 800, fontSize: '25px',
+            fontWeight: 800,
             color: '#000000',
+            textAlign: 'center',
           }}>© {year} INSPIRED BY GOD. ALL RIGHTS RESERVED.</span>
         </div>
 

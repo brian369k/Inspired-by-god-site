@@ -83,6 +83,44 @@ input, textarea, select {
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-heading,
+.footer-link,
+.footer-body,
+.footer-copyright {
+  font-size: 25px;
+}
+
+.footer-marquee {
+  font-size: 25px;
+}
+
+@media (max-width: 640px) {
+  .footer-cols {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-heading,
+  .footer-link,
+  .footer-copyright {
+    font-size: 17px;
+  }
+
+  .footer-body {
+    font-size: 15px;
+  }
+
+  .footer-marquee {
+    font-size: 15px;
+  }
+}
+
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: rgba(201, 168, 76, 0.6);
