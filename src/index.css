@@ -102,8 +102,20 @@ input, textarea, select {
 
 @media (max-width: 640px) {
   .footer-cols {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem 1rem;
+  }
+
+  .footer-cols > div:nth-child(1) {
+    grid-column: 1 / -1;
+  }
+
+  .footer-cols > div:nth-child(2) {
+    grid-column: 1;
+  }
+
+  .footer-cols > div:nth-child(3) {
+    grid-column: 2;
   }
 
   .footer-heading,
