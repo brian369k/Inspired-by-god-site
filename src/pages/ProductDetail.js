@@ -14,6 +14,7 @@ export default function ProductDetail() {
   const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
   const [sizeError, setSizeError] = useState(false);
+  const [buying, setBuying] = useState(false);
 
   const currentPrice = selectedSize ? getPriceBySize(product, selectedSize) : product?.price;
 
@@ -24,6 +25,13 @@ export default function ProductDetail() {
       setActiveImg(0);
     }
   }, [id, product]);
+
+  // Reset the button if the shopper comes back from Stripe with the browser's back button.
+  useEffect(() => {
+    const reset = () => setBuying(false);
+    window.addEventListener('pageshow', reset);
+    return () => window.removeEventListener('pageshow', reset);
+  }, []);
 
   if (!product) {
     return (
@@ -43,10 +51,27 @@ export default function ProductDetail() {
     setTimeout(() => setAdded(false), 2500);
   };
 
-  const handleBuyNow = () => {
+  const handleBuyNow = async () => {
     if (!selectedSize) { setSizeError(true); return; }
     setSizeError(false);
-    window.open(product.stripeLink, '_blank');
+    setBuying(true);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [{ id: product.id, size: selectedSize, color: selectedColor, quantity: 1 }] }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+        return;
+      }
+      alert('Checkout error: ' + (data.error || 'Unknown error'));
+    } catch (err) {
+      console.error('Checkout error:', err);
+      alert('Network error. Please try again.');
+    }
+    setBuying(false);
   };
 
   const related = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 4);
@@ -191,15 +216,15 @@ export default function ProductDetail() {
 
             {/* Buttons — full width like reference sites */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <button onClick={handleBuyNow} style={{
+              <button onClick={handleBuyNow} disabled={buying} style={{
                 width: '100%', padding: '1.1rem',
-                background: added ? '#2d6a2d' : '#000000',
-                color: '#ffffff', border: 'none', cursor: 'pointer',
+                background: buying ? '#888888' : '#000000',
+                color: '#ffffff', border: 'none', cursor: buying ? 'not-allowed' : 'pointer',
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 700, fontSize: '25px',
                 letterSpacing: '0.15em', transition: 'background 0.2s',
               }}>
-                {selectedSize ? `BUY NOW — $${currentPrice.toFixed(2)}` : 'SELECT SIZE TO BUY'}
+                {buying ? 'LOADING...' : selectedSize ? `BUY NOW — $${currentPrice.toFixed(2)}` : 'SELECT SIZE TO BUY'}
               </button>
 
               <button onClick={handleAddToCart} style={{

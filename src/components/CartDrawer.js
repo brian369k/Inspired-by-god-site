@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQty, totalPrice, totalItems } = useCart();
   const [loading, setLoading] = useState(false);
+
+  // Reset the button if the shopper comes back from Stripe with the browser's back button.
+  useEffect(() => {
+    const reset = () => setLoading(false);
+    window.addEventListener('pageshow', reset);
+    return () => window.removeEventListener('pageshow', reset);
+  }, []);
 
   const handleStripeCheckout = async () => {
     setLoading(true);

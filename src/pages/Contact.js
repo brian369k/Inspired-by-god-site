@@ -136,7 +136,7 @@ export default function Contact() {
               {/* Social */}
               <div>
                 <p className="font-mono tracking-widest text-gold mb-4" style={{ fontSize: '30px' }}>FOLLOW US</p>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-x-4 gap-y-2">
                   {['FACEBOOK', 'INSTAGRAM', 'TIKTOK', 'PINTEREST'].map((s) => (
                     <a
                       key={s}
